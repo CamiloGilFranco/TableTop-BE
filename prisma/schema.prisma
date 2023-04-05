@@ -10,8 +10,198 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model restaurants {
+  id_restaurant        String                    @id @default(cuid())
+  restaurant_path      String                    @unique
+  restaurant_name      String                    @unique
+  logo                 String                    @unique
+  rating               Float
+  numbr_of_sales       Int
+  cuisines             cuisines_per_restaurant[]
+  photos               restaurant_photos[]
+  dishes               dishes[]
+  dishes_categories    dishes_categories[]
+  facilities_per_venue facilities_per_venue[]
+  venues               restaurant_venues[]
+  reservations         reservations[]
+  orders               orders[]
+  reviews              reviews[]
+  createdAt            DateTime                  @default(now())
+  updatedAt            DateTime                  @updatedAt
+}
+
+model users {
+  user_id         String               @id @default(cuid())
+  email           String
+  password        String
+  name            String
+  last_name       String
+  document_type   String
+  document_number String
+  date_of_birth   DateTime
+  city            String
+  contact_email   Boolean
+  contact_sms     Boolean
+  contact_wpp     Boolean
+  user_rol        String
+  reservations    reservations[]
+  phone_numbers   user_phone_numbers[]
+  addresses       user_addresses[]
+  orders          orders[]
+  reviews         reviews[]
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+}
+
+model cuisine_categories {
+  id_cuisine_category       String                    @id @default(cuid())
+  cuisine_category          String
+  id_cuisine_per_restaurant cuisines_per_restaurant[]
+  createdAt                 DateTime                  @default(now())
+  updatedAt                 DateTime                  @updatedAt
+}
+
+model cuisines_per_restaurant {
+  id_cuisine_per_restaurant             String             @id @default(cuid())
+  restaurants                           restaurants        @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant              String
+  cuisine_categories                    cuisine_categories @relation(fields: [cuisine_categoriesId_cuisine_category], references: [id_cuisine_category])
+  cuisine_categoriesId_cuisine_category String
+  createdAt                             DateTime           @default(now())
+  updatedAt                             DateTime           @updatedAt
+}
+
+model restaurant_photos {
+  id_restaurant_photo      String      @id @default(cuid())
+  photo_link               String
+  restaurants              restaurants @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant String
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
+}
+
+model dishes {
+  id_dish                             String            @id @default(cuid())
+  title                               String
+  description                         String
+  price                               String
+  restaurants                         restaurants       @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant            String
+  dishes_categories                   dishes_categories @relation(fields: [dishes_categoriesId_dishes_category], references: [id_dishes_category])
+  dishes_categoriesId_dishes_category String
+  order_details                       order_details[]
+  createdAt                           DateTime          @default(now())
+  updatedAt                           DateTime          @updatedAt
+}
+
+model dishes_categories {
+  id_dishes_category       String      @id @default(cuid())
+  dishes_category          String
+  restaurants              restaurants @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant String
+  dishes                   dishes[]
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
+}
+
+model facilities_per_venue {
+  id_facility_per_venue                String            @id @default(cuid())
+  restaurants                          restaurants       @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant             String
+  facilities                           facilities        @relation(fields: [facilitiesId_facility], references: [id_facility])
+  facilitiesId_facility                String
+  restaurant_venues                    restaurant_venues @relation(fields: [restaurant_venuesId_restaurant_venue], references: [id_restaurant_venue])
+  restaurant_venuesId_restaurant_venue String
+  createdAt                            DateTime          @default(now())
+  updatedAt                            DateTime          @updatedAt
+}
+
+model facilities {
+  id_facility          String                 @id @default(cuid())
+  facility_name        String
+  facilities_per_venue facilities_per_venue[]
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+}
+
+model restaurant_venues {
+  id_restaurant_venue      String                 @id @default(cuid())
+  address                  String
+  phone_number             String
+  open_hour                String
+  close_hour               String
+  restaurants              restaurants            @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant String
+  facilities               facilities_per_venue[]
+  reservations             reservations[]
+  createdAt                DateTime               @default(now())
+  updatedAt                DateTime               @updatedAt
+}
+
+model reservations {
+  id_reservation                       String            @id @default(cuid())
+  date_hour                            DateTime
+  restaurants                          restaurants       @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant             String
+  restaurant_venues                    restaurant_venues @relation(fields: [restaurant_venuesId_restaurant_venue], references: [id_restaurant_venue])
+  restaurant_venuesId_restaurant_venue String
+  users                                users             @relation(fields: [usersUser_id], references: [user_id])
+  usersUser_id                         String
+  createdAt                            DateTime          @default(now())
+  updatedAt                            DateTime          @updatedAt
+}
+
+model user_phone_numbers {
+  id_user_phone_number String   @id @default(cuid())
+  phone_number         String
+  users                users    @relation(fields: [usersUser_id], references: [user_id])
+  usersUser_id         String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model user_addresses {
+  id_address   String   @id @default(cuid())
+  address      String
+  users        users    @relation(fields: [usersUser_id], references: [user_id])
+  usersUser_id String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model orders {
+  id_order                 String          @id @default(cuid())
+  date                     DateTime
+  price                    Int
+  users                    users           @relation(fields: [usersUser_id], references: [user_id])
+  usersUser_id             String
+  restaurants              restaurants     @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant String
+  order_details            order_details[]
+  createdAt                DateTime        @default(now())
+  updatedAt                DateTime        @updatedAt
+}
+
+model order_details {
+  id_order_detail String   @id @default(cuid())
+  orders          orders   @relation(fields: [ordersId_order], references: [id_order])
+  ordersId_order  String
+  dishes          dishes   @relation(fields: [dishesId_dish], references: [id_dish])
+  dishesId_dish   String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model reviews {
+  id_review                String      @id @default(cuid())
+  title                    String
+  rating                   Int
+  date                     DateTime
+  comment                  String
+  restaurants              restaurants @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant String
+  users                    users       @relation(fields: [usersUser_id], references: [user_id])
+  usersUser_id             String
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
 }
