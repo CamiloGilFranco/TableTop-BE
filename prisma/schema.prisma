@@ -15,8 +15,9 @@ model restaurants {
   restaurant_path      String                    @unique
   restaurant_name      String                    @unique
   logo                 String                    @unique
+  main_photo           String
   rating               Float
-  numbr_of_sales       Int
+  number_of_sales      Int
   cuisines             cuisines_per_restaurant[]
   photos               restaurant_photos[]
   dishes               dishes[]
@@ -26,31 +27,34 @@ model restaurants {
   reservations         reservations[]
   orders               orders[]
   reviews              reviews[]
+  admins               users[]
   createdAt            DateTime                  @default(now())
   updatedAt            DateTime                  @updatedAt
 }
 
 model users {
-  user_id         String               @id @default(cuid())
-  email           String
-  password        String
-  name            String
-  last_name       String
-  document_type   String
-  document_number String
-  date_of_birth   DateTime
-  city            String
-  contact_email   Boolean
-  contact_sms     Boolean
-  contact_wpp     Boolean
-  user_rol        String
-  reservations    reservations[]
-  phone_numbers   user_phone_numbers[]
-  addresses       user_addresses[]
-  orders          orders[]
-  reviews         reviews[]
-  createdAt       DateTime             @default(now())
-  updatedAt       DateTime             @updatedAt
+  user_id                  String               @id @default(cuid())
+  email                    String               @unique
+  password                 String
+  name                     String
+  last_name                String
+  document_type            String
+  document_number          String               @unique
+  date_of_birth            DateTime
+  city                     String
+  contact_email            Boolean
+  contact_sms              Boolean
+  contact_wpp              Boolean
+  user_rol                 String
+  reservations             reservations[]
+  phone_numbers            user_phone_numbers[]
+  addresses                user_addresses[]
+  orders                   orders[]
+  reviews                  reviews[]
+  createdAt                DateTime             @default(now())
+  updatedAt                DateTime             @updatedAt
+  restaurants              restaurants?         @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant String?
 }
 
 model cuisine_categories {
