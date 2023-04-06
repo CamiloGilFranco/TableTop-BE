@@ -7,7 +7,11 @@ const prisma = new PrismaClient();
 const seedUsers = async (prisma: PrismaClient): Promise<void> => {
   const users = [];
   const documentTypes = ["CC", "CE", "PP"];
-  const userRoles = ["user", "restaurantAdmin", "appAdmin"];
+  const userRoles = {
+    user: "user",
+    restaurantAdmin: "restaurantAdmin",
+    appAdmin: "appAdmin",
+  };
 
   const restaurants = await prisma.restaurants.findMany();
 
@@ -29,10 +33,10 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
             mode: "age",
           }),
           city: faker.address.cityName(),
-          contact_email: random(0, 1) === 1 ? true : false,
-          contact_sms: random(0, 1) === 1 ? true : false,
-          contact_wpp: random(0, 1) === 1 ? true : false,
-          user_rol: userRoles[1],
+          contact_email: random(0, 1) === 1,
+          contact_sms: random(0, 1) === 1,
+          contact_wpp: random(0, 1) === 1,
+          user_rol: userRoles.restaurantAdmin,
           restaurants: {
             connect: {
               id_restaurant: restaurant.id_restaurant,
@@ -53,10 +57,10 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
       document_number: random(100000, 999999999999).toString(),
       date_of_birth: faker.date.birthdate({ min: 18, max: 80, mode: "age" }),
       city: faker.address.cityName(),
-      contact_email: random(0, 1) === 1 ? true : false,
-      contact_sms: random(0, 1) === 1 ? true : false,
-      contact_wpp: random(0, 1) === 1 ? true : false,
-      user_rol: userRoles[0],
+      contact_email: random(0, 1) === 1,
+      contact_sms: random(0, 1) === 1,
+      contact_wpp: random(0, 1) === 1,
+      user_rol: userRoles.user,
     };
 
     users.push(user);
@@ -72,10 +76,10 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
       document_number: random(100000, 999999999999).toString(),
       date_of_birth: faker.date.birthdate({ min: 18, max: 80, mode: "age" }),
       city: faker.address.cityName(),
-      contact_email: random(0, 1) === 1 ? true : false,
-      contact_sms: random(0, 1) === 1 ? true : false,
-      contact_wpp: random(0, 1) === 1 ? true : false,
-      user_rol: userRoles[2],
+      contact_email: random(0, 1) === 1,
+      contact_sms: random(0, 1) === 1,
+      contact_wpp: random(0, 1) === 1,
+      user_rol: userRoles.appAdmin,
     };
 
     users.push(appAdmin);
