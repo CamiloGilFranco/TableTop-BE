@@ -133,6 +133,8 @@ model restaurant_venues {
   id_restaurant_venue      String                 @id @default(cuid())
   name_venue               String
   address                  String
+  city                     String
+  venue_photo              String
   phone_number             String
   open_hour                String
   close_hour               String
@@ -179,7 +181,6 @@ model user_addresses {
 
 model orders {
   id_order                 String          @id @default(cuid())
-  date                     DateTime
   price                    Int
   users                    users           @relation(fields: [usersUser_id], references: [user_id])
   usersUser_id             String
@@ -204,7 +205,6 @@ model reviews {
   id_review                String      @id @default(cuid())
   title                    String
   rating                   Int
-  date                     DateTime
   comment                  String
   restaurants              restaurants @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
   restaurantsId_restaurant String
