@@ -9,6 +9,12 @@ import seedCuisine_per_restaurant from "./cuisines_perRestaurantSeeder";
 import seedRestaurant_photos from "./restaurant_photosSeeder";
 import seedReviews from "./reviewsSeeder";
 import seedRestaurant_venues from "./restaurant_venuesSeeder";
+import seedReservation from "./reservationsSeeder";
+import seedFacilities_per_venue from "./facilities_per_venue";
+import seedDish_categories from "./dishes_categoriesSeeder";
+import seedDishes from "./dishesSeeder";
+import seedOrders from "./ordersSeeder";
+import seedOrder_details from "./order_detailsSeeder";
 
 const prisma = new PrismaClient();
 
@@ -23,6 +29,12 @@ const seeders = [
   seedRestaurant_photos,
   seedReviews,
   seedRestaurant_venues,
+  seedReservation,
+  seedFacilities_per_venue,
+  seedDish_categories,
+  seedDishes,
+  seedOrders,
+  seedOrder_details,
 ];
 
 const seed = async () => {

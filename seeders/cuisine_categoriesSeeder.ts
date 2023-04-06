@@ -10,7 +10,6 @@ const seedCuisine_categories = async (prisma: PrismaClient): Promise<void> => {
   for (let i = 0; i < cuisinesListKeys.length; i++) {
     const cuisine = {
       cuisine_category: cuisinesListKeys[i],
-      cuisine_photo: cuisinesList[cuisinesListKeys[i]],
     };
 
     cuisines.push(cuisine);
