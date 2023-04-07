@@ -7,7 +7,11 @@ const prisma = new PrismaClient();
 const seedUsers = async (prisma: PrismaClient): Promise<void> => {
   const users = [];
   const documentTypes = ["CC", "CE", "PP"];
-  const userRoles = ["user", "restaurantAdmin", "appAdmin"];
+  const userRoles = {
+    user: "user",
+    restaurantAdmin: "restaurantAdmin",
+    appAdmin: "appAdmin",
+  };
 
   const restaurants = await prisma.restaurants.findMany();
 
@@ -33,6 +37,10 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
           contact_sms: random(0, 1) === 1 ? true : false,
           contact_wpp: random(0, 1) === 1 ? true : false,
           user_role: userRoles[1],
+          contact_email: random(0, 1) === 1,
+          contact_sms: random(0, 1) === 1,
+          contact_wpp: random(0, 1) === 1,
+          user_role: userRoles.restaurantAdmin,
           restaurants: {
             connect: {
               id_restaurant: restaurant.id_restaurant,
