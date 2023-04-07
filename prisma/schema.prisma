@@ -45,7 +45,7 @@ model users {
   contact_email            Boolean
   contact_sms              Boolean
   contact_wpp              Boolean
-  user_rol                 String
+  user_role                String
   reservations             reservations[]
   phone_numbers            user_phone_numbers[]
   addresses                user_addresses[]
