@@ -76,9 +76,9 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
       document_number: random(100000, 999999999999).toString(),
       date_of_birth: faker.date.birthdate({ min: 18, max: 80, mode: "age" }),
       city: faker.address.cityName(),
-      contact_email: random(0, 1) === 1 ? true : false,
-      contact_sms: random(0, 1) === 1 ? true : false,
-      contact_wpp: random(0, 1) === 1 ? true : false,
+      contact_email: random(0, 1) === 1,
+      contact_sms: random(0, 1) === 1,
+      contact_wpp: random(0, 1) === 1,
       user_role: userRoles.appAdmin,
     };
 
