@@ -14,7 +14,7 @@ import {
   res: Response,
  ) => {
   try {
-    const users = await getAllUsers()    ;
+    const users = await getAllUsers();
     res.status(200).send({ message: 'Users retrieved successfully', data: users });
   } catch (error: any) {
     res.status(500).json({message: error.message});
@@ -22,7 +22,6 @@ import {
  }
 
  // get single user with id
-
  export const getUserByIdController = async (
   req: Request,
   res: Response,
@@ -36,12 +35,11 @@ import {
     
     res.status(200).json({ message: 'User found!', data: user });
   } catch (error: any) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
  }
 
  // create new user
-
  export const createUserController = async (
   req: Request,
   res: Response,
@@ -51,12 +49,11 @@ import {
     res.status(201).send({message : 'User created successfully', data: user});
   } catch (error: any) {
     console.error(error);
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
  }
 
  // update user
-
  export const updateUserController = async (
   req: Request,
   res: Response,
@@ -71,7 +68,6 @@ import {
  }
 
  // delete user
-
  export const deleteUserController = async (
   req: Request,
   res: Response,

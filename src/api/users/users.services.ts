@@ -17,7 +17,6 @@ export const getAllUsers = () => {
 
 
 // get a single user by the id 
-
 export const getUserById = (id: string) => {
   return prisma.users.findUnique({
     where: {
@@ -27,21 +26,22 @@ export const getUserById = (id: string) => {
 }
 
 export const createUser = (input: any) => {
-  const dateOfBirth = new Date(input.date_of_birth);
+  const { email, password, name, last_name, document_type, document_number, date_of_birth, city, contact_email, contact_sms, contact_wpp, user_role } = input;
+  const dateOfBirth = new Date(date_of_birth);
   return prisma.users.create({
     data: {
-      email: input.email,
-      password: input.password,
-      name: input.name,
-      last_name: input.last_name,
-      document_type: input.document_type,
-      document_number: input.document_number,
+      email,
+      password,
+      name,
+      last_name,
+      document_type,
+      document_number,
       date_of_birth: dateOfBirth,
-      city: input.city,
-      contact_email: Boolean(input.contact_email),
-      contact_sms: Boolean(input.contact_sms),
-      contact_wpp: Boolean(input.contact_wpp),
-      user_role: input.user_role
+      city,
+      contact_email: Boolean(contact_email),
+      contact_sms: Boolean(contact_sms),
+      contact_wpp: Boolean(contact_wpp),
+      user_role
     }
   });
 }
@@ -69,7 +69,6 @@ export const updateUser = (id: string, input: any) => {
 }
 
 // delete user 
-
 export const deleteUser = (id: string) => {
   return prisma.users.delete({
     where: {
