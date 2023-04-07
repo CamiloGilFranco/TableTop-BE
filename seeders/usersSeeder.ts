@@ -36,7 +36,7 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
           contact_email: random(0, 1) === 1,
           contact_sms: random(0, 1) === 1,
           contact_wpp: random(0, 1) === 1,
-          user_rol: userRoles.restaurantAdmin,
+          user_role: userRoles.restaurantAdmin,
           restaurants: {
             connect: {
               id_restaurant: restaurant.id_restaurant,
@@ -60,7 +60,7 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
       contact_email: random(0, 1) === 1,
       contact_sms: random(0, 1) === 1,
       contact_wpp: random(0, 1) === 1,
-      user_rol: userRoles.user,
+      user_role: userRoles.user,
     };
 
     users.push(user);
@@ -79,7 +79,7 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
       contact_email: random(0, 1) === 1,
       contact_sms: random(0, 1) === 1,
       contact_wpp: random(0, 1) === 1,
-      user_rol: userRoles.appAdmin,
+      user_role: userRoles.appAdmin,
     };
 
     users.push(appAdmin);
