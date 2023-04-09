@@ -21,6 +21,14 @@ export const getUserById = (id: string) => {
   return prisma.users.findUnique({
     where: {
       user_id:id
+    },
+    include: {
+      phone_numbers: true,
+      addresses: true,
+      reservations: true,
+      orders: true,
+      reviews: true,
+      restaurants: true
     }
   });
 }
@@ -48,9 +56,30 @@ export const createUser = (input: any) => {
 
 // update user
 export const updateUser = (id: string, input: any) => {
+  const { 
+    email,
+    password, 
+    name, 
+    last_name, 
+    city, 
+    contact_email, 
+    contact_sms, 
+    contact_wpp,
+    phone_numbers, 
+    addresses
+   } = input;
 
-  const { email, password, name, last_name, city, contact_email, contact_sms, contact_wpp } = input;
+  // Update the phone numbers
+  const updatedPhoneNumbers = phone_numbers.map((phone_number: any) => ({
+    where: { id_user_phone_number: phone_number.id_user_phone_number },
+    data: { phone_number: phone_number.phone_number },
+  }));
 
+  // Update the addresses
+  const updatedAddresses = addresses.map((address: any) => ({
+    where: { id_address: address.id_address },
+    data: { address_name: address.address_name, address: address.address, city: address.city },
+  }));
   return prisma.users.update({
     where: {
       user_id: id
@@ -64,6 +93,8 @@ export const updateUser = (id: string, input: any) => {
       contact_email: contact_email && { set: Boolean(contact_email) },
       contact_sms: contact_sms && { set: Boolean(contact_sms) },
       contact_wpp: contact_wpp && { set: Boolean(contact_wpp) },
+      phone_numbers: phone_numbers && { updateMany: updatedPhoneNumbers },
+      addresses: addresses && { updateMany: updatedAddresses },
     }
   });
 }
