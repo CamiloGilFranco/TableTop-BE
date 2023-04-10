@@ -45,7 +45,8 @@ import {
   res: Response,
  ) => {
   try {
-    const user = await createUser(req.body);
+    console.log(req.body);
+    const user = await createUser(req.body); 
     res.status(201).send({message : 'User created successfully', data: user});
   } catch (error: any) {
     console.error(error);
