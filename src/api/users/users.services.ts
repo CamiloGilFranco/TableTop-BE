@@ -76,10 +76,11 @@ export const updateUser = (id: string, input: any) => {
   }));
 
   // Update the addresses
-  const updatedAddresses = addresses.map((address: any) => ({
-    where: { id_address: address.id_address },
-    data: { address_name: address.address_name, address: address.address, city: address.city },
+  const updatedAddresses = addresses.map(({ id_address, address_name, address, city }: any) => ({
+    where: { id_address },
+    data: { address_name, address, city },
   }));
+  
   return prisma.users.update({
     where: {
       user_id: id
