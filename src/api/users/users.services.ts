@@ -34,7 +34,7 @@ export const getUserById = (id: string) => {
 }
 
 export const createUser = (input: any) => {
-  const { 
+  const {
     email, 
     password, 
     name, 
