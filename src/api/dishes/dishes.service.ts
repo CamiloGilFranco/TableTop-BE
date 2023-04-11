@@ -7,15 +7,22 @@ export const getAllDishes = () => {
 };
 
 export const createDish = (input: any) => {
+  const {
+    title,
+    description,
+    price,
+    restaurantsId_restaurant,
+    dishes_categoriesId_dishes_category,
+    order_details,
+  } = input;
   return prisma.dishes.create({
     data: {
-      title: input.title,
-      description: input.description,
-      price: input.price,
-      restaurantsId_restaurant: input.restaurantsId_restaurant,
-      dishes_categoriesId_dishes_category:
-        input.dishes_categoriesId_dishes_category,
-      order_details: input.order_details,
+      title,
+      description,
+      price,
+      restaurantsId_restaurant,
+      dishes_categoriesId_dishes_category,
+      order_details,
     },
   });
 };
@@ -29,18 +36,25 @@ export const getDishById = (id: string) => {
 };
 
 export const updateDishById = (id: string, input: any) => {
+  const {
+    title,
+    description,
+    price,
+    restaurantsId_restaurant,
+    dishes_categoriesId_dishes_category,
+    order_details,
+  } = input;
   return prisma.dishes.update({
     where: {
       id_dish: id,
     },
     data: {
-      title: input.title,
-      description: input.description,
-      price: input.price, //ó parceInt
-      restaurantsId_restaurant: input.restaurantsId_restaurant,
-      dishes_categoriesId_dishes_category:
-        input.dishes_categoriesId_dishes_category,
-      order_details: input.order_details,
+      title,
+      description,
+      price,
+      restaurantsId_restaurant,
+      dishes_categoriesId_dishes_category,
+      order_details,
     },
   });
 };
