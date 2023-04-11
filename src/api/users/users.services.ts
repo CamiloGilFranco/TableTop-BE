@@ -34,7 +34,22 @@ export const getUserById = (id: string) => {
 }
 
 export const createUser = (input: any) => {
-  const { email, password, name, last_name, document_type, document_number, date_of_birth, city, contact_email, contact_sms, contact_wpp, user_role } = input;
+  const {
+    email, 
+    password, 
+    name, 
+    last_name, 
+    document_type, 
+    document_number, 
+    date_of_birth, 
+    city, 
+    contact_email, 
+    contact_sms, 
+    contact_wpp, 
+    user_role,
+    address,
+    phone_number
+  } = input;
   const dateOfBirth = new Date(date_of_birth);
   return prisma.users.create({
     data: {
@@ -49,7 +64,19 @@ export const createUser = (input: any) => {
       contact_email: Boolean(contact_email),
       contact_sms: Boolean(contact_sms),
       contact_wpp: Boolean(contact_wpp),
-      user_role
+      user_role,
+      phone_numbers: {
+        create: {
+          phone_number
+        }
+      },
+      addresses: {
+        create: {
+          address_name: "Primary Address",
+          address,
+          city
+        }
+      }
     }
   });
 }
