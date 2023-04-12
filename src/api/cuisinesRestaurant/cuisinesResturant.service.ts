@@ -14,23 +14,26 @@ export const getCuisineRestaurantById = (id: string) => {
   });
 };
 export const createCuisineRestaurant = (input: any) => {
+  const { restaurantsId_restaurant, cuisine_categoriesId_cuisine_category } =
+    input;
   return prisma.cuisines_per_restaurant.create({
     data: {
-      restaurantsId_restaurant: input.restaurantsId_restaurant,
-      cuisine_categoriesId_cuisine_category:
-        input.cuisine_categoriesId_cuisine_category,
+      restaurantsId_restaurant,
+      cuisine_categoriesId_cuisine_category,
     },
   });
 };
 export const updateCuisineRestaurant = (id: string, input: any) => {
+  const { restaurantsId_restaurant, cuisine_categoriesId_cuisine_category } =
+    input;
+
   return prisma.cuisines_per_restaurant.update({
     where: {
       id_cuisine_per_restaurant: id,
     },
     data: {
-      restaurantsId_restaurant: input.restaurantsId_restaurant,
-      cuisine_categoriesId_cuisine_category:
-        input.cuisine_categoriesId_cuisine_category,
+      restaurantsId_restaurant,
+      cuisine_categoriesId_cuisine_category,
     },
   });
 };

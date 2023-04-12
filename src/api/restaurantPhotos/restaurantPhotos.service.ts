@@ -15,22 +15,24 @@ export const getPhotosRestaurantById = (id: string) => {
 };
 
 export const createPhotosRestaurant = (input: any) => {
+  const { photo_link, restaurantsId_restaurant } = input;
   return prisma.restaurant_photos.create({
     data: {
-      photo_link: input.photo_link,
-      restaurantsId_restaurant: input.restaurantsId_restaurant,
+      photo_link,
+      restaurantsId_restaurant,
     },
   });
 };
 
 export const updatePhotosRestaurant = (id: string, input: any) => {
+  const { photo_link, restaurantsId_restaurant } = input;
   return prisma.restaurant_photos.update({
     where: {
       id_restaurant_photo: id,
     },
     data: {
-      photo_link: input.photo_link,
-      restaurantsId_restaurant: input.restaurantsId_restaurant,
+      photo_link,
+      restaurantsId_restaurant,
     },
   });
 };
