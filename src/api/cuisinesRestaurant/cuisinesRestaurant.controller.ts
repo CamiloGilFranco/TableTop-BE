@@ -14,9 +14,10 @@ export const getAllCuisineRestaurantController = async (
 ) => {
   try {
     const cuisineRestaurants = await getAllCuisineRestaurant();
-    res
-      .status(200)
-      .json({ message: "Coisine Restaurant found!", data: cuisineRestaurants });
+    res.status(200).json({
+      message: "Cuisine Restaurants found!",
+      data: cuisineRestaurants,
+    });
   } catch (error) {
     next(error);
   }
@@ -86,14 +87,14 @@ export const deleteCuisineRestaurantController = async (
 ) => {
   try {
     const { id } = req.params;
-    const cuisineRestauran = await deleteCuisineRestaurant(id);
+    const cuisineRestaurant = await deleteCuisineRestaurant(id);
 
-    if (!cuisineRestauran) {
-      return res.status(404).json({ message: "cuisineRestaurant Not Found" });
+    if (!cuisineRestaurant) {
+      return res.status(404).json({ message: "Cuisine Restaurant Not Found" });
     }
     res
       .status(200)
-      .json({ message: "CuisineRestaurant deleted", data: cuisineRestauran });
+      .json({ message: "Cuisine Restaurant Deleted", data: cuisineRestaurant });
   } catch (error) {
     next(error);
   }
