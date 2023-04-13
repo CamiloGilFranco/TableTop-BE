@@ -5,6 +5,7 @@ import users from "./api/users";
 import restaurants from "./api/restaurants";
 import dishes from "./api/dishes";
 import cuisineCategories from "./api/cuisineCategories";
+import cuisineRestaurants from "./api/cuisinesRestaurant";
 
 const routes = (app: Application): void => {
   app.use("/api/healthcheck", healthcheck);
@@ -12,5 +13,6 @@ const routes = (app: Application): void => {
   app.use("/api/restaurants", restaurants);
   app.use("/api/dishes", dishes);
   app.use("/api/cuisine-categories", cuisineCategories);
+  app.use("/api/cuisine-per-restaurant", cuisineRestaurants);
 };
 export default routes;
