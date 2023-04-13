@@ -7,7 +7,6 @@ import {
   updatePhotosRestaurant,
 } from "./restaurantPhotos.service";
 
-//get all
 export const getAllPhotosRestaurantController = async (
   req: Request,
   res: Response,
@@ -21,7 +20,6 @@ export const getAllPhotosRestaurantController = async (
   }
 };
 
-//get by id
 export const getPhotosRestaurantByIdController = async (
   req: Request,
   res: Response,
@@ -39,7 +37,6 @@ export const getPhotosRestaurantByIdController = async (
   }
 };
 
-//create
 export const createPhotosRestaurantController = async (
   req: Request,
   res: Response,
@@ -52,7 +49,7 @@ export const createPhotosRestaurantController = async (
     next(error);
   }
 };
-//update
+
 export const updatePhotosRestaurantController = async (
   req: Request,
   res: Response,
@@ -66,7 +63,7 @@ export const updatePhotosRestaurantController = async (
     next(error);
   }
 };
-//delete
+
 export const deleteCuisineRestaurantController = async (
   req: Request,
   res: Response,
