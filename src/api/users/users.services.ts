@@ -82,31 +82,35 @@ export const createUser = (input: any) => {
 }
 
 // update user
-export const updateUser = (id: string, input: any) => {
-  const { 
+export const updateUser = (id: string | undefined, input: any) => {
+  const {
     email,
-    password, 
-    name, 
-    last_name, 
-    city, 
-    contact_email, 
-    contact_sms, 
+    password,
+    name,
+    last_name,
+    city,
+    contact_email,
+    contact_sms,
     contact_wpp,
     phone_numbers, 
     addresses
    } = input;
 
   // Update the phone numbers
-  const updatedPhoneNumbers = phone_numbers.map((phone_number: any) => ({
-    where: { id_user_phone_number: phone_number.id_user_phone_number },
-    data: { phone_number: phone_number.phone_number },
-  }));
+  const updatedPhoneNumbers = phone_numbers
+    ? phone_numbers.map((phone_number: any) => ({
+        where: { id_user_phone_number: phone_number.id_user_phone_number },
+        data: { phone_number: phone_number.phone_number },
+      }))
+    : [];
 
   // Update the addresses
-  const updatedAddresses = addresses.map(({ id_address, address_name, address, city }: any) => ({
-    where: { id_address },
-    data: { address_name, address, city },
-  }));
+  const updatedAddresses = addresses
+    ? addresses.map(({ id_address, address_name, address, city }: any) => ({
+        where: { id_address },
+        data: { address_name, address, city },
+      }))
+    : [];
   
   return prisma.users.update({
     where: {
