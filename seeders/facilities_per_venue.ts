@@ -16,11 +16,6 @@ const seedFacilities_per_venue = async (
     for (let i = 0; i < numberOfFacilities; i++) {
       await prisma.facilities_per_venue.create({
         data: {
-          restaurants: {
-            connect: {
-              id_restaurant: venue.restaurantsId_restaurant,
-            },
-          },
           facilities: {
             connect: {
               id_facility:
