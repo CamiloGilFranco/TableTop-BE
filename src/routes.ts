@@ -11,6 +11,7 @@ import facilities from "./api/facilities";
 import restaurantVenues from "./api/restaurantVenues";
 import dishesCategories from "./api/dishesCategories";
 import reservations from "./api/reservations";
+import authLocal from './auth/local';
 
 const routes = (app: Application): void => {
   app.use("/api/healthcheck", healthcheck);
@@ -24,5 +25,8 @@ const routes = (app: Application): void => {
   app.use("/api/restaurant-venues", restaurantVenues);
   app.use("/api/dishes-categories", dishesCategories);
   app.use("/api/reservations", reservations);
+
+  // auth routes
+  app.use('/auth/local', authLocal);
 };
 export default routes;

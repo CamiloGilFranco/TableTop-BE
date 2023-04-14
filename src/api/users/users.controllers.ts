@@ -1,11 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
+import { AuthUser } from "../../auth/auth.types";
 import { 
-  createUser,
   deleteUser,
   getAllUsers, 
   getUserById,
   updateUser,
-
  } from "./users.services";
 
  // gets all the users from the bd
@@ -39,27 +38,13 @@ import {
   }
  }
 
- // create new user
- export const createUserController = async (
-  req: Request,
-  res: Response,
- ) => {
-  try {
-    const user = await createUser(req.body); 
-    res.status(201).send({message : 'User created successfully', data: user});
-  } catch (error: any) {
-    console.error(error);
-    res.status(500).json({ message: error.message });
-  }
- }
-
  // update user
  export const updateUserController = async (
-  req: Request,
+  req: AuthUser,
   res: Response,
  ) => {
   try {
-    const { id } = req.params;
+    const id = req.user;
     const user = await updateUser(id, req.body);
     res.status(200).json({ message: 'User updated', data: user });
   } catch (error: any) {

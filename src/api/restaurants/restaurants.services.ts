@@ -3,17 +3,42 @@ const prisma = new PrismaClient();
 
 // get all restaurants
 export const getAllRestaurants = () => {
-  return prisma.restaurants.findMany();
-}
+  return prisma.restaurants.findMany({
+    include: {
+      cuisines: true,
+      photos: true,
+      dishes: true,
+      dishes_categories: true,
+      facilities_per_venue: true,
+      venues: true,
+      reservations: true,
+      reviews: true,
+      admins: true,
+      order_details: true,
+    },
+  });
+};
 
 // get restaurant by id
 export const getAllRestaurantById = (id: string) => {
   return prisma.restaurants.findUnique({
     where: {
-      id_restaurant: id
-    }
+      id_restaurant: id,
+    },
+    include: {
+      cuisines: true,
+      photos: true,
+      dishes: true,
+      dishes_categories: true,
+      facilities_per_venue: true,
+      venues: true,
+      reservations: true,
+      reviews: true,
+      admins: true,
+      order_details: true,
+    },
   });
-}
+};
 
 // create new restaurant
 export const createRestaurant = (input: any) => {
