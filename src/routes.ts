@@ -26,7 +26,7 @@ const routes = (app: Application): void => {
   app.use("/api/restaurant-venues", restaurantVenues);
   app.use("/api/dishes-categories", dishesCategories);
   app.use("/api/reservations", reservations);
-  app.use("/api/use-phone-number", usePhoneNumbers);
+  app.use("/api/user-phone-number", usePhoneNumbers);
 
   // auth routes
   app.use("/auth/local", authLocal);
