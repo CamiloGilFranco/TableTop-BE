@@ -2,11 +2,9 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-//get all
 export const getAllCuisineCategory = () => {
   return prisma.cuisine_categories.findMany();
 };
-//get by Id
 export const getCuisineCategoryById = (id: string) => {
   return prisma.cuisine_categories.findUnique({
     where: {
@@ -14,7 +12,7 @@ export const getCuisineCategoryById = (id: string) => {
     },
   });
 };
-//create -> post
+
 export const createCuisineCategory = (input: any) => {
   return prisma.cuisine_categories.create({
     data: {
