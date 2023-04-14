@@ -15,6 +15,7 @@ import authLocal from "./auth/local";
 import usePhoneNumbers from "./api/userPhonesNumbers";
 import useAddress from "./api/userAddresses";
 import orders from "./api/orders";
+import ordersDetails from "./api/orderDetails";
 
 const routes = (app: Application): void => {
   app.use("/api/healthcheck", healthcheck);
@@ -31,6 +32,7 @@ const routes = (app: Application): void => {
   app.use("/api/user-phone-number", usePhoneNumbers);
   app.use("/api/user-address", useAddress);
   app.use("/api/orders", orders);
+  app.use("/api/orders-details", ordersDetails);
 
   // auth routes
   app.use("/auth/local", authLocal);
