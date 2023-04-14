@@ -2,11 +2,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-//get all
 export const getAllFacilities = () => {
   return prisma.facilities.findMany();
 };
-//get by Id
+
 export const getByIdFacility = (id: string) => {
   return prisma.facilities.findUnique({
     where: {
@@ -14,7 +13,7 @@ export const getByIdFacility = (id: string) => {
     },
   });
 };
-//create
+
 export const createFacility = (input: any) => {
   return prisma.facilities.create({
     data: {
@@ -22,7 +21,7 @@ export const createFacility = (input: any) => {
     },
   });
 };
-//update
+
 export const updateByIdFacility = (id: string, input: any) => {
   return prisma.facilities.update({
     where: {
@@ -33,7 +32,7 @@ export const updateByIdFacility = (id: string, input: any) => {
     },
   });
 };
-//delete
+
 export const deleteFacility = (id: string) => {
   return prisma.facilities.delete({
     where: {

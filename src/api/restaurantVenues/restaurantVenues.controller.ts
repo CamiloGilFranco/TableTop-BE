@@ -7,7 +7,6 @@ import {
   updateByIdRestaurantVenues,
 } from "./restaurantVenues.service";
 
-//get all
 export const getAllRestaurantVenuesController = async (
   req: Request,
   res: Response,
@@ -23,7 +22,6 @@ export const getAllRestaurantVenuesController = async (
   }
 };
 
-//get by id
 export const getByIdRestaurantVenuesController = async (
   req: Request,
   res: Response,
@@ -41,7 +39,6 @@ export const getByIdRestaurantVenuesController = async (
   }
 };
 
-//create
 export const createRestaurantVenuesController = async (
   req: Request,
   res: Response,
@@ -56,7 +53,7 @@ export const createRestaurantVenuesController = async (
     next(error);
   }
 };
-//update
+
 export const updateByIdRestaurantVenuesController = async (
   req: Request,
   res: Response,
@@ -72,7 +69,7 @@ export const updateByIdRestaurantVenuesController = async (
     next(error);
   }
 };
-//delete
+
 export const deleteRestaurantVenuesController = async (
   req: Request,
   res: Response,

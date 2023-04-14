@@ -2,11 +2,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-//get all
 export const getAllRestaurantVenues = () => {
   return prisma.restaurant_venues.findMany();
 };
-//get by Id
+
 export const getByIdRestaurantVenues = (id: string) => {
   return prisma.restaurant_venues.findUnique({
     where: {
@@ -14,7 +13,7 @@ export const getByIdRestaurantVenues = (id: string) => {
     },
   });
 };
-//create
+
 export const createRestaurantVenues = (input: any) => {
   const {
     name_venue,
@@ -39,7 +38,7 @@ export const createRestaurantVenues = (input: any) => {
     },
   });
 };
-//update
+
 export const updateByIdRestaurantVenues = (id: string, input: any) => {
   const {
     name_venue,
@@ -68,7 +67,6 @@ export const updateByIdRestaurantVenues = (id: string, input: any) => {
   });
 };
 
-//delete
 export const deleteRestaurantVenues = (id: string) => {
   return prisma.restaurant_venues.delete({
     where: {
