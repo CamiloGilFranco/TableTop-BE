@@ -14,7 +14,7 @@ export const auth = (
       throw new Error('Your session has expired, please log in again');
     }
 
-    const [ , token] = authorization.split(' ');
+    const [_, token] = authorization.split(' ');
 
     if (!token) {
       throw new Error('Your session has expired, please log in again');

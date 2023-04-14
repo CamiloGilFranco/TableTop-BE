@@ -5,6 +5,13 @@ interface PhoneNumber {
   phone_number: string;
 }
 
+interface UserAddress {
+  id_address: string;
+  address_name: string;
+  address: string;
+  city: string;
+}
+
 const prisma = new PrismaClient();
 
 
@@ -87,7 +94,7 @@ export const createUser = (input: any) => {
 }
 
 // update user
-export const updateUser = (id: string, input: any) => {
+export const updateUser = (id: string | undefined, input: any) => {
   const {
     email,
     password,
@@ -111,11 +118,11 @@ export const updateUser = (id: string, input: any) => {
 
   // Update the addresses
   const updatedAddresses = addresses
-    ? addresses.map(({ id_address, address_name, address, city }: any) => ({
-        where: { id_address },
-        data: { address_name, address, city },
-      }))
-    : [];
+  ? addresses.map(({ id_address, address_name, address, city }: UserAddress) => ({
+      where: { id_address },
+      data: { address_name, address, city },
+    }))
+  : [];
   
   return prisma.users.update({
     where: {
