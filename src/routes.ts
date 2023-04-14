@@ -8,6 +8,7 @@ import cuisineCategories from "./api/cuisineCategories";
 import cuisineRestaurants from "./api/cuisinesRestaurant";
 import restaurantPhotos from "./api/restaurantPhotos";
 import facilities from "./api/facilities";
+import restaurantVenues from "./api/restaurantVenues";
 
 const routes = (app: Application): void => {
   app.use("/api/healthcheck", healthcheck);
@@ -18,5 +19,6 @@ const routes = (app: Application): void => {
   app.use("/api/cuisine-per-restaurant", cuisineRestaurants);
   app.use("/api/photos-restaurant", restaurantPhotos);
   app.use("/api/facilities", facilities);
+  app.use("/api/restaurant-venues", restaurantVenues);
 };
 export default routes;
