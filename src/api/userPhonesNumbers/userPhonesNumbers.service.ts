@@ -1,5 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 
+type Input = {
+  phone_number: string;
+  usersUser_id: string;
+};
+
 const prisma = new PrismaClient();
 
 export const getAllUserPhoneNumbres = () => {
@@ -14,7 +19,7 @@ export const getByIdUserPhoneNumber = (id: string) => {
   });
 };
 
-export const createUserPhoneNumber = (input: any) => {
+export const createUserPhoneNumber = (input: Input) => {
   const { phone_number, usersUser_id } = input;
   return prisma.user_phone_numbers.create({
     data: {
@@ -24,7 +29,7 @@ export const createUserPhoneNumber = (input: any) => {
   });
 };
 
-export const updateByIdUserPhoneNumber = (id: string, input: any) => {
+export const updateByIdUserPhoneNumber = (id: string, input: Input) => {
   const { phone_number, usersUser_id } = input;
   return prisma.user_phone_numbers.update({
     where: {

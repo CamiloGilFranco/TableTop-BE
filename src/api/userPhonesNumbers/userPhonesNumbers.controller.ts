@@ -15,11 +15,11 @@ export const getAllUserPhoneNumbresController = async (
   try {
     const userPhoneNumbers = await getAllUserPhoneNumbres();
     if (!userPhoneNumbers) {
-      return res.status(404).json({ message: "User Phone Number Not Fpound" });
+      return res.status(404).json({ message: "User phone numbers not found" });
     }
     res
       .status(200)
-      .json({ message: "user phones numbers Found", data: userPhoneNumbers });
+      .json({ message: "User phone numbers found", data: userPhoneNumbers });
   } catch (error) {
     next(error);
   }
@@ -35,7 +35,7 @@ export const getByIdUserPhoneNumberController = async (
     const userPhoneNumber = await getByIdUserPhoneNumber(id);
     res
       .status(200)
-      .json({ message: "user phone number Found", data: userPhoneNumber });
+      .json({ message: "User phone number found", data: userPhoneNumber });
   } catch (error) {
     next(error);
   }
@@ -50,7 +50,7 @@ export const createUserPhoneNumberController = async (
     const userPhoneNumber = await createUserPhoneNumber(req.body);
     res
       .status(201)
-      .json({ message: "user phone number Created", data: userPhoneNumber });
+      .json({ message: "User phone number created", data: userPhoneNumber });
   } catch (error) {
     next(error);
   }
@@ -66,7 +66,7 @@ export const updateByIdUserPhoneNumberController = async (
     const userPhoneNumber = await updateByIdUserPhoneNumber(id, req.body);
     res
       .status(200)
-      .json({ message: "user phone number updated", data: userPhoneNumber });
+      .json({ message: "User phone number updated", data: userPhoneNumber });
   } catch (error) {
     next(error);
   }
@@ -82,7 +82,7 @@ export const deleteUserPhoneNumberController = async (
     const userPhoneNumber = await deleteUserPhoneNumber(id);
     res
       .status(200)
-      .json({ message: "user phone Deleted", data: userPhoneNumber });
+      .json({ message: "User phone number deleted", data: userPhoneNumber });
   } catch (error) {
     next(error);
   }
