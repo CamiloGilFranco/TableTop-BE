@@ -20,8 +20,8 @@ export const signupController = async (
       phone_number
     } = req.body;
     const encPassword = await bcrypt.hash(req.body.password, 10);
-    const user = await createUser({ ...req.body, password: encPassword });
-    const token = signToken({ id: user.user_id });
+    const {user_id: id} = await createUser({ ...req.body, password: encPassword });
+    const token = signToken({ id });
     res.status(201).send({message : 'User created successfully', data: { name, last_name, email }, token});
   } catch (error: any) {
     console.error(error);
@@ -47,8 +47,8 @@ export const loginController = async (
       throw new Error('Email or password are incorrect');
     }
 
-    const { name, last_name, user_id } = user;
-    const token = signToken({ id: user.user_id });
+    const { name, last_name, user_id: id } = user;
+    const token = signToken({ id });
     res.status(201).send({message : 'User loged in successfully',  data: { email, name, last_name }, token});
 
   } catch (error: any) {

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { verifyToken } from "../auth/auth.services";
+import { verifyToken, DecodedToken } from "../auth/auth.services";
 import { AuthUser } from "../auth/auth.types";
 
 export const auth = (
@@ -14,13 +14,13 @@ export const auth = (
       throw new Error('Your session has expired, please log in again');
     }
 
-    const [, token] = authorization.split(' ');
+    const [ , token] = authorization.split(' ');
 
     if (!token) {
       throw new Error('Your session has expired, please log in again');
     }
 
-    const { id } = verifyToken(token) as { id: string };
+    const { id } = verifyToken(token) as  DecodedToken;
     req.user = id;
     next();
 

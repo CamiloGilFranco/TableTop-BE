@@ -1,5 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 
+interface PhoneNumber {
+  id_user_phone_number: string;
+  phone_number: string;
+}
+
 const prisma = new PrismaClient();
 
 
@@ -82,7 +87,7 @@ export const createUser = (input: any) => {
 }
 
 // update user
-export const updateUser = (id: string | undefined, input: any) => {
+export const updateUser = (id: string, input: any) => {
   const {
     email,
     password,
@@ -98,11 +103,11 @@ export const updateUser = (id: string | undefined, input: any) => {
 
   // Update the phone numbers
   const updatedPhoneNumbers = phone_numbers
-    ? phone_numbers.map((phone_number: any) => ({
-        where: { id_user_phone_number: phone_number.id_user_phone_number },
-        data: { phone_number: phone_number.phone_number },
-      }))
-    : [];
+  ? phone_numbers.map(({ id_user_phone_number, phone_number }: PhoneNumber) => ({
+      where: { id_user_phone_number },
+      data: { phone_number },
+    }))
+  : [];
 
   // Update the addresses
   const updatedAddresses = addresses
