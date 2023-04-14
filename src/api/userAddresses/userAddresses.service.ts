@@ -1,5 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 
+type Input = {
+  address_name: string;
+  address: string;
+  city: string;
+  usersUser_id: string;
+};
+
 const prisma = new PrismaClient();
 
 export const getAllUserAddresses = () => {
@@ -14,7 +21,7 @@ export const getUserAddressById = (id: string) => {
   });
 };
 
-export const createUserAddress = (input: any) => {
+export const createUserAddress = (input: Input) => {
   const { address_name, address, city, usersUser_id } = input;
   return prisma.user_addresses.create({
     data: {
@@ -26,7 +33,7 @@ export const createUserAddress = (input: any) => {
   });
 };
 
-export const updateUserAddress = (id: string, input: any) => {
+export const updateUserAddress = (id: string, input: Input) => {
   const { address_name, address, city, usersUser_id } = input;
   return prisma.user_addresses.update({
     where: {

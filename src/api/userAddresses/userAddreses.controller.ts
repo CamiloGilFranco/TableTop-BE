@@ -16,7 +16,7 @@ export const getAllUserAddressesController = async (
     const userAddresses = await getAllUserAddresses();
     res
       .status(200)
-      .json({ message: "User Addresses Found!", data: userAddresses });
+      .json({ message: "User addresses found!", data: userAddresses });
   } catch (error) {
     next(error);
   }
