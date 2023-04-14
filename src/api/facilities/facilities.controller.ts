@@ -7,7 +7,6 @@ import {
   updateByIdFacility,
 } from "./facilities.service";
 
-//get all
 export const getAllFacilitiesController = async (
   req: Request,
   res: Response,
@@ -21,7 +20,6 @@ export const getAllFacilitiesController = async (
   }
 };
 
-//get by id
 export const getByIdFacilityController = async (
   req: Request,
   res: Response,
@@ -39,7 +37,6 @@ export const getByIdFacilityController = async (
   }
 };
 
-//create
 export const createFacilityController = async (
   req: Request,
   res: Response,
@@ -52,7 +49,7 @@ export const createFacilityController = async (
     next(error);
   }
 };
-//update
+
 export const updateByIdFacilityController = async (
   req: Request,
   res: Response,
@@ -66,7 +63,7 @@ export const updateByIdFacilityController = async (
     next(error);
   }
 };
-//delete
+
 export const deleteFacilityController = async (
   req: Request,
   res: Response,
