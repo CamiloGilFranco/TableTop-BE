@@ -1,4 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
+import bcrypt from 'bcrypt';
+
 
 interface PhoneNumber {
   id_user_phone_number: string;
@@ -45,7 +47,7 @@ export const getUserById = (id: string) => {
   });
 }
 
-export const createUser = (input: any) => {
+export const createUser = async (input: any) => {
   const {
     email, 
     password, 
@@ -63,41 +65,49 @@ export const createUser = (input: any) => {
     phone_number
   } = input;
   const dateOfBirth = new Date(date_of_birth);
-  return prisma.users.create({
-    data: {
-      email,
-      password,
-      name,
-      last_name,
-      document_type,
-      document_number,
-      date_of_birth: dateOfBirth,
-      city,
-      contact_email: Boolean(contact_email),
-      contact_sms: Boolean(contact_sms),
-      contact_wpp: Boolean(contact_wpp),
-      user_role,
-      phone_numbers: {
-        create: {
-          phone_number
-        }
-      },
-      addresses: {
-        create: {
-          address_name: "Primary Address",
-          address,
-          city
+  try {
+    return prisma.users.create({
+      data: {
+        email,
+        password,
+        name,
+        last_name,
+        document_type,
+        document_number,
+        date_of_birth: dateOfBirth,
+        city,
+        contact_email: Boolean(contact_email),
+        contact_sms: Boolean(contact_sms),
+        contact_wpp: Boolean(contact_wpp),
+        user_role,
+        phone_numbers: {
+          create: {
+            phone_number
+          }
+        },
+        addresses: {
+          create: {
+            address_name: "Primary Address",
+            address,
+            city
+          }
         }
       }
+    });
+    
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+      throw new Error('Email already exists');
+    } else {
+      throw error;
     }
-  });
+  }
 }
 
 // update user
-export const updateUser = (id: string | undefined, input: any) => {
+export const updateUser = async (id: string | undefined, input: any) => {
   const {
     email,
-    password,
     name,
     last_name,
     city,
@@ -108,6 +118,7 @@ export const updateUser = (id: string | undefined, input: any) => {
     addresses
    } = input;
 
+   const encPassword = await bcrypt.hash(input.password, 10);
   // Update the phone numbers
   const updatedPhoneNumbers = phone_numbers
   ? phone_numbers.map(({ id_user_phone_number, phone_number }: PhoneNumber) => ({
@@ -130,7 +141,7 @@ export const updateUser = (id: string | undefined, input: any) => {
     },
     data: {
       email: email && { set: email },
-      password: password && { set: password },
+      password: encPassword && { set: encPassword },
       name: name && { set: name },
       last_name: last_name && { set: last_name },
       city: city && { set: city },

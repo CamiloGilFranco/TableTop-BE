@@ -20,20 +20,24 @@ import {
   }
  }
 
- // get single user with id
- export const getUserByIdController = async (
-  req: Request,
-  res: Response,
- ) =>{
+ // get single user with token
+ export const getUserByTokenController = async (
+  req: Request & AuthUser,
+  res: Response
+ ) => {
   try {
-    const { id } = req.params;
-    const user = await getUserById(id);
+    const { user } = req;
     if (!user) {
-      return res.status(404).json({ message: 'User with that ID does not exist' });
+      return res.status(404).json({ message: "User not found" });
     }
-    
-    res.status(200).json({ message: 'User found!', data: user });
-  } catch (error: any) {
+    const fetchedUser = await getUserById(user);
+
+    if (!fetchedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "User found!", data: fetchedUser });
+  } catch (error:any) {
     res.status(500).json({ message: error.message });
   }
  }

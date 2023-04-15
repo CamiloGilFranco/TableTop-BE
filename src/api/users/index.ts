@@ -1,8 +1,8 @@
 import { Router  } from 'express';
-import { 
+import {
   deleteUserController,
-  getAllUsersController, 
-  getUserByIdController,
+  getAllUsersController,
+  getUserByTokenController,
   updateUserController,
  } from './users.controllers';
 import { auth } from '../../middleware/auth';
@@ -10,7 +10,7 @@ import { auth } from '../../middleware/auth';
 const router = Router();
 
 router.get('/', getAllUsersController);
-router.get('/:id', getUserByIdController);
+router.get('/profile', auth, getUserByTokenController);
 router.put('/', auth, updateUserController);
 router.delete('/:id', auth, deleteUserController);
 
