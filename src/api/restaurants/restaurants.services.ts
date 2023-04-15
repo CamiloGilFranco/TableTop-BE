@@ -40,6 +40,15 @@ export const getAllRestaurantById = (id: string) => {
   });
 };
 
+//Get restaurants for RestaurantList
+export const getAllRestaurantsWithCuisines = () => {
+  return prisma.restaurants.findMany({
+    include: {
+      cuisines: true,
+    },
+  });
+};
+
 // create new restaurant
 export const createRestaurant = (input: any) => {
   const {
@@ -59,7 +68,7 @@ export const createRestaurant = (input: any) => {
     admins,
     order_details,
   } = input;
-  const restaurant_path = restaurant_name.replaceAll(' ', '').toLowerCase();
+  const restaurant_path = restaurant_name.replaceAll(" ", "").toLowerCase();
   return prisma.restaurants.create({
     data: {
       restaurant_path,
@@ -77,12 +86,12 @@ export const createRestaurant = (input: any) => {
       reservations,
       reviews,
       admins,
-      order_details
-    }
+      order_details,
+    },
   });
-}
+};
 
-// update restaurant 
+// update restaurant
 export const updateRestaurant = (id: string, input: any) => {
   const {
     restaurant_name,
@@ -101,11 +110,11 @@ export const updateRestaurant = (id: string, input: any) => {
     admins,
     order_details,
   } = input;
-  const restaurant_path = restaurant_name.replaceAll(' ', '').toLowerCase();
+  const restaurant_path = restaurant_name.replaceAll(" ", "").toLowerCase();
 
   return prisma.restaurants.update({
     where: {
-      id_restaurant: id
+      id_restaurant: id,
     },
     data: {
       restaurant_name: restaurant_name && { set: restaurant_name },
@@ -118,21 +127,23 @@ export const updateRestaurant = (id: string, input: any) => {
       photos: photos && { set: photos },
       dishes: dishes && { set: dishes },
       dishes_categories: dishes_categories && { set: dishes_categories },
-      facilities_per_venue: facilities_per_venue && { set: facilities_per_venue },
+      facilities_per_venue: facilities_per_venue && {
+        set: facilities_per_venue,
+      },
       venues: venues && { set: venues },
       reservations: reservations && { set: reservations },
       reviews: reviews && { set: reviews },
       admins: admins && { set: admins },
-      order_details: order_details && { set: order_details }
-    }
+      order_details: order_details && { set: order_details },
+    },
   });
-}
+};
 
-// delete restaurant 
+// delete restaurant
 export const deleteRestaurant = (id: string) => {
   return prisma.restaurants.delete({
     where: {
-      id_restaurant: id
-    }
+      id_restaurant: id,
+    },
   });
-}
+};

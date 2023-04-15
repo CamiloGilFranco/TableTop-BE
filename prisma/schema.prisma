@@ -59,20 +59,21 @@ model users {
 
 model cuisine_categories {
   id_cuisine_category       String                    @id @default(cuid())
-  cuisine_category          String
+  cuisine_category          String                    @unique
+  cuisine_photo             String
   id_cuisine_per_restaurant cuisines_per_restaurant[]
   createdAt                 DateTime                  @default(now())
   updatedAt                 DateTime                  @updatedAt
 }
 
 model cuisines_per_restaurant {
-  id_cuisine_per_restaurant             String             @id @default(cuid())
-  restaurants                           restaurants        @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
-  restaurantsId_restaurant              String
-  cuisine_categories                    cuisine_categories @relation(fields: [cuisine_categoriesId_cuisine_category], references: [id_cuisine_category])
-  cuisine_categoriesId_cuisine_category String
-  createdAt                             DateTime           @default(now())
-  updatedAt                             DateTime           @updatedAt
+  id_cuisine_per_restaurant String             @id @default(cuid())
+  restaurants               restaurants        @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant  String
+  cuisine_categories        cuisine_categories @relation(fields: [cuisine_category], references: [cuisine_category])
+  cuisine_category          String
+  createdAt                 DateTime           @default(now())
+  updatedAt                 DateTime           @updatedAt
 }
 
 model restaurant_photos {
