@@ -1,4 +1,6 @@
 import { PrismaClient, Prisma } from "@prisma/client";
+import bcrypt from 'bcrypt';
+
 
 interface PhoneNumber {
   id_user_phone_number: string;
@@ -103,10 +105,9 @@ export const createUser = async (input: any) => {
 }
 
 // update user
-export const updateUser = (id: string | undefined, input: any) => {
+export const updateUser = async (id: string | undefined, input: any) => {
   const {
     email,
-    password,
     name,
     last_name,
     city,
@@ -117,6 +118,7 @@ export const updateUser = (id: string | undefined, input: any) => {
     addresses
    } = input;
 
+   const encPassword = await bcrypt.hash(input.password, 10);
   // Update the phone numbers
   const updatedPhoneNumbers = phone_numbers
   ? phone_numbers.map(({ id_user_phone_number, phone_number }: PhoneNumber) => ({
@@ -139,7 +141,7 @@ export const updateUser = (id: string | undefined, input: any) => {
     },
     data: {
       email: email && { set: email },
-      password: password && { set: password },
+      password: encPassword && { set: encPassword },
       name: name && { set: name },
       last_name: last_name && { set: last_name },
       city: city && { set: city },
