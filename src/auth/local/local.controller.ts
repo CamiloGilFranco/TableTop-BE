@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import { createUser } from "../../api/users/users.services";
@@ -5,6 +6,8 @@ import {
   login,
   signToken
 } from "../auth.services";
+
+const prisma = new PrismaClient();
 
 // create new user
 export const signupController = async (
@@ -19,13 +22,24 @@ export const signupController = async (
       address,
       phone_number
     } = req.body;
+    const existingUser = await prisma.users.findUnique({ where: { email } });
+
+    if (existingUser) {
+      res.status(409).json({ message: 'Email already exists' });
+      return;
+    }
     const encPassword = await bcrypt.hash(req.body.password, 10);
     const {user_id: id} = await createUser({ ...req.body, password: encPassword });
     const token = signToken({ id });
     res.status(201).send({message : 'User created successfully', data: { name, last_name, email }, token});
   } catch (error: any) {
-    console.error(error);
-    res.status(500).json({ message: error.message });
+    console.error('Error:', error.message);
+
+    if (error.message === 'Email already exists') {
+      res.status(409).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: 'An unexpected error occurred' });
+    }
   }
 }
 
