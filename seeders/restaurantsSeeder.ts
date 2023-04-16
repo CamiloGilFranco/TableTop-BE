@@ -9,8 +9,20 @@ const seedRestaurants = async (prisma: PrismaClient): Promise<void> => {
   const restaurants = [];
 
   for (let i = 0; i < dat.length; i++) {
+    let path = dat[i].restaurantName;
+    path = path.toLowerCase();
+    path = path.replaceAll(" ", "-");
+    path = path.replaceAll("ñ", "n");
+    path = path.replaceAll("á", "a");
+    path = path.replaceAll("é", "e");
+    path = path.replaceAll("í", "i");
+    path = path.replaceAll("ó", "o");
+    path = path.replaceAll("ú", "u");
+    path = path.replaceAll("&", "y");
+    path = path.replaceAll("'", "");
+
     const restaurant = {
-      restaurant_path: dat[i].restaurantPath,
+      restaurant_path: path,
       restaurant_name: dat[i].restaurantName,
       logo: dat[i].logo,
       main_photo: dat[i].picture,

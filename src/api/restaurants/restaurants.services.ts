@@ -9,7 +9,6 @@ export const getAllRestaurants = () => {
       photos: true,
       dishes: true,
       dishes_categories: true,
-      facilities_per_venue: true,
       venues: true,
       reservations: true,
       reviews: true,
@@ -30,7 +29,6 @@ export const getAllRestaurantById = (id: string) => {
       photos: true,
       dishes: true,
       dishes_categories: true,
-      facilities_per_venue: true,
       venues: true,
       reservations: true,
       reviews: true,
@@ -45,6 +43,26 @@ export const getAllRestaurantsWithCuisines = () => {
   return prisma.restaurants.findMany({
     include: {
       cuisines: true,
+    },
+  });
+};
+
+// get restaurant by path
+export const getRestaurantByPath = (path: string) => {
+  return prisma.restaurants.findUnique({
+    where: {
+      restaurant_path: path,
+    },
+    include: {
+      cuisines: true,
+      photos: true,
+      dishes_categories: {
+        include: {
+          dishes: true,
+        },
+      },
+      venues: true,
+      reviews: true,
     },
   });
 };
@@ -81,7 +99,6 @@ export const createRestaurant = (input: any) => {
       photos,
       dishes,
       dishes_categories,
-      facilities_per_venue,
       venues,
       reservations,
       reviews,
@@ -127,9 +144,6 @@ export const updateRestaurant = (id: string, input: any) => {
       photos: photos && { set: photos },
       dishes: dishes && { set: dishes },
       dishes_categories: dishes_categories && { set: dishes_categories },
-      facilities_per_venue: facilities_per_venue && {
-        set: facilities_per_venue,
-      },
       venues: venues && { set: venues },
       reservations: reservations && { set: reservations },
       reviews: reviews && { set: reviews },
