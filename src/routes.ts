@@ -17,7 +17,7 @@ import useAddress from "./api/userAddresses";
 import orders from "./api/orders";
 import ordersDetails from "./api/orderDetails";
 import reviews from "./api/reviews";
-import facilitiesVenue from "./api/facilitiesVenue ";
+import facilitiesVenue from "./api/facilitiesVenue";
 
 const routes = (app: Application): void => {
   app.use("/api/healthcheck", healthcheck);
