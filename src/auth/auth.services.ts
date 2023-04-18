@@ -7,7 +7,7 @@ export type DecodedToken = {
 
 const prisma = new PrismaClient();
 const SECRET = process.env.SECRET_KEY as string;
-const tokenExpirationTime = 60 * 15;
+const tokenExpirationTime = 60 * 60 * 2;
 
 export const login = (email: string) => {
   return prisma.users.findUnique({

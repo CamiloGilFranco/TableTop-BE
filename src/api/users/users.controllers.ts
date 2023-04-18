@@ -5,6 +5,7 @@ import {
   getAllUsers, 
   getUserById,
   updateUser,
+  updateUserRole,
  } from "./users.services";
 
  // gets all the users from the bd
@@ -69,3 +70,17 @@ import {
     res.status(500).json({ message: error.message });
   }
  }
+
+ // updates a user role
+ export const updateUserRoleController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { email, user_role } = req.body;
+    const user = await updateUserRole(email, user_role);
+    res.status(200).json({ message: 'User role updated', data: user });
+  } catch (error: any) {
+    res.status(500).json({message: error.message});
+  }
+};

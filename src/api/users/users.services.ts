@@ -162,3 +162,19 @@ export const deleteUser = (id: string) => {
     }
   });
 }
+
+// Update user role by email
+export const updateUserRole = async (email: string, user_role: string) => {
+  try {
+    return prisma.users.update({
+      where: {
+        email
+      },
+      data: {
+        user_role,
+      },
+    });
+  } catch (error: any) {
+    throw new Error (`${error.message}`)
+  }
+};

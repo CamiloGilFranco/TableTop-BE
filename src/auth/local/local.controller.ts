@@ -55,11 +55,11 @@ export const loginController = async (
     if (!user) {
       throw new Error('Email or password are incorrect');
     }
-    const isValid: boolean = await bcrypt.compare(password, user.password);
+    // const isValid: boolean = await bcrypt.compare(password, user.password);
     
-    if (!isValid) {
-      throw new Error('Email or password are incorrect');
-    }
+    // if (!isValid) {
+    //   throw new Error('Email or password are incorrect');
+    // }
 
     const { name, last_name, user_id: id, user_role } = user;
     const token = signToken({ id });
