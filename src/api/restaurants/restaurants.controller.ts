@@ -7,6 +7,7 @@ import {
   getAllRestaurants,
   updateRestaurant,
   getAllRestaurantsWithCuisines,
+  getRestaurantByPath,
 } from "./restaurants.services";
 
 // get all restaurants
@@ -52,6 +53,22 @@ export const getAllRestaurantsWithCuisinesController = async (
       message: "Restaurants retrieved successfully",
       data: restaurants,
     });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// get restaurant by path
+export const getRestaurantByPathController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { path } = req.params;
+    const restaurant = await getRestaurantByPath(path);
+    res
+      .status(200)
+      .json({ message: "Restaurant with that path found!", data: restaurant });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
