@@ -27,7 +27,6 @@ const seeders = [
   seedCuisine_categories,
   seedCuisine_per_restaurant,
   seedRestaurant_photos,
-  seedReviews,
   seedRestaurant_venues,
   seedReservation,
   seedFacilities_per_venue,
@@ -35,6 +34,7 @@ const seeders = [
   seedDishes,
   seedOrders,
   seedOrder_details,
+  seedReviews,
 ];
 
 const seed = async () => {
