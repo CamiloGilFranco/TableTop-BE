@@ -19,22 +19,14 @@ export const signupController = async (req: Request, res: Response) => {
       return;
     }
     const encPassword = await bcrypt.hash(req.body.password, 10);
-    // const { user_id: id } = await createUser({
-    //   ...req.body,
-    //   password: encPassword,
-    // });
-    // const token = signToken({ id });
 
-    //enviar correo electronico
-    const user = await createUser({
+    const { user_id: id } = await createUser({
       ...req.body,
       password: encPassword,
     });
-    const token = signToken({ id: user.user_id });
+    const token = signToken({ id });
 
-    await sendNodemailer(welcomeEmail(user));
-    // -----------------------------------
-
+    await sendNodemailer(welcomeEmail({ email, name }));
     res.status(201).send({
       message: "User created successfully",
       data: { name, last_name, email },

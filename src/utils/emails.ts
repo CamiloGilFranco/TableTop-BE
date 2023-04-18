@@ -3,8 +3,8 @@ export const welcomeEmail = (user: any) => {
     from: "<admin@restaurant.com>",
     to: user.email,
     subject: "Welcome",
-    html: `<h1>Bienvenido ${user.name} gracias por registrarte</h1>`,
-    text: `Bienvenido ${user.name} gracias por registrarte`,
+    html: `<h1>Welcome ${user.name} thank you for registering to the top 27 restaurant</h1>`,
+    text: `Wellcome ${user.name} thank you for registering to the top 27 restaurant`,
   };
   return email;
 };

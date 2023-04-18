@@ -13,7 +13,7 @@ const createGmailTransporter = () => {
     secure: true,
     auth: {
       user: username,
-      password: password,
+      pass: password,
     },
     logger: false,
   });
