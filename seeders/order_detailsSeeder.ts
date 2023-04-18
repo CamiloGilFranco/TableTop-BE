@@ -70,17 +70,17 @@ const seedOrder_details = async (prisma: PrismaClient): Promise<void> => {
   const restaurants = await prisma.restaurants.findMany();
 
   for (const restaurant of restaurants) {
-    const restaurantId = restaurant.id_restaurant;
+    const { id_restaurant } = restaurant;
 
     const shopping = await prisma.order_details.findMany({
       where: {
-        restaurantsId_restaurant: restaurantId,
+        restaurantsId_restaurant: id_restaurant,
       },
     });
 
     await prisma.restaurants.update({
       where: {
-        id_restaurant: restaurantId,
+        id_restaurant: id_restaurant,
       },
       data: {
         number_of_sales: shopping.length,

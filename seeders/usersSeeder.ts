@@ -25,14 +25,14 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
     const numberOfAdmins = random(1, 5);
 
     for (let i = 0; i < numberOfAdmins; i++) {
-      const userEmail = faker.internet.email();
+      const email = faker.internet.email();
       const userPassword = faker.internet.password();
-      const cryptPassword = await bcrypt.hash(userPassword, 10);
+      const password = await bcrypt.hash(userPassword, 10);
 
       await prisma.users.create({
         data: {
-          email: userEmail,
-          password: cryptPassword,
+          email,
+          password,
           name: faker.name.firstName(),
           last_name: faker.name.lastName(),
           document_type: documentTypes[random(0, documentTypes.length - 1)],
@@ -57,19 +57,19 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
 
       appendFileSync(
         "./assets/usersData.txt",
-        `Rol: restaurantAdmin --- Email: ${userEmail} --- Password: ${userPassword} --- AdminOf: ${restaurant.restaurant_name}\n`
+        `Rol: restaurantAdmin --- Email: ${email} --- Password: ${userPassword} --- AdminOf: ${restaurant.restaurant_name}\n`
       );
     }
   }
 
   for (let i = 0; i < 100; i++) {
-    const userEmail = faker.internet.email();
+    const email = faker.internet.email();
     const userPassword = faker.internet.password();
-    const cryptPassword = await bcrypt.hash(userPassword, 10);
+    const password = await bcrypt.hash(userPassword, 10);
 
     const user = {
-      email: userEmail,
-      password: cryptPassword,
+      email,
+      password,
       name: faker.name.firstName(),
       last_name: faker.name.lastName(),
       document_type: documentTypes[random(0, documentTypes.length - 1)],
@@ -86,18 +86,18 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
 
     appendFileSync(
       "./assets/usersData.txt",
-      `Rol: user --- Email: ${userEmail} --- Password: ${userPassword}\n`
+      `Rol: user --- Email: ${email} --- Password: ${userPassword}\n`
     );
   }
 
   for (let i = 0; i < random(1, 10); i++) {
-    const userEmail = faker.internet.email();
+    const email = faker.internet.email();
     const userPassword = faker.internet.password();
-    const cryptPassword = await bcrypt.hash(userPassword, 10);
+    const password = await bcrypt.hash(userPassword, 10);
 
     const appAdmin = {
-      email: userEmail,
-      password: cryptPassword,
+      email,
+      password,
       name: faker.name.firstName(),
       last_name: faker.name.lastName(),
       document_type: documentTypes[random(0, documentTypes.length - 1)],
@@ -114,7 +114,7 @@ const seedUsers = async (prisma: PrismaClient): Promise<void> => {
 
     appendFileSync(
       "./assets/usersData.txt",
-      `Rol: appAdmin --- Email: ${userEmail} --- Password: ${userPassword}\n`
+      `Rol: appAdmin --- Email: ${email} --- Password: ${userPassword}\n`
     );
   }
 
