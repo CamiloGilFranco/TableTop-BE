@@ -78,9 +78,13 @@ import {
 ) => {
   try {
     const { email, user_role } = req.body;
+    if (!email || !user_role) {
+      return res.status(400).json({ message: 'Email and user_role are required' });
+    }
     const user = await updateUserRole(email, user_role);
     res.status(200).json({ message: 'User role updated', data: user });
   } catch (error: any) {
+    console.error(error)
     res.status(500).json({message: error.message});
   }
 };
