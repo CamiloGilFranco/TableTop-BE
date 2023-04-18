@@ -11,16 +11,21 @@ const seedReviews = async (prisma: PrismaClient): Promise<void> => {
 
   for (const restaurant of restaurants) {
     const numberOfReviews = random(0, 20);
+    const restaurantID = restaurant.id_restaurant;
+    let ratingSum = 0;
+    let dataQuantity = 0;
 
     for (let i = 0; i < numberOfReviews; i++) {
+      const singleRating = random(1, 5);
+
       await prisma.reviews.create({
         data: {
           title: faker.lorem.words(random(1, 5)),
-          rating: random(1, 5),
+          rating: singleRating,
           comment: faker.lorem.sentence(),
           restaurants: {
             connect: {
-              id_restaurant: restaurant.id_restaurant,
+              id_restaurant: restaurantID,
             },
           },
           users: {
@@ -30,10 +35,26 @@ const seedReviews = async (prisma: PrismaClient): Promise<void> => {
           },
         },
       });
+
+      dataQuantity++;
+      ratingSum += singleRating;
     }
+
+    const ratingAverage = ratingSum / dataQuantity;
+
+    await prisma.restaurants.update({
+      where: {
+        id_restaurant: restaurantID,
+      },
+      data: {
+        rating: ratingAverage,
+      },
+    });
   }
 
   console.log("reviews created!");
 };
+
+/* seedReviews(prisma); */
 
 export default seedReviews;
