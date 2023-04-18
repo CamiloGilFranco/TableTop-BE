@@ -11,25 +11,24 @@ datasource db {
 }
 
 model restaurants {
-  id_restaurant        String                    @id @default(cuid())
-  restaurant_path      String                    @unique
-  restaurant_name      String                    @unique
-  logo                 String                    @unique
-  main_photo           String
-  rating               Float
-  number_of_sales      Int
-  cuisines             cuisines_per_restaurant[]
-  photos               restaurant_photos[]
-  dishes               dishes[]
-  dishes_categories    dishes_categories[]
-  facilities_per_venue facilities_per_venue[]
-  venues               restaurant_venues[]
-  reservations         reservations[]
-  reviews              reviews[]
-  admins               users[]
-  order_details        order_details[]
-  createdAt            DateTime                  @default(now())
-  updatedAt            DateTime                  @updatedAt
+  id_restaurant     String                    @id @default(cuid())
+  restaurant_path   String                    @unique
+  restaurant_name   String                    @unique
+  logo              String                    @unique
+  main_photo        String
+  rating            Float
+  number_of_sales   Int
+  cuisines          cuisines_per_restaurant[]
+  photos            restaurant_photos[]
+  dishes            dishes[]
+  dishes_categories dishes_categories[]
+  venues            restaurant_venues[]
+  reservations      reservations[]
+  reviews           reviews[]
+  admins            users[]
+  order_details     order_details[]
+  createdAt         DateTime                  @default(now())
+  updatedAt         DateTime                  @updatedAt
 }
 
 model users {
@@ -111,8 +110,6 @@ model dishes_categories {
 
 model facilities_per_venue {
   id_facility_per_venue                String            @id @default(cuid())
-  restaurants                          restaurants       @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
-  restaurantsId_restaurant             String
   facilities                           facilities        @relation(fields: [facilitiesId_facility], references: [id_facility])
   facilitiesId_facility                String
   restaurant_venues                    restaurant_venues @relation(fields: [restaurant_venuesId_restaurant_venue], references: [id_restaurant_venue])
