@@ -61,8 +61,11 @@ export const getRestaurantByPath = (path: string) => {
           dishes: true,
         },
       },
-
-      venues: true,
+      venues: {
+        include: {
+          facilities: true,
+        },
+      },
       reviews: true,
     },
   });
