@@ -3,6 +3,7 @@ import {
   deleteUserController,
   getAllUsersController,
   getUserByTokenController,
+  getUsersByRoleController,
   updateUserController,
   updateUserRoleController,
  } from './users.controllers';
@@ -15,6 +16,7 @@ router.get('/', getAllUsersController);
 router.get('/profile', auth, getUserByTokenController);
 router.put('/', auth, updateUserController);
 router.put('/change-role', auth, isAppAdmin, updateUserRoleController);
-router.delete('/:id', auth, deleteUserController);
+router.delete('/:id', auth, isAppAdmin, deleteUserController);
+router.get('/by-role', auth, isAppAdmin, getUsersByRoleController);
 
 export default router;

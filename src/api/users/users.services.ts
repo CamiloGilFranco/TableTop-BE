@@ -24,7 +24,8 @@ export const getAllUsers = () => {
       name: true,
       last_name: true,
       city: true,
-      user_role: true
+      user_role: true,
+      user_id: true
     }
   });
 }
@@ -155,13 +156,78 @@ export const updateUser = async (id: string | undefined, input: any) => {
 }
 
 // delete user 
-export const deleteUser = (id: string) => {
-  return prisma.users.delete({
+export const deleteUser = async (user_id: string) => {
+  const user = await prisma.users.findUnique({
     where: {
-      user_id: id
-    }
+      user_id,
+    },
+    select: {
+      user_role: true,
+    },
   });
-}
+
+  if (user && user.user_role === 'user') {
+    await prisma.user_addresses.deleteMany({
+      where: {
+        usersUser_id: user_id,
+      },
+    });
+    await prisma.user_phone_numbers.deleteMany({
+      where: {
+        usersUser_id: user_id,
+      },
+    });
+
+    // gets all the orders related to the user
+    const userOrders = await prisma.orders.findMany({
+      where: {
+        usersUser_id: user_id,
+      },
+      select: {
+        id_order: true,
+      },
+    });
+
+    // Deletes order_details records associated with each order
+    for (const order of userOrders) {
+      await prisma.order_details.deleteMany({
+        where: {
+          ordersId_order: order.id_order,
+        },
+      });
+    }
+
+    // Deletes the order
+    await prisma.orders.deleteMany({
+      where: {
+        usersUser_id: user_id,
+      },
+    });
+
+    // Deletes the reviews
+    await prisma.reviews.deleteMany({
+      where: {
+        usersUser_id: user_id,
+      },
+    });
+
+    // Deletes the reservations
+    await prisma.reservations.deleteMany({
+      where: {
+        usersUser_id: user_id,
+      },
+    });
+
+    // Deletes the user itself
+    return prisma.users.delete({
+      where: {
+        user_id,
+      },
+    });
+  } else {
+    throw new Error('Cannot delete admins or restaurant admins');
+  }
+};
 
 // Update user role by email
 export const updateUserRole = async (email: string, user_role: string) => {
@@ -177,4 +243,19 @@ export const updateUserRole = async (email: string, user_role: string) => {
   } catch (error: any) {
     throw new Error (`${error.message}`)
   }
+};
+
+export const getUsersByRole = (user_role: string) => {
+  return prisma.users.findMany({
+    where: {
+      user_role,
+    },
+    select: {
+      name: true,
+      last_name: true,
+      city: true,
+      user_role: true,
+      user_id: true,
+    },
+  });
 };

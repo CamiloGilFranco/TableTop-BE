@@ -4,6 +4,7 @@ import {
   deleteUser,
   getAllUsers, 
   getUserById,
+  getUsersByRole,
   updateUser,
   updateUserRole,
  } from "./users.services";
@@ -86,5 +87,21 @@ import {
   } catch (error: any) {
     console.error(error)
     res.status(500).json({message: error.message});
+  }
+};
+
+export const getUsersByRoleController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { role } = req.query;
+    if (!role) {
+      return res.status(400).json({ message: 'Role parameter is required' });
+    }
+    const users = await getUsersByRole(role as string);
+    res.status(200).send({ message: 'Users retrieved successfully', data: users });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 };
