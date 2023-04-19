@@ -137,7 +137,6 @@ export const updateUser = async (id: string | undefined, input: any) => {
         })
       )
     : [];
-
   return prisma.users.update({
     where: {
       user_id: id,

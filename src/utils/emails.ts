@@ -1,4 +1,8 @@
-export const welcomeEmail = (user: any) => {
+interface UserEmailData {
+  email: string;
+  name: string;
+}
+export const welcomeEmail = (user: UserEmailData) => {
   const email = {
     from: "<admin@restaurant.com>",
     to: user.email,
