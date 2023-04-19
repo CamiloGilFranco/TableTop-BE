@@ -33,9 +33,10 @@ export const getAllUsers = () => {
 
 // get a single user by the id 
 export const getUserById = (id: string) => {
-  return prisma.users.findUnique({
+  return prisma.users.findFirst({
     where: {
-      user_id:id
+      user_id: id,
+      active: true,
     },
     include: {
       phone_numbers: true,
@@ -43,10 +44,12 @@ export const getUserById = (id: string) => {
       reservations: true,
       orders: true,
       reviews: true,
-      restaurants: true
-    }
+      restaurants: true,
+    },
   });
-}
+};
+
+
 
 export const createUser = async (input: any) => {
   const {
@@ -155,77 +158,19 @@ export const updateUser = async (id: string | undefined, input: any) => {
   });
 }
 
-// delete user 
-export const deleteUser = async (user_id: string) => {
-  const user = await prisma.users.findUnique({
-    where: {
-      user_id,
-    },
-    select: {
-      user_role: true,
-    },
-  });
-
-  if (user && user.user_role === 'user') {
-    await prisma.user_addresses.deleteMany({
-      where: {
-        usersUser_id: user_id,
-      },
-    });
-    await prisma.user_phone_numbers.deleteMany({
-      where: {
-        usersUser_id: user_id,
-      },
-    });
-
-    // gets all the orders related to the user
-    const userOrders = await prisma.orders.findMany({
-      where: {
-        usersUser_id: user_id,
-      },
-      select: {
-        id_order: true,
-      },
-    });
-
-    // Deletes order_details records associated with each order
-    for (const order of userOrders) {
-      await prisma.order_details.deleteMany({
-        where: {
-          ordersId_order: order.id_order,
-        },
-      });
-    }
-
-    // Deletes the order
-    await prisma.orders.deleteMany({
-      where: {
-        usersUser_id: user_id,
-      },
-    });
-
-    // Deletes the reviews
-    await prisma.reviews.deleteMany({
-      where: {
-        usersUser_id: user_id,
-      },
-    });
-
-    // Deletes the reservations
-    await prisma.reservations.deleteMany({
-      where: {
-        usersUser_id: user_id,
-      },
-    });
-
-    // Deletes the user itself
-    return prisma.users.delete({
+// Deactivate user 
+export const deactivateUser = async (user_id: string) => {
+  try {
+    return prisma.users.update({
       where: {
         user_id,
       },
+      data: {
+        active: false,
+      },
     });
-  } else {
-    throw new Error('Cannot delete admins or restaurant admins');
+  } catch (error: any) {
+    throw new Error('Cannot deactivate admins or restaurant admins');
   }
 };
 
@@ -249,6 +194,7 @@ export const getUsersByRole = (user_role: string) => {
   return prisma.users.findMany({
     where: {
       user_role,
+      active: true,
     },
     select: {
       name: true,
@@ -256,6 +202,14 @@ export const getUsersByRole = (user_role: string) => {
       city: true,
       user_role: true,
       user_id: true,
+    },
+  });
+};
+
+export const getUserByEmail = async (email: string) => {
+  return await prisma.users.findUnique({
+    where: {
+      email,
     },
   });
 };

@@ -9,6 +9,7 @@ import {
   getAllRestaurantsWithCuisines,
   getRestaurantByPath,
 } from "./restaurants.services";
+import { getUserByEmail, updateUserRole } from "../users/users.services";
 
 // get all restaurants
 export const getAllRestaurantsController = async (
@@ -80,6 +81,20 @@ export const createRestaurantController = async (
   res: Response
 ) => {
   try {
+    const adminEmail = req.body.adminEmail;
+    
+    const existingUser = await getUserByEmail(adminEmail);
+    if (!existingUser) {
+      res.status(400).json({ message: "Admin email does not match any existing user" });
+      return;
+    }
+    req.body.admins = [{
+      id: existingUser.user_id,
+    }];
+
+    //updates the existing user to have the restaurant admin role
+    await updateUserRole(adminEmail, 'restaurantAdmin');
+
     const restaurant = await createRestaurant(req.body);
     res
       .status(200)

@@ -29,6 +29,7 @@ model restaurants {
   order_details     order_details[]
   createdAt         DateTime                  @default(now())
   updatedAt         DateTime                  @updatedAt
+  active            Boolean                   @default(true)
 }
 
 model users {
@@ -54,6 +55,7 @@ model users {
   updatedAt                DateTime             @updatedAt
   restaurants              restaurants?         @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
   restaurantsId_restaurant String?
+  active                   Boolean             @default(true)
 }
 
 model cuisine_categories {

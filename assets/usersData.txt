@@ -1,0 +1,141 @@
+Rol: restaurantAdmin --- Email: Tiara_Jenkins@gmail.com --- Password: pQSUJEG6qzJK7db --- AdminOf: La Carnicería Grill & Beer
+Rol: restaurantAdmin --- Email: Dessie_Cole@gmail.com --- Password: K6ao1Nkb01n_bam --- AdminOf: El Palacio de Hierro
+Rol: restaurantAdmin --- Email: Amos_Gulgowski@gmail.com --- Password: YAYGdZwYNC3VYKI --- AdminOf: El Palacio de Hierro
+Rol: restaurantAdmin --- Email: Santiago41@gmail.com --- Password: p14DGnrqyZQrpq1 --- AdminOf: El Palacio de Hierro
+Rol: restaurantAdmin --- Email: Adela.Bashirian64@yahoo.com --- Password: KUPmNGtj7pKwHp2 --- AdminOf: El Palacio de Hierro
+Rol: restaurantAdmin --- Email: Yasmin_Yundt82@hotmail.com --- Password: JX2BRBR7F2X5lJ6 --- AdminOf: El Palacio de Hierro
+Rol: restaurantAdmin --- Email: Edd_Upton@hotmail.com --- Password: xKRgqtY4x6tHIbL --- AdminOf: La Bohème Bistrot
+Rol: restaurantAdmin --- Email: Susan_Lowe@gmail.com --- Password: yUoc9HeAhjrgiAN --- AdminOf: La Bohème Bistrot
+Rol: restaurantAdmin --- Email: Ford.Johnston18@gmail.com --- Password: cW7ypMqWMzGoZN9 --- AdminOf: La Bohème Bistrot
+Rol: restaurantAdmin --- Email: Seth67@gmail.com --- Password: 6T_rt6YEX4hKEIt --- AdminOf: La Bohème Bistrot
+Rol: restaurantAdmin --- Email: Avery.Schimmel52@yahoo.com --- Password: cUDGzuRBMQ2oN8o --- AdminOf: La Bohème Bistrot
+Rol: restaurantAdmin --- Email: Selena_Medhurst91@hotmail.com --- Password: 1LHfc_tHjzafzMn --- AdminOf: Las Cazuelas de la Abuela
+Rol: restaurantAdmin --- Email: Magdalena.Collins@hotmail.com --- Password: vWzvOBDz4Qqa0GW --- AdminOf: Las Cazuelas de la Abuela
+Rol: restaurantAdmin --- Email: Mac.Heaney57@yahoo.com --- Password: jpeVJhRm7yPi3SI --- AdminOf: Las Cazuelas de la Abuela
+Rol: restaurantAdmin --- Email: Quinton77@hotmail.com --- Password: M1JDa60Xqf9jm1v --- AdminOf: El Rincón de los Sabores
+Rol: restaurantAdmin --- Email: Rogelio83@yahoo.com --- Password: dOuDV8vC9GklG6q --- AdminOf: El Rincón de los Sabores
+Rol: restaurantAdmin --- Email: Cyril.Yost@hotmail.com --- Password: D4U8xTBbJXvHkcM --- AdminOf: Sushi House
+Rol: restaurantAdmin --- Email: Monty.Hoeger@yahoo.com --- Password: eiAo5GQtHyZTtJU --- AdminOf: Sushi House
+Rol: restaurantAdmin --- Email: Oceane53@yahoo.com --- Password: lSwVot8ni8LJOwq --- AdminOf: Sushi House
+Rol: restaurantAdmin --- Email: Itzel.Lubowitz@gmail.com --- Password: 5YUK_AZvQD7PIdr --- AdminOf: Sushi House
+Rol: restaurantAdmin --- Email: Antoinette_Jacobs@hotmail.com --- Password: 52QmyQROvaM3M1K --- AdminOf: La Casona del Molino
+Rol: restaurantAdmin --- Email: Tevin_Becker@hotmail.com --- Password: CdS2aAtucIikrUT --- AdminOf: Tostao' Café & Pan
+Rol: restaurantAdmin --- Email: Boris.Dickinson49@hotmail.com --- Password: bbrpqcdQ4sSLrwv --- AdminOf: Tostao' Café & Pan
+Rol: restaurantAdmin --- Email: Giles.Baumbach@hotmail.com --- Password: NcNMEY5Q7TIxQGH --- AdminOf: Tostao' Café & Pan
+Rol: restaurantAdmin --- Email: Trinity89@hotmail.com --- Password: QtG9hVqAPhFWBCd --- AdminOf: Tostao' Café & Pan
+Rol: restaurantAdmin --- Email: Darrick_Jones50@gmail.com --- Password: kl6HqB5Q295Y3px --- AdminOf: Tostao' Café & Pan
+Rol: restaurantAdmin --- Email: Ruth21@hotmail.com --- Password: JQHhfQov18TobJ5 --- AdminOf: La Taquería del Barrio
+Rol: restaurantAdmin --- Email: Susan_Wisozk@yahoo.com --- Password: ETDHceXds_FPpNC --- AdminOf: Punto MX
+Rol: restaurantAdmin --- Email: Queen_Bahringer3@yahoo.com --- Password: z8DvoJq6GBvKLq1 --- AdminOf: Punto MX
+Rol: restaurantAdmin --- Email: Regan_Hettinger@hotmail.com --- Password: 0k9_Nnfz0bPg2si --- AdminOf: El Gaucho Argentino
+Rol: restaurantAdmin --- Email: Austen_Kerluke@gmail.com --- Password: PX0h4duTzfzwfhr --- AdminOf: El Gaucho Argentino
+Rol: restaurantAdmin --- Email: Lucius.Bosco58@yahoo.com --- Password: 4Cxt_zKxV9lC0bq --- AdminOf: El Gaucho Argentino
+Rol: restaurantAdmin --- Email: Jaren_Robel31@yahoo.com --- Password: p8R3HROaiZDlb0s --- AdminOf: El Gaucho Argentino
+Rol: restaurantAdmin --- Email: Percy68@yahoo.com --- Password: 5WkqiQr3WnQVp4A --- AdminOf: El Gaucho Argentino
+Rol: restaurantAdmin --- Email: Damaris.Muller27@hotmail.com --- Password: mJuvsRnKufSlKTz --- AdminOf: La Casa de Toño
+Rol: user --- Email: Porter80@gmail.com --- Password: zcBhAq1O4hJUV3P
+Rol: user --- Email: Sid_Yundt@hotmail.com --- Password: vSebEktaidCeHiR
+Rol: user --- Email: Henderson.Kshlerin70@hotmail.com --- Password: wLfpH8IEi63FJ9w
+Rol: user --- Email: Myrtis36@gmail.com --- Password: yWdotRSsdBFd9OF
+Rol: user --- Email: Nova.Becker21@hotmail.com --- Password: 6jtSi5743MUWm7x
+Rol: user --- Email: Jessie3@yahoo.com --- Password: yB_oEG2bYrgeFgJ
+Rol: user --- Email: Asa.Buckridge@yahoo.com --- Password: xuTYULOFukHxoYK
+Rol: user --- Email: Lisa41@hotmail.com --- Password: BxAVn2GoXk8_3Yo
+Rol: user --- Email: Meredith_Blick68@gmail.com --- Password: Y86Rm4nR_LYdTB5
+Rol: user --- Email: Duane38@hotmail.com --- Password: d4jtzdKJKg5ptSZ
+Rol: user --- Email: Syble_Robel@hotmail.com --- Password: wt5voF2_NN6eRJP
+Rol: user --- Email: Nicolette73@yahoo.com --- Password: cDu8fhbSOoBFoXr
+Rol: user --- Email: Bert.Leannon@gmail.com --- Password: SZPTFPkjbf03yRr
+Rol: user --- Email: Mellie.Rempel@gmail.com --- Password: VeZJGXPQFHKd_wb
+Rol: user --- Email: Jennie_Murray46@yahoo.com --- Password: iMWoPzHBZfYPfFb
+Rol: user --- Email: Pedro.Kerluke@yahoo.com --- Password: ye8L3r5q4u1zz51
+Rol: user --- Email: Nathanial37@hotmail.com --- Password: JQzRXZGTW2jJP17
+Rol: user --- Email: Celia21@gmail.com --- Password: M9Ty06FfvNNCU8F
+Rol: user --- Email: Joesph38@gmail.com --- Password: I8Qw9mSruYLpkCx
+Rol: user --- Email: Monique_Fay@yahoo.com --- Password: x74UeAE1d6t__GQ
+Rol: user --- Email: Jannie.Simonis@gmail.com --- Password: 8jzzfK2hXSPJftY
+Rol: user --- Email: Celestino_Bradtke@yahoo.com --- Password: O9GKEuntNUouvM_
+Rol: user --- Email: Janick_Romaguera84@yahoo.com --- Password: Kkyuw66I7Z7YB3W
+Rol: user --- Email: Jarrell91@hotmail.com --- Password: bHGW3b1dluuJKu0
+Rol: user --- Email: Hanna7@gmail.com --- Password: spV07C6Yo6u3nUo
+Rol: user --- Email: Maida.Jakubowski@yahoo.com --- Password: t5vYC5Cht0I5U6h
+Rol: user --- Email: Cleora.Wisoky25@hotmail.com --- Password: 8Wta_djhkitI5LT
+Rol: user --- Email: Rosina.Kerluke25@yahoo.com --- Password: q8OaqLojbiHF7kC
+Rol: user --- Email: Emmitt67@gmail.com --- Password: D4qjapuptmfl_xH
+Rol: user --- Email: Ignacio27@yahoo.com --- Password: ee2cxhMxOTUB_aB
+Rol: user --- Email: Linda.Hermiston@gmail.com --- Password: tkNjgd_eKzoKBjx
+Rol: user --- Email: Mason.Kuhic15@yahoo.com --- Password: 5z2Z0BsrZMf1D5x
+Rol: user --- Email: Candelario.Bayer@yahoo.com --- Password: PE2tFQZwuc67ElM
+Rol: user --- Email: Chanel25@yahoo.com --- Password: MoWy2gW_2NBOzBZ
+Rol: user --- Email: Rasheed_Hessel@hotmail.com --- Password: tlZfDzrdF0adZ9h
+Rol: user --- Email: Liliana_McKenzie@yahoo.com --- Password: CNdRD7YrIPpRjzu
+Rol: user --- Email: Trace_Paucek4@yahoo.com --- Password: PE8aUextOZ1jpNg
+Rol: user --- Email: Arely25@yahoo.com --- Password: XJWh8ode1kws864
+Rol: user --- Email: Lon_Howell19@hotmail.com --- Password: EaZ_Yn4ZPag6hcy
+Rol: user --- Email: Eriberto.Luettgen7@gmail.com --- Password: zZTOH2cX4vtbpjC
+Rol: user --- Email: Evalyn_Ritchie24@yahoo.com --- Password: ZhhWPdMtaMRk2QT
+Rol: user --- Email: Scarlett.Turcotte53@gmail.com --- Password: mCFKN_GRI_h9JL4
+Rol: user --- Email: Ottilie55@hotmail.com --- Password: 6JSEHR1W9FFR9EG
+Rol: user --- Email: Clarissa37@yahoo.com --- Password: jOPl9RNnQHPbbtx
+Rol: user --- Email: Willard99@hotmail.com --- Password: Izeu_hPUA52pE2z
+Rol: user --- Email: Lavern_Blick37@hotmail.com --- Password: 1bT_Ty1eq5Da2pe
+Rol: user --- Email: Bobby.Morar97@yahoo.com --- Password: cRYladnnKmCY1xW
+Rol: user --- Email: Frederik_McLaughlin90@yahoo.com --- Password: bs5embPqngCWych
+Rol: user --- Email: Zackary_Klein74@gmail.com --- Password: IIK9v4fsPLbaBO3
+Rol: user --- Email: Gino.Kreiger@hotmail.com --- Password: xbraGUDtdeIk_sh
+Rol: user --- Email: Tate_Jacobi@gmail.com --- Password: AZ9DavhKTBXawhu
+Rol: user --- Email: Jeromy.Macejkovic@gmail.com --- Password: tLaisRcyljKCayP
+Rol: user --- Email: Name.Mraz@yahoo.com --- Password: 01GeGT8C7kOHgQQ
+Rol: user --- Email: Mitchell_Wuckert65@hotmail.com --- Password: _E5JPFktRFrajhX
+Rol: user --- Email: Mathias.Witting65@gmail.com --- Password: fpGGxACGkO6dDke
+Rol: user --- Email: Vaughn37@yahoo.com --- Password: 7emUb2ns1XRY3JM
+Rol: user --- Email: Felipa55@yahoo.com --- Password: D2GPmFotrn8pPLg
+Rol: user --- Email: Madyson44@hotmail.com --- Password: 9tCyHlY56xhHicb
+Rol: user --- Email: Rafael77@gmail.com --- Password: lZP_SkyuvPOnn9y
+Rol: user --- Email: Concepcion_Kreiger14@gmail.com --- Password: JoqPyc4TexRvI2K
+Rol: user --- Email: Dallin51@gmail.com --- Password: rxy9AGj_7VNrpCt
+Rol: user --- Email: Electa_MacGyver@hotmail.com --- Password: 0M3ThdAtQ8vMT3v
+Rol: user --- Email: Eleanora_Koss21@yahoo.com --- Password: Pm9ZvHP12XOHNb7
+Rol: user --- Email: Wyman_Lemke@hotmail.com --- Password: TikEEAGhFQthif9
+Rol: user --- Email: Delta_Welch3@gmail.com --- Password: grFLaDrLnuYbbH4
+Rol: user --- Email: Aleen98@gmail.com --- Password: HTKbojs7EzfQqcw
+Rol: user --- Email: Mandy_Bednar93@gmail.com --- Password: EbhaJVJahAhQ2ex
+Rol: user --- Email: Gordon37@gmail.com --- Password: 8mUmBWP6HFoUXaP
+Rol: user --- Email: Rosario_Kuphal@hotmail.com --- Password: xpTNQLPYGACWPIc
+Rol: user --- Email: Rosalyn.Feil@hotmail.com --- Password: c30P1tFxtgXD27x
+Rol: user --- Email: Tyrel.Blanda59@gmail.com --- Password: fdd7cGqkbsJGeN2
+Rol: user --- Email: Yolanda.Reynolds@yahoo.com --- Password: MBC2PhJZNtwqiXU
+Rol: user --- Email: Willis90@hotmail.com --- Password: Fl2JJ1DXgqidOZl
+Rol: user --- Email: Tia65@gmail.com --- Password: WvbKPMSdtxActGO
+Rol: user --- Email: Van.Spinka75@gmail.com --- Password: rZA8H9pQhhuKwBw
+Rol: user --- Email: Erica_Senger67@gmail.com --- Password: I_VCWEJOA08DXVY
+Rol: user --- Email: Jules86@yahoo.com --- Password: xUDxSTPI1c5wtHi
+Rol: user --- Email: Viviane20@yahoo.com --- Password: 4MIhQkkMHDuPr0d
+Rol: user --- Email: Ollie_Wilderman24@hotmail.com --- Password: L5zEA7wOpnSHbD5
+Rol: user --- Email: Kristopher_Mraz@gmail.com --- Password: abzWnIGBomurQCQ
+Rol: user --- Email: Gudrun.Larson@gmail.com --- Password: blpY0daGsLP_thr
+Rol: user --- Email: Margarete_Goodwin@gmail.com --- Password: tFjeBt1jNSRRNst
+Rol: user --- Email: Zack.Baumbach91@gmail.com --- Password: obWpyaUxPlgnAui
+Rol: user --- Email: Brandyn0@hotmail.com --- Password: 7mWkGguclNfOdCF
+Rol: user --- Email: Jannie_Beer@yahoo.com --- Password: BF1AVlaoeen9Lxn
+Rol: user --- Email: Marques_Lesch26@gmail.com --- Password: rikW1wXF3RDcq1O
+Rol: user --- Email: Mina_Rosenbaum27@yahoo.com --- Password: Ob9zo0pvv1gcCQr
+Rol: user --- Email: Mario_Armstrong36@gmail.com --- Password: 3e74MqvPv3qf_jc
+Rol: user --- Email: Gretchen10@yahoo.com --- Password: 3R_l9N23aAW_uzg
+Rol: user --- Email: Winnifred.VonRueden23@yahoo.com --- Password: auZ5N0eb2aSkHQ9
+Rol: user --- Email: Amelie_Nolan@gmail.com --- Password: hiOijjwhcdMk54g
+Rol: user --- Email: Pauline49@hotmail.com --- Password: EAl3gYZb9mfxaW2
+Rol: user --- Email: Jerrold_McCullough99@hotmail.com --- Password: wU5NwQwnOTikd7V
+Rol: user --- Email: Stanford77@gmail.com --- Password: 1z0oHLJYVQshkEu
+Rol: user --- Email: Corrine65@hotmail.com --- Password: S9Nxl_6Q3cUx5oc
+Rol: user --- Email: Fae.Franecki@gmail.com --- Password: F5bZFsIRibqiW_W
+Rol: user --- Email: Therese_DAmore@hotmail.com --- Password: SHUB8E090mQlt3P
+Rol: user --- Email: Jarret51@hotmail.com --- Password: uFsbAaMt0DmRifS
+Rol: user --- Email: Sarai.Lakin56@yahoo.com --- Password: zyRSWSnnmxcj1lx
+Rol: user --- Email: Walter.Borer@yahoo.com --- Password: wxfXkyoI9t_833J
+Rol: appAdmin --- Email: Katrine56@gmail.com --- Password: KvMhE0ggx7jzqCg
+Rol: appAdmin --- Email: Karley67@gmail.com --- Password: 5S4hhHYPNxB89FX
+Rol: appAdmin --- Email: Jordon_Dach@gmail.com --- Password: m5Yd3EtO3IabLNy
+Rol: appAdmin --- Email: Don_Klein@yahoo.com --- Password: E_IDVNb1fbi37j5
+Rol: appAdmin --- Email: Donato58@hotmail.com --- Password: qXXizbdIVPBluuZ
+Rol: appAdmin --- Email: Alden76@yahoo.com --- Password: 6Bi68tpbXsFTcV_

@@ -4,6 +4,9 @@ const prisma = new PrismaClient();
 // get all restaurants
 export const getAllRestaurants = () => {
   return prisma.restaurants.findMany({
+    where: {
+      active: true,
+    },
     include: {
       cuisines: true,
       photos: true,
@@ -18,11 +21,13 @@ export const getAllRestaurants = () => {
   });
 };
 
+
 // get restaurant by id
 export const getAllRestaurantById = (id: string) => {
-  return prisma.restaurants.findUnique({
+  return prisma.restaurants.findFirst({
     where: {
       id_restaurant: id,
+      active: true,
     },
     include: {
       cuisines: true,
@@ -41,6 +46,9 @@ export const getAllRestaurantById = (id: string) => {
 //Get restaurants for RestaurantList
 export const getAllRestaurantsWithCuisines = () => {
   return prisma.restaurants.findMany({
+    where: {
+      active: true,
+    },
     include: {
       cuisines: true,
     },
@@ -49,9 +57,10 @@ export const getAllRestaurantsWithCuisines = () => {
 
 // get restaurant by path
 export const getRestaurantByPath = (path: string) => {
-  return prisma.restaurants.findUnique({
+  return prisma.restaurants.findFirst({
     where: {
       restaurant_path: path,
+      active: true,
     },
     include: {
       cuisines: true,
@@ -61,7 +70,6 @@ export const getRestaurantByPath = (path: string) => {
           dishes: true,
         },
       },
-
       venues: true,
       reviews: true,
     },

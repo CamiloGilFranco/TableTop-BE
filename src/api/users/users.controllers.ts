@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AuthUser } from "../../auth/auth.types";
 import { 
-  deleteUser,
+  deactivateUser,
   getAllUsers, 
   getUserById,
   getUsersByRole,
@@ -59,13 +59,13 @@ import {
  }
 
  // delete user
- export const deleteUserController = async (
+ export const deactivateUserController = async (
   req: Request,
   res: Response,
  ) => {
   try {
     const { id } = req.params;
-    const user = await deleteUser(id);
+    const user = await deactivateUser(id);
     res.json(user);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
