@@ -58,13 +58,16 @@ export const loginController = async (req: Request, res: Response) => {
       throw new Error("Email or password are incorrect");
     }
 
-    const { name, last_name, user_id: id } = user;
+    const { name, last_name, user_id: id, user_role } = user;
     const token = signToken({ id });
+
+    res.setHeader('Authorization', `Bearer ${token}`);
     res.status(201).send({
-      message: "User loged in successfully",
+      message: "User logged in successfully",
       data: { email, name, last_name },
       token,
     });
+
   } catch (error: any) {
     console.error(error);
     res.status(500).json({ message: error.message });
