@@ -63,6 +63,7 @@ export const loginController = async (
 
     const { name, last_name, user_id: id, user_role } = user;
     const token = signToken({ id });
+    res.setHeader('Authorization', `Bearer ${token}`);
     res.status(201).send({message : 'User loged in successfully',  data: { email, name, last_name, user_role }, token});
 
   } catch (error: any) {

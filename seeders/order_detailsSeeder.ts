@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { faker } from "@faker-js/faker";
 import { random } from "./randomFunction";
 
 const prisma = new PrismaClient();
@@ -67,6 +66,29 @@ const seedOrder_details = async (prisma: PrismaClient): Promise<void> => {
   }
 
   console.log("order prices updated!");
+
+  const restaurants = await prisma.restaurants.findMany();
+
+  for (const restaurant of restaurants) {
+    const { id_restaurant } = restaurant;
+
+    const shopping = await prisma.order_details.findMany({
+      where: {
+        restaurantsId_restaurant: id_restaurant,
+      },
+    });
+
+    await prisma.restaurants.update({
+      where: {
+        id_restaurant: id_restaurant,
+      },
+      data: {
+        number_of_sales: shopping.length,
+      },
+    });
+  }
+
+  console.log("number_of_sales updated");
 };
 
 export default seedOrder_details;
