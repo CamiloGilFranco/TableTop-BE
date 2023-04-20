@@ -179,14 +179,14 @@ export const updateUserRole = async (email: string, user_role: string) => {
   try {
     return prisma.users.update({
       where: {
-        email
+        email,
       },
       data: {
-        user_role,
+        user_role: { set: user_role },
       },
     });
   } catch (error: any) {
-    throw new Error (`${error.message}`)
+    throw new Error(`${error.message}`);
   }
 };
 

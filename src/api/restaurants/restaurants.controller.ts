@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 import {
   createRestaurant,
-  deleteRestaurant,
+  deactivateRestaurant,
   getAllRestaurantById,
   getAllRestaurants,
   updateRestaurant,
@@ -120,13 +120,13 @@ export const updateRestaurantController = async (
 };
 
 // delete restaurant
-export const deleteRestaurantController = async (
+export const deactivateRestaurantController = async (
   req: Request,
   res: Response
 ) => {
   try {
     const { id } = req.params;
-    const restaurant = await deleteRestaurant(id);
+    const restaurant = await deactivateRestaurant(id);
     res.status(200).json({ message: "Restaurant Deleted", data: restaurant });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
