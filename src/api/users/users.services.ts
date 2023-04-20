@@ -22,7 +22,7 @@ export const getAllUsers = () => {
       name: true,
       last_name: true,
       city: true,
-      user_role: true,,
+      user_role: true,
       user_id: true
     },
   });

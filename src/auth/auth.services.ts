@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { SECRET } from "../../constants/secret";
 import jwt from 'jsonwebtoken';
 
 export type DecodedToken = {
@@ -6,7 +7,7 @@ export type DecodedToken = {
 }
 
 const prisma = new PrismaClient();
-const SECRET = process.env.SECRET_KEY as string;
+const secret = SECRET as string;
 const tokenExpirationTime = 60 * 60 * 2;
 
 export const login = (email: string) => {
@@ -20,7 +21,7 @@ export const login = (email: string) => {
 export const signToken = (payload: any): string => {
   const token = jwt.sign(
     payload,
-    SECRET,
+    secret,
     { expiresIn: tokenExpirationTime }
   );
   return token;

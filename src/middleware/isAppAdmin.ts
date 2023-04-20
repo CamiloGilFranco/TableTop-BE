@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import { AuthUser } from "../auth/auth.types";
 import { getUserById } from "../api/users/users.services";
+import { APP_ADMIN_ROLE } from "../../constants/roles";
 
 export const isAppAdmin = async (
   req: AuthUser,
@@ -13,7 +14,7 @@ export const isAppAdmin = async (
     }
 
     const user = await getUserById(req.user);
-    if (user && user.user_role === "appAdmin") {
+    if (user && user.user_role === APP_ADMIN_ROLE) {
       next();
     } else {
       res.status(403).json({ message: "Access denied" });

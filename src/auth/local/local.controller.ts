@@ -11,22 +11,23 @@ const prisma = new PrismaClient();
 // create new user
 export const signupController = async (req: Request, res: Response) => {
   try {
-    const { email, name, last_name } = req.body;
+    const { email, name, last_name, password: passToEncrypt } = req.body;
+
     const existingUser = await prisma.users.findUnique({ where: { email } });
 
     if (existingUser) {
       res.status(409).json({ message: "Email already exists" });
       return;
     }
-    const encPassword = await bcrypt.hash(req.body.password, 10);
+    const password = await bcrypt.hash(passToEncrypt, 10);
 
     const { user_id: id } = await createUser({
       ...req.body,
-      password: encPassword,
+      password,
     });
     const token = signToken({ id });
 
-    await sendNodemailer(welcomeEmail({ email, name }));
+    await sendNodemailer(welcomeEmail({ name, email }));
     res.status(201).send({
       message: "User created successfully",
       data: { name, last_name, email },
@@ -64,7 +65,7 @@ export const loginController = async (req: Request, res: Response) => {
     res.setHeader('Authorization', `Bearer ${token}`);
     res.status(201).send({
       message: "User logged in successfully",
-      data: { email, name, last_name },
+      data: { email, name, last_name, user_role },
       token,
     });
 

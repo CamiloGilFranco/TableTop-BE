@@ -1,11 +1,13 @@
 const nodemailer = require("nodemailer");
 import Mail from "nodemailer/lib/mailer";
+import { HOSTNAME, EMAILPORT, USER, PASS } from '../../constants/secret';
+
 
 const createGmailTransporter = () => {
-  const hostname = process.env.SMTP_SERVER;
-  const port = Number(process.env.SMTP_PORT);
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASSWORD;
+  const hostname = HOSTNAME;
+  const port = EMAILPORT;
+  const user = USER;
+  const pass = PASS;
 
   const transporter = nodemailer.createTransport({
     host: hostname,
