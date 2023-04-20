@@ -112,8 +112,8 @@ model dishes_categories {
 
 model facilities_per_venue {
   id_facility_per_venue                String            @id @default(cuid())
-  facilities                           facilities        @relation(fields: [facilitiesId_facility], references: [id_facility])
-  facilitiesId_facility                String
+  facilities                           facilities        @relation(fields: [facility], references: [facility_name])
+  facility                             String
   restaurant_venues                    restaurant_venues @relation(fields: [restaurant_venuesId_restaurant_venue], references: [id_restaurant_venue])
   restaurant_venuesId_restaurant_venue String
   createdAt                            DateTime          @default(now())
@@ -122,7 +122,7 @@ model facilities_per_venue {
 
 model facilities {
   id_facility          String                 @id @default(cuid())
-  facility_name        String
+  facility_name        String                 @unique
   facilities_per_venue facilities_per_venue[]
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
