@@ -1,9 +1,13 @@
 import { PrismaClient } from "@prisma/client";
+import { getUserByEmail, updateUserRole } from "../users/users.services";
 const prisma = new PrismaClient();
 
 // get all restaurants
 export const getAllRestaurants = () => {
   return prisma.restaurants.findMany({
+    where: {
+      active: true,
+    },
     include: {
       cuisines: true,
       photos: true,
@@ -18,11 +22,13 @@ export const getAllRestaurants = () => {
   });
 };
 
+
 // get restaurant by id
 export const getAllRestaurantById = (id: string) => {
-  return prisma.restaurants.findUnique({
+  return prisma.restaurants.findFirst({
     where: {
       id_restaurant: id,
+      active: true,
     },
     include: {
       cuisines: true,
@@ -41,6 +47,9 @@ export const getAllRestaurantById = (id: string) => {
 //Get restaurants for RestaurantList
 export const getAllRestaurantsWithCuisines = () => {
   return prisma.restaurants.findMany({
+    where: {
+      active: true,
+    },
     include: {
       cuisines: true,
     },
@@ -49,9 +58,10 @@ export const getAllRestaurantsWithCuisines = () => {
 
 // get restaurant by path
 export const getRestaurantByPath = (path: string) => {
-  return prisma.restaurants.findUnique({
+  return prisma.restaurants.findFirst({
     where: {
       restaurant_path: path,
+      active: true,
     },
     include: {
       cuisines: true,
@@ -61,8 +71,11 @@ export const getRestaurantByPath = (path: string) => {
           dishes: true,
         },
       },
-
-      venues: true,
+      venues: {
+        include: {
+          facilities: true,
+        },
+      },
       reviews: true,
     },
   });
@@ -110,25 +123,31 @@ export const createRestaurant = (input: any) => {
 };
 
 // update restaurant
-export const updateRestaurant = (id: string, input: any) => {
+export const updateRestaurant = async (id: string, input: any) => {
+
   const {
     restaurant_name,
     logo,
     main_photo,
-    rating,
-    number_of_sales,
-    cuisines,
-    photos,
-    dishes,
-    dishes_categories,
-    facilities_per_venue,
-    venues,
-    reservations,
-    reviews,
-    admins,
-    order_details,
+    admin_email,
   } = input;
   const restaurant_path = restaurant_name.replaceAll(" ", "").toLowerCase();
+
+  let adminUpdateData = {};
+  if (admin_email) {
+    const existingUser = await getUserByEmail(admin_email);
+    if (!existingUser) {
+      throw new Error("Admin email does not match any existing user");
+    }
+    await updateUserRole(admin_email, "restaurantAdmin");
+    adminUpdateData = {
+      admins: {
+        connect: {
+          user_id: existingUser.user_id,
+        },
+      },
+    };
+  }
 
   return prisma.restaurants.update({
     where: {
@@ -139,26 +158,19 @@ export const updateRestaurant = (id: string, input: any) => {
       restaurant_path,
       logo: logo && { set: logo },
       main_photo: main_photo && { set: main_photo },
-      rating: rating && { set: rating },
-      number_of_sales: number_of_sales && { set: number_of_sales },
-      cuisines: cuisines && { set: cuisines },
-      photos: photos && { set: photos },
-      dishes: dishes && { set: dishes },
-      dishes_categories: dishes_categories && { set: dishes_categories },
-      venues: venues && { set: venues },
-      reservations: reservations && { set: reservations },
-      reviews: reviews && { set: reviews },
-      admins: admins && { set: admins },
-      order_details: order_details && { set: order_details },
+      ...adminUpdateData,
     },
   });
 };
 
 // delete restaurant
-export const deleteRestaurant = (id: string) => {
-  return prisma.restaurants.delete({
+export const deactivateRestaurant = (id_restaurant: string) => {
+  return prisma.restaurants.update({
     where: {
-      id_restaurant: id,
+      id_restaurant,
+    },
+    data: {
+      active: false,
     },
   });
 };

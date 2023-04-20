@@ -15,8 +15,8 @@ model restaurants {
   restaurant_path   String                    @unique
   restaurant_name   String                    @unique
   logo              String                    @unique
-  main_photo        String
-  rating            Float
+  main_photo        String                    @unique
+  rating            Float?
   number_of_sales   Int
   cuisines          cuisines_per_restaurant[]
   photos            restaurant_photos[]
@@ -29,6 +29,7 @@ model restaurants {
   order_details     order_details[]
   createdAt         DateTime                  @default(now())
   updatedAt         DateTime                  @updatedAt
+  active            Boolean                   @default(true)
 }
 
 model users {
@@ -54,12 +55,13 @@ model users {
   updatedAt                DateTime             @updatedAt
   restaurants              restaurants?         @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
   restaurantsId_restaurant String?
+  active                   Boolean             @default(true)
 }
 
 model cuisine_categories {
   id_cuisine_category       String                    @id @default(cuid())
   cuisine_category          String                    @unique
-  cuisine_photo             String
+  cuisine_photo             String                    @unique
   id_cuisine_per_restaurant cuisines_per_restaurant[]
   createdAt                 DateTime                  @default(now())
   updatedAt                 DateTime                  @updatedAt
@@ -110,8 +112,8 @@ model dishes_categories {
 
 model facilities_per_venue {
   id_facility_per_venue                String            @id @default(cuid())
-  facilities                           facilities        @relation(fields: [facilitiesId_facility], references: [id_facility])
-  facilitiesId_facility                String
+  facilities                           facilities        @relation(fields: [facility], references: [facility_name])
+  facility                             String
   restaurant_venues                    restaurant_venues @relation(fields: [restaurant_venuesId_restaurant_venue], references: [id_restaurant_venue])
   restaurant_venuesId_restaurant_venue String
   createdAt                            DateTime          @default(now())
@@ -120,7 +122,7 @@ model facilities_per_venue {
 
 model facilities {
   id_facility          String                 @id @default(cuid())
-  facility_name        String
+  facility_name        String                 @unique
   facilities_per_venue facilities_per_venue[]
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
@@ -132,7 +134,7 @@ model restaurant_venues {
   address                  String
   city                     String
   venue_photo              String
-  phone_number             String
+  phone_number             String?
   open_hour                String
   close_hour               String
   restaurants              restaurants            @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
@@ -187,15 +189,15 @@ model orders {
 }
 
 model order_details {
-  id_order_detail          String       @id @default(cuid())
-  orders                   orders       @relation(fields: [ordersId_order], references: [id_order])
+  id_order_detail          String      @id @default(cuid())
+  orders                   orders      @relation(fields: [ordersId_order], references: [id_order])
   ordersId_order           String
-  dishes                   dishes       @relation(fields: [dishesId_dish], references: [id_dish])
+  dishes                   dishes      @relation(fields: [dishesId_dish], references: [id_dish])
   dishesId_dish            String
-  restaurants              restaurants? @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
-  restaurantsId_restaurant String?
-  createdAt                DateTime     @default(now())
-  updatedAt                DateTime     @updatedAt
+  restaurants              restaurants @relation(fields: [restaurantsId_restaurant], references: [id_restaurant])
+  restaurantsId_restaurant String
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
 }
 
 model reviews {

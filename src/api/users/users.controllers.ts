@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import { AuthUser } from "../../auth/auth.types";
 import { 
-  deleteUser,
+  deactivateUser,
   getAllUsers, 
   getUserById,
+  getUsersByRole,
   updateUser,
+  updateUserRole,
  } from "./users.services";
 
  // gets all the users from the bd
@@ -57,15 +59,49 @@ import {
  }
 
  // delete user
- export const deleteUserController = async (
+ export const deactivateUserController = async (
   req: Request,
   res: Response,
  ) => {
   try {
     const { id } = req.params;
-    const user = await deleteUser(id);
+    const user = await deactivateUser(id);
     res.json(user);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
  }
+
+ // updates a user role
+ export const updateUserRoleController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { email, user_role } = req.body;
+    if (!email || !user_role) {
+      return res.status(400).json({ message: 'Email and user_role are required' });
+    }
+    const user = await updateUserRole(email, user_role);
+    res.status(200).json({ message: 'User role updated', data: user });
+  } catch (error: any) {
+    console.error(error)
+    res.status(500).json({message: error.message});
+  }
+};
+
+export const getUsersByRoleController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { role } = req.query;
+    if (!role) {
+      return res.status(400).json({ message: 'Role parameter is required' });
+    }
+    const users = await getUsersByRole(role as string);
+    res.status(200).send({ message: 'Users retrieved successfully', data: users });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
