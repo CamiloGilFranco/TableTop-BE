@@ -184,7 +184,7 @@ export const getRestaurantByUser = (user_id: string) => {
           user_id,
         },
       },
-    },
+    },  
     include: {
       cuisines: true,
       photos: true,
@@ -197,4 +197,23 @@ export const getRestaurantByUser = (user_id: string) => {
       order_details: true,
     },
   });
+};
+
+// get a restaurant by venue id
+export const getRestaurantByVenueId = async (venueId: string) => {
+  try {
+    const restaurant = await prisma.restaurants.findFirst({
+      where: {
+        venues: {
+          some: {
+            id_restaurant_venue: venueId,
+          },
+        },
+      },
+    });
+    return restaurant;
+  } catch (error) {
+    console.error('Error in getRestaurantByVenueId:', error);
+    throw error;
+  }
 };
