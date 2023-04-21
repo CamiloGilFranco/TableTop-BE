@@ -58,3 +58,14 @@ export const deleteReservation = (id: string) => {
     },
   });
 };
+
+export const getReservationsByVenue = (venueId: string) => {
+  return prisma.reservations.findMany({
+    where: {
+      restaurant_venuesId_restaurant_venue: venueId
+    },
+    include: {
+      users: true
+    },
+  });
+};

@@ -4,6 +4,7 @@ import {
   deleteReservationController,
   getAllReservationsController,
   getByIdReservationController,
+  getReservationsByVenueController,
   updateByIdReservationController,
 } from "./reservation.controller";
 
@@ -14,5 +15,6 @@ router.get("/:id", getByIdReservationController);
 router.post("/", createReservationController);
 router.put("/:id", updateByIdReservationController);
 router.delete("/:id", deleteReservationController);
+router.get("/venue/:venueId", getReservationsByVenueController);
 
 export default router;

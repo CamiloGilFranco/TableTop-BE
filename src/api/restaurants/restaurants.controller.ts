@@ -141,7 +141,9 @@ export const getRestaurantByUserController = async (
 ) => {
   try {
     const { user_id } = req.params;
+    console.log("🚀 ~ file: restaurants.controller.ts:144 ~ user_id:", user_id)
     const restaurant = await getRestaurantByUser(user_id);
+    console.log("🚀 ~ file: restaurants.controller.ts:146 ~ user_id:", user_id)
     res
       .status(200)
       .json({ message: "Restaurant associated with user found!", data: restaurant });
