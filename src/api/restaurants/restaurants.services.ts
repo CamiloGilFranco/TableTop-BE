@@ -174,3 +174,27 @@ export const deactivateRestaurant = (id_restaurant: string) => {
     },
   });
 };
+
+// gets one restaurant by it's admin
+export const getRestaurantByUser = (user_id: string) => {
+  return prisma.restaurants.findFirst({
+    where: {
+      admins: {
+        some: {
+          user_id,
+        },
+      },
+    },
+    include: {
+      cuisines: true,
+      photos: true,
+      dishes: true,
+      dishes_categories: true,
+      venues: true,
+      reservations: true,
+      reviews: true,
+      admins: true,
+      order_details: true,
+    },
+  });
+};

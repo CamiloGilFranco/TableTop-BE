@@ -8,8 +8,10 @@ import {
   updateRestaurant,
   getAllRestaurantsWithCuisines,
   getRestaurantByPath,
+  getRestaurantByUser,
 } from "./restaurants.services";
 import { getUserByEmail, updateUserRole } from "../users/users.services";
+import { AuthUser } from "../../auth/auth.types";
 
 // get all restaurants
 export const getAllRestaurantsController = async (
@@ -128,6 +130,21 @@ export const deactivateRestaurantController = async (
     const { id } = req.params;
     const restaurant = await deactivateRestaurant(id);
     res.status(200).json({ message: "Restaurant Deleted", data: restaurant });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getRestaurantByUserController = async (
+  req: AuthUser,
+  res: Response
+) => {
+  try {
+    const { user_id } = req.params;
+    const restaurant = await getRestaurantByUser(user_id);
+    res
+      .status(200)
+      .json({ message: "Restaurant associated with user found!", data: restaurant });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
