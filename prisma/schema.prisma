@@ -156,6 +156,7 @@ model reservations {
   usersUser_id                         String
   createdAt                            DateTime          @default(now())
   updatedAt                            DateTime          @updatedAt
+  active                               Boolean           @default(true)
 }
 
 model user_phone_numbers {
