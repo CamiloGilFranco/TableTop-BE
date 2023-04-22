@@ -44,6 +44,19 @@ export const getUserById = (id: string) => {
   });
 };
 
+// get a single user with payment info
+export const getUserAddresses = (id: string) => {
+  return prisma.users.findUnique({
+    where: {
+      user_id: id,
+    },
+    include: {
+      phone_numbers: true,
+      addresses: true,
+    },
+  });
+};
+
 export const createUser = async (input: any) => {
   const {
     email,

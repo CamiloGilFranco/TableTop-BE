@@ -2,16 +2,19 @@ import { Router } from "express";
 import {
   createReviewController,
   deleteReviewController,
-  getAllReviewsController,
+  getAllReviewsRestaurantController,
   getReviewByIdController,
   updateReviewController,
+  getNumberOfReviewsController,
 } from "./reviews.controller";
+import { auth } from "../../middleware/auth";
 
 const router = Router();
 
-router.get("/", getAllReviewsController);
+router.get("/count", getNumberOfReviewsController);
+router.get("/", auth, getAllReviewsRestaurantController);
 router.get("/:id", getReviewByIdController);
-router.post("/", createReviewController);
+router.post("/", auth, createReviewController);
 router.put("/:id", updateReviewController);
 router.delete("/:id", deleteReviewController);
 

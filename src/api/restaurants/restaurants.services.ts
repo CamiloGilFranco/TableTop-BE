@@ -165,3 +165,16 @@ export const deleteRestaurant = (id: string) => {
     },
   });
 };
+
+//update restaurant rating
+
+export const updateRestaurantRating = (id_restaurant: any, rating: any) => {
+  return prisma.restaurants.update({
+    where: {
+      id_restaurant,
+    },
+    data: {
+      rating,
+    },
+  });
+};

@@ -5,21 +5,28 @@ import {
   getAllReviews,
   getReviewById,
   updateReview,
+  getAllReviewsRestaurant,
+  getNumberOfReviews,
 } from "./reviews.service";
+import { AuthUser } from "../../auth/auth.types";
 
-export const getAllReviewsController = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+export const getAllReviewsRestaurantController = async (
+  req: Request & AuthUser,
+  res: Response
 ) => {
   try {
-    const reviews = await getAllReviews();
+    const { user } = req;
+    const { id_restaurant } = req.query;
+
+    const reviews = await getAllReviewsRestaurant(id_restaurant, user);
     res.status(200).json({
-      message: "Reviews found!",
+      message: "Complete",
       data: reviews,
     });
   } catch (error) {
-    next(error);
+    res.status(200).json({
+      message: "Error",
+    });
   }
 };
 
@@ -42,15 +49,37 @@ export const getReviewByIdController = async (
 };
 
 export const createReviewController = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: Request & AuthUser,
+  res: Response
 ) => {
   try {
-    const review = await createReview(req.body);
+    const { user } = req;
+    const { id_restaurant, title, rating, comment } = req.body;
+
+    const review = await createReview({
+      user,
+      id_restaurant,
+      title,
+      rating: parseInt(rating),
+      comment,
+    });
     res.status(201).json({ message: "Review created", data: review });
   } catch (error) {
-    next(error);
+    res.status(400).json({ message: "Error...." });
+  }
+};
+
+export const getNumberOfReviewsController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { id_restaurant } = req.query;
+
+    const review = await getNumberOfReviews(id_restaurant);
+    res.status(201).json({ message: "Count done", data: review });
+  } catch (error) {
+    res.status(400).json({ message: "Error" });
   }
 };
 

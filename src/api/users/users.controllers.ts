@@ -1,30 +1,30 @@
 import { Request, Response } from "express";
 import { AuthUser } from "../../auth/auth.types";
-import { 
+import {
   deleteUser,
-  getAllUsers, 
+  getAllUsers,
   getUserById,
   updateUser,
- } from "./users.services";
+  getUserAddresses,
+} from "./users.services";
 
- // gets all the users from the bd
- export const getAllUsersController = async (
-  req: Request,
-  res: Response,
- ) => {
+// gets all the users from the bd
+export const getAllUsersController = async (req: Request, res: Response) => {
   try {
     const users = await getAllUsers();
-    res.status(200).send({ message: 'Users retrieved successfully', data: users });
+    res
+      .status(200)
+      .send({ message: "Users retrieved successfully", data: users });
   } catch (error: any) {
-    res.status(500).json({message: error.message});
+    res.status(500).json({ message: error.message });
   }
- }
+};
 
- // get single user with token
- export const getUserByTokenController = async (
+// get single user with token
+export const getUserByTokenController = async (
   req: Request & AuthUser,
   res: Response
- ) => {
+) => {
   try {
     const { user } = req;
     if (!user) {
@@ -37,30 +37,49 @@ import {
     }
 
     res.status(200).json({ message: "User found!", data: fetchedUser });
-  } catch (error:any) {
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
- }
+};
 
- // update user
- export const updateUserController = async (
-  req: AuthUser,
-  res: Response,
- ) => {
+// get single user with payment info
+export const getUserAddressesController = async (
+  req: Request & AuthUser,
+  res: Response
+) => {
+  try {
+    console.log("entro");
+
+    const { user } = req;
+    console.log(user);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const fetchedUser = await getUserAddresses(user);
+
+    if (!fetchedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "User found!", data: fetchedUser });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// update user
+export const updateUserController = async (req: AuthUser, res: Response) => {
   try {
     const id = req.user;
     const user = await updateUser(id, req.body);
-    res.status(200).json({ message: 'User updated', data: user });
+    res.status(200).json({ message: "User updated", data: user });
   } catch (error: any) {
-    res.status(500).json({message: error.message});
+    res.status(500).json({ message: error.message });
   }
- }
+};
 
- // delete user
- export const deleteUserController = async (
-  req: Request,
-  res: Response,
- ) => {
+// delete user
+export const deleteUserController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user = await deleteUser(id);
@@ -68,4 +87,4 @@ import {
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
- }
+};
