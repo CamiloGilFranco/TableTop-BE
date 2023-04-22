@@ -18,9 +18,9 @@ export const isRestaurantAdmin = async (
     const restaurantAdminRole = RESTAURANT_ADMIN_ROLE;
 
     if (user && user.user_role === restaurantAdminRole) {
-      const { venue_id } = req.params.venue_id
-        ? req.params
-        : req.body;
+      const venue_id = req.params.venue_id
+        ? req.params.venue_id
+        : req.body.restaurantsId_restaurant;
       const restaurant = await getRestaurantByVenueId(venue_id);
 
       if (restaurant) {
