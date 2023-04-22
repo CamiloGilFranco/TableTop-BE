@@ -40,7 +40,7 @@ const seedReviews = async (prisma: PrismaClient): Promise<void> => {
       ratingSum += rating;
     }
 
-    const rating = ratingSum / dataQuantity;
+    const rating = (await ratingSum) / dataQuantity;
 
     await prisma.restaurants.update({
       where: {

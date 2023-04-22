@@ -6,6 +6,7 @@ import {
   getByIdReservation,
   updateByIdReservation,
 } from "./reservation.service";
+import { AuthUser } from "../../auth/auth.types";
 
 export const getAllReservationsController = async (
   req: Request,
@@ -38,12 +39,19 @@ export const getByIdReservationController = async (
 };
 
 export const createReservationController = async (
-  req: Request,
+  req: Request & AuthUser,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const reservation = await createReservation(req.body);
+    const { user } = req;
+    const { id_restaurant, id_venue, date } = req.body;
+    const reservation = await createReservation({
+      date,
+      id_restaurant,
+      id_venue,
+      user,
+    });
     res.status(201).json({ message: "Reservation Created", data: reservation });
   } catch (error) {
     next(error);
