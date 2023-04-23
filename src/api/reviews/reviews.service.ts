@@ -26,8 +26,6 @@ export const getAllReviewsRestaurant = (restaurant: any, user: any) => {
 
 //count the number of reviews of a restaurant
 export const getNumberOfReviews = (restaurant: any) => {
-  console.log(restaurant);
-
   return prisma.reviews.count({
     where: {
       restaurantsId_restaurant: restaurant,

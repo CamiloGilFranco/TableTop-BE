@@ -48,10 +48,8 @@ export const getUserAddressesController = async (
   res: Response
 ) => {
   try {
-    console.log("entro");
-
     const { user } = req;
-    console.log(user);
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
