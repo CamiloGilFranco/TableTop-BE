@@ -13,7 +13,7 @@ configExpress(app);
 //Setup config
 routes(app);
 
-app.post("/test-formdata", formData, (req, res) => {
+app.post("/send-formdata", formData, (req, res) => {
   res.status(200).json({ ...req.body });
 });
 
