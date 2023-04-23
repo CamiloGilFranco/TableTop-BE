@@ -3,7 +3,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getAllDishes = () => {
-  return prisma.dishes.findMany();
+  return prisma.dishes.findMany({
+    where: {
+      active: true
+    }
+  });
 };
 
 export const createDish = (input: any) => {
@@ -15,9 +19,6 @@ export const createDish = (input: any) => {
     id_dishes_category,
     order_details,
   } = input;
-
-  console.log("Input:", input);
-  console.log("id_restaurant:", id_restaurant);
 
   return prisma.dishes.create({
     data: {
@@ -70,10 +71,13 @@ export const updateDishById = (id: string, input: any) => {
   });
 };
 
-export const deleteDishById = (id: string) => {
-  return prisma.dishes.delete({
+export const deleteDishById = (id_dish: string) => {
+  return prisma.dishes.update({
     where: {
-      id_dish: id,
+      id_dish
+    },
+    data: {
+      active: false
     },
   });
 };

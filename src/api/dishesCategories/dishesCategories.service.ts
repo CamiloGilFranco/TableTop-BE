@@ -4,7 +4,11 @@ const prisma = new PrismaClient();
 
 //get all
 export const getAllDishesCategories = () => {
-  return prisma.dishes_categories.findMany();
+  return prisma.dishes_categories.findMany({
+    where: {
+      active: true
+    }
+  });
 };
 //get by Id
 export const getByIdDishesCategory = (id: string) => {
@@ -38,10 +42,13 @@ export const updateByIdDishesCategory = (id: string, input: any) => {
   });
 };
 //delete
-export const deleteDishesCategory = (id: string) => {
-  return prisma.dishes_categories.delete({
+export const deleteDishesCategory = (id_dishes_category: string) => {
+  return prisma.dishes_categories.update({
     where: {
-      id_dishes_category: id,
+      id_dishes_category,
     },
+    data: {
+      active: false
+    }
   });
 };

@@ -9,7 +9,7 @@ export const isRestaurantAdmin = async (
   res: Response,
   next: NextFunction
 ) => {
-  try {
+  try {    
     if (!req.user) {
       return res.status(403).json({ message: "Access denied" });
     }

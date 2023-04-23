@@ -9,9 +9,11 @@ import {
   getAllRestaurantsWithCuisines,
   getRestaurantByPath,
   getRestaurantByUser,
+  addAdminToRestaurant,
 } from "./restaurants.services";
 import { getUserByEmail, updateUserRole } from "../users/users.services";
 import { AuthUser } from "../../auth/auth.types";
+import { RESTAURANT_ADMIN_ROLE } from "../../../constants/roles";
 
 // get all restaurants
 export const getAllRestaurantsController = async (
@@ -146,6 +148,28 @@ export const getRestaurantByUserController = async (
       .status(200)
       .json({ message: "Restaurant associated with user found!", data: restaurant });
   } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const addAdminToRestaurantController = async (req: Request, res: Response) => {
+  try {
+    const { email, restaurantId } = req.body;
+    const existingUser = await getUserByEmail(email);
+    if (!existingUser) {
+      res.status(400).json({ message: "Admin email does not match any existing user" });
+      return;
+    }
+
+    if (!email || !restaurantId) {
+      return res.status(400).json({ message: 'Email and restaurantId are required' });
+    }
+    await updateUserRole(email, RESTAURANT_ADMIN_ROLE);
+
+    const updatedRestaurant = await addAdminToRestaurant(email, restaurantId);
+    res.status(200).json({ message: 'Admin added to the restaurant', data: updatedRestaurant });
+  } catch (error: any) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };

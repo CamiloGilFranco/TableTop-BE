@@ -7,7 +7,6 @@ import {
   updateByIdDishesCategoryController,
 } from "./dishesCategories.controller";
 import { checkUserActive } from "../../middleware/checkUserActive";
-import { isRestaurantAdmin } from "../../middleware/isRestaurantAdmin";
 import { auth } from "../../middleware/auth";
 
 const router = Router();
@@ -16,6 +15,6 @@ router.get("/", getAllDishesCategoriesController);
 router.get("/:id", getByIdDishesCategoryController);
 router.post("/", auth, checkUserActive, createDishesCategoryController);
 router.put("/:id", updateByIdDishesCategoryController);
-router.delete("/:id", deleteDishesCategoryController);
+router.patch("/:id", auth, checkUserActive, deleteDishesCategoryController);
 
 export default router;
