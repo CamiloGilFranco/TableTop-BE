@@ -1,13 +1,12 @@
-//importar
+require("dotenv").config();
 import busboy from "busboy";
 import { v2 as cloudinary } from "cloudinary";
 import { Request, Response, NextFunction } from "express";
 
-
 cloudinary.config({
-  cloud_name: "dmshyev5s",
-  api_key: "295928881237629",
-  api_secret: "gItinS6-WkwZP45dZnfulJtnino",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 export const formData = (req: Request, res: Response, next: NextFunction) => {
@@ -16,19 +15,20 @@ export const formData = (req: Request, res: Response, next: NextFunction) => {
 
   const done = () => {
     if (uploadingFile) return;
-    if (uploadingCount > 0) return;
+    if (uploadingCount) return;
 
     next();
   };
 
-  const bb = busboy({ headers: req.headers });
+  const { headers } = req;
+  const busBoyStream = busboy({ headers });
   req.body = {};
 
-  bb.on("field", (key, val) => {
+  busBoyStream.on("field", (key, val) => {
     req.body[key] = val;
   });
 
-  bb.on("file", (key, stream) => {
+  busBoyStream.on("file", (key, stream) => {
     uploadingFile = true;
     uploadingCount++;
     const cloud = cloudinary.uploader.upload_stream(
@@ -50,9 +50,9 @@ export const formData = (req: Request, res: Response, next: NextFunction) => {
     });
   });
 
-  bb.on("finish", () => {
+  busBoyStream.on("finish", () => {
     done();
   });
 
-  req.pipe(bb);
+  req.pipe(busBoyStream);
 };
