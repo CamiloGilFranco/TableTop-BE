@@ -171,23 +171,27 @@ model user_addresses {
   address      String
   city         String
   users        users    @relation(fields: [usersUser_id], references: [user_id])
+  orders       orders[]
   usersUser_id String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
 
 model orders {
-  id_order      String          @id @default(cuid())
-  price         Int
-  users         users           @relation(fields: [usersUser_id], references: [user_id])
-  usersUser_id  String
-  order_details order_details[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  id_order                 String          @id @default(cuid())
+  price                    Int
+  order_details            order_details[]
+  users                    users           @relation(fields: [usersUser_id], references: [user_id])
+  usersUser_id             String
+  user_addresses           user_addresses? @relation(fields: [user_addressesId_address], references: [id_address])
+  user_addressesId_address String?
+  createdAt                DateTime        @default(now())
+  updatedAt                DateTime        @updatedAt
 }
 
 model order_details {
   id_order_detail          String      @id @default(cuid())
+  quantity                 Int
   orders                   orders      @relation(fields: [ordersId_order], references: [id_order])
   ordersId_order           String
   dishes                   dishes      @relation(fields: [dishesId_dish], references: [id_dish])

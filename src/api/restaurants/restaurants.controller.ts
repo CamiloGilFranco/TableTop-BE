@@ -8,6 +8,7 @@ import {
   updateRestaurant,
   getAllRestaurantsWithCuisines,
   getRestaurantByPath,
+  updateRestaurantRating,
 } from "./restaurants.services";
 
 // get all restaurants
@@ -115,5 +116,19 @@ export const deleteRestaurantController = async (
     res.status(200).json({ message: "Restaurant Deleted", data: restaurant });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+//update restaurant rating
+export const updateRestaurantRatingController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { id_restaurant, rating } = req.body;
+    await updateRestaurantRating(id_restaurant, rating);
+    res.status(200).json({ message: "Restaurant Rating updated" });
+  } catch (error) {
+    res.status(500).json({ message: "the record was not updated" });
   }
 };

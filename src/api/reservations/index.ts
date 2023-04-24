@@ -6,12 +6,13 @@ import {
   getByIdReservationController,
   updateByIdReservationController,
 } from "./reservation.controller";
+import { auth } from "../../middleware/auth";
 
 const router = Router();
 
 router.get("/", getAllReservationsController);
 router.get("/:id", getByIdReservationController);
-router.post("/", createReservationController);
+router.post("/", auth, createReservationController);
 router.put("/:id", updateByIdReservationController);
 router.delete("/:id", deleteReservationController);
 
