@@ -87,6 +87,7 @@ export const createRestaurantController = async (
 ) => {
   try {
     const { adminEmail } = req.body;
+    console.log("🚀 ~ file: restaurants.controller.ts:90 ~ req.body:", req.body)
     
     const existingUser = await getUserByEmail(adminEmail);
     if (!existingUser) {

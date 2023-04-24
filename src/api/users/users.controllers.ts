@@ -80,15 +80,6 @@ export const updateUserController = async (req: AuthUser, res: Response) => {
   }
 };
 
-export const deactivateUserController = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const user = await deactivateUser(id);
-    res.json(user);
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
-};
 
 // updates a user role
 export const updateUserRoleController = async (req: Request, res: Response) => {

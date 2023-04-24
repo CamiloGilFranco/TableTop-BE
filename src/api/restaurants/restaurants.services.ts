@@ -124,16 +124,14 @@ export const createRestaurant = (input: any) => {
     logo,
     main_photo,
     rating,
-    number_of_sales,
     cuisines,
     photos,
     dishes,
     dishes_categories,
-    facilities_per_venue,
     venues,
     reservations,
     reviews,
-    admins,
+    adminEmail,
     order_details,
   } = input;
   const restaurant_path = restaurant_name.replaceAll(" ", "").toLowerCase();
@@ -144,7 +142,7 @@ export const createRestaurant = (input: any) => {
       logo,
       main_photo,
       rating,
-      number_of_sales,
+      number_of_sales: 0,
       cuisines,
       photos,
       dishes,
@@ -152,7 +150,11 @@ export const createRestaurant = (input: any) => {
       venues,
       reservations,
       reviews,
-      admins,
+      admins: {
+        connect: {
+          email: adminEmail
+        }
+      },
       order_details,
     },
   });
