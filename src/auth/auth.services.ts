@@ -19,7 +19,7 @@ export const login = (email: string) => {
 };
 
 export const signToken = (payload: any): string => {
-  const token = jwt.sign(payload, SECRET, { expiresIn: tokenExpirationTime });
+  const token = jwt.sign(payload, secret, { expiresIn: tokenExpirationTime });
   return token;
 };
 
