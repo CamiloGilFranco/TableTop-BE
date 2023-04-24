@@ -127,7 +127,7 @@ export const updateRestaurantRatingController = async (
   try {
     const { id_restaurant, rating } = req.body;
     await updateRestaurantRating(id_restaurant, rating);
-    res.status(200).json({ message: "Restaurant Raring updated" });
+    res.status(200).json({ message: "Restaurant Rating updated" });
   } catch (error) {
     res.status(500).json({ message: "the record was not updated" });
   }

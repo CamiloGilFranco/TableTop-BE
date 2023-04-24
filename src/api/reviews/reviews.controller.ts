@@ -15,8 +15,10 @@ export const getAllReviewsRestaurantController = async (
   res: Response
 ) => {
   try {
-    const { user } = req;
-    const { id_restaurant } = req.query;
+    const {
+      user,
+      query: { id_restaurant },
+    } = req;
 
     const reviews = await getAllReviewsRestaurant(id_restaurant, user);
     res.status(200).json({
@@ -53,8 +55,10 @@ export const createReviewController = async (
   res: Response
 ) => {
   try {
-    const { user } = req;
-    const { id_restaurant, title, rating, comment } = req.body;
+    const {
+      user,
+      body: { id_restaurant, title, rating, comment },
+    } = req;
 
     const review = await createReview({
       user,
@@ -65,7 +69,7 @@ export const createReviewController = async (
     });
     res.status(201).json({ message: "Review created", data: review });
   } catch (error) {
-    res.status(400).json({ message: "Error...." });
+    res.status(400).json({ message: "The review could not be created" });
   }
 };
 

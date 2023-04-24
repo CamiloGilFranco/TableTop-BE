@@ -44,8 +44,10 @@ export const createReservationController = async (
   next: NextFunction
 ) => {
   try {
-    const { user } = req;
-    const { id_restaurant, id_venue, date } = req.body;
+    const {
+      user,
+      body: { id_restaurant, id_venue, date },
+    } = req;
     const reservation = await createReservation({
       date,
       id_restaurant,
