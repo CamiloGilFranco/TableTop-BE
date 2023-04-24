@@ -1,13 +1,14 @@
 import { PrismaClient } from "@prisma/client";
-import jwt from "jsonwebtoken";
+import { SECRET } from "../../constants/secret";
+import jwt from 'jsonwebtoken';
 
 export type DecodedToken = {
   id: string;
 };
 
 const prisma = new PrismaClient();
-const SECRET = process.env.SECRET_KEY as string;
-const tokenExpirationTime = 60 * 15;
+const secret = SECRET as string;
+const tokenExpirationTime = 60 * 60 * 2;
 
 export const login = (email: string) => {
   return prisma.users.findUnique({

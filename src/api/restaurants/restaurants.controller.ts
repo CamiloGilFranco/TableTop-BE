@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 import {
   createRestaurant,
-  deleteRestaurant,
+  deactivateRestaurant,
   getAllRestaurantById,
   getAllRestaurants,
   updateRestaurant,
@@ -10,6 +10,7 @@ import {
   getRestaurantByPath,
   updateRestaurantRating,
 } from "./restaurants.services";
+import { getUserByEmail, updateUserRole } from "../users/users.services";
 
 // get all restaurants
 export const getAllRestaurantsController = async (
@@ -81,6 +82,20 @@ export const createRestaurantController = async (
   res: Response
 ) => {
   try {
+    const { adminEmail } = req.body;
+    
+    const existingUser = await getUserByEmail(adminEmail);
+    if (!existingUser) {
+      res.status(400).json({ message: "Admin email does not match any existing user" });
+      return;
+    }
+    req.body.admins = [{
+      id: existingUser.user_id,
+    }];
+
+    //updates the existing user to have the restaurant admin role
+    await updateUserRole(adminEmail, 'restaurantAdmin');
+
     const restaurant = await createRestaurant(req.body);
     res
       .status(200)
@@ -106,13 +121,13 @@ export const updateRestaurantController = async (
 };
 
 // delete restaurant
-export const deleteRestaurantController = async (
+export const deactivateRestaurantController = async (
   req: Request,
   res: Response
 ) => {
   try {
     const { id } = req.params;
-    const restaurant = await deleteRestaurant(id);
+    const restaurant = await deactivateRestaurant(id);
     res.status(200).json({ message: "Restaurant Deleted", data: restaurant });
   } catch (error: any) {
     res.status(500).json({ message: error.message });

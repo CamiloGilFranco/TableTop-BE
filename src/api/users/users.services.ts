@@ -23,15 +23,17 @@ export const getAllUsers = () => {
       last_name: true,
       city: true,
       user_role: true,
+      user_id: true
     },
   });
 };
 
 // get a single user by the id
 export const getUserById = (id: string) => {
-  return prisma.users.findUnique({
+  return prisma.users.findFirst({
     where: {
       user_id: id,
+      active: true,
     },
     include: {
       phone_numbers: true,
@@ -169,11 +171,58 @@ export const updateUser = async (id: string | undefined, input: any) => {
   });
 };
 
-// delete user
-export const deleteUser = (id: string) => {
-  return prisma.users.delete({
+// Deactivate user 
+export const deactivateUser = async (user_id: string) => {
+  try {
+    return prisma.users.update({
+      where: {
+        user_id,
+      },
+      data: {
+        active: false,
+      },
+    });
+  } catch (error: any) {
+    throw new Error('Cannot deactivate admins or restaurant admins');
+  }
+};
+
+// Update user role by email
+export const updateUserRole = async (email: string, user_role: string) => {
+  try {
+    return prisma.users.update({
+      where: {
+        email,
+      },
+      data: {
+        user_role: { set: user_role },
+      },
+    });
+  } catch (error: any) {
+    throw new Error(`${error.message}`);
+  }
+};
+
+export const getUsersByRole = (user_role: string) => {
+  return prisma.users.findMany({
     where: {
-      user_id: id,
+      user_role,
+      active: true,
+    },
+    select: {
+      name: true,
+      last_name: true,
+      city: true,
+      user_role: true,
+      user_id: true,
+    },
+  });
+};
+
+export const getUserByEmail = async (email: string) => {
+  return await prisma.users.findUnique({
+    where: {
+      email,
     },
   });
 };
