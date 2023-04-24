@@ -4,7 +4,11 @@ import { random } from "./randomFunction";
 const prisma = new PrismaClient();
 
 const seedOrders = async (prisma: PrismaClient): Promise<void> => {
-  const users = await prisma.users.findMany();
+  const users = await prisma.users.findMany({
+    include: {
+      addresses: true,
+    },
+  });
 
   for (const user of users) {
     const numberOfOrders = random(0, 5);
@@ -16,6 +20,12 @@ const seedOrders = async (prisma: PrismaClient): Promise<void> => {
           users: {
             connect: {
               user_id: user.user_id,
+            },
+          },
+          user_addresses: {
+            connect: {
+              id_address:
+                user.addresses[random(0, user.addresses.length - 1)].id_address,
             },
           },
         },

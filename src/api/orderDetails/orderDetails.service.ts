@@ -49,4 +49,9 @@ export const deleteOrderDetail = (id: string) => {
     },
   });
 };
-getOrderDetailById
+
+export const createSeveralOrderDetail = (input: any) => {
+  return prisma.order_details.createMany({
+    data: input,
+  });
+};

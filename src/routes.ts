@@ -18,6 +18,7 @@ import orders from "./api/orders";
 import ordersDetails from "./api/orderDetails";
 import reviews from "./api/reviews";
 import facilitiesVenue from "./api/facilitiesVenue";
+import checkout from "./api/checkout";
 
 const routes = (app: Application): void => {
   app.use("/api/healthcheck", healthcheck);
@@ -37,6 +38,7 @@ const routes = (app: Application): void => {
   app.use("/api/orders-details", ordersDetails);
   app.use("/api/reviews", reviews);
   app.use("/api/facilities-per-venue", facilitiesVenue);
+  app.use("/api/checkout", checkout);
 
   // auth routes
   app.use("/auth/local", authLocal);

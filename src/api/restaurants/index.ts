@@ -7,12 +7,14 @@ import {
   updateRestaurantController,
   getAllRestaurantsWithCuisinesController,
   getRestaurantByPathController,
+  updateRestaurantRatingController,
 } from "./restaurants.controller";
 import { auth } from "../../middleware/auth";
 import { isAppAdmin } from "../../middleware/isAppAdmin";
 
 const router = Router();
 
+router.put("/rating", updateRestaurantRatingController);
 router.get("/", getAllRestaurantsController);
 router.get("/path/:path", getRestaurantByPathController);
 router.get("/withcuisines/all", getAllRestaurantsWithCuisinesController);
