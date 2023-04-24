@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
 import { AuthUser } from "../../auth/auth.types";
 
-import { 
+import {
   deactivateUser,
-  getAllUsers, 
-  deleteUser,
+  getAllUsers,
   getUserById,
   getUsersByRole,
   updateUser,
@@ -80,7 +79,7 @@ export const updateUserController = async (req: AuthUser, res: Response) => {
   }
 };
 
-export const deleteUserController = async (req: Request, res: Response) => {
+export const deactivateUserController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user = await deactivateUser(id);
@@ -88,37 +87,35 @@ export const deleteUserController = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
- }
+};
 
- // updates a user role
- export const updateUserRoleController = async (
-  req: Request,
-  res: Response,
-) => {
+// updates a user role
+export const updateUserRoleController = async (req: Request, res: Response) => {
   try {
     const { email, user_role } = req.body;
     if (!email || !user_role) {
-      return res.status(400).json({ message: 'Email and user_role are required' });
+      return res
+        .status(400)
+        .json({ message: "Email and user_role are required" });
     }
     const user = await updateUserRole(email, user_role);
-    res.status(200).json({ message: 'User role updated', data: user });
+    res.status(200).json({ message: "User role updated", data: user });
   } catch (error: any) {
-    console.error(error)
-    res.status(500).json({message: error.message});
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
-export const getUsersByRoleController = async (
-  req: Request,
-  res: Response,
-) => {
+export const getUsersByRoleController = async (req: Request, res: Response) => {
   try {
     const { role } = req.query;
     if (!role) {
-      return res.status(400).json({ message: 'Role parameter is required' });
+      return res.status(400).json({ message: "Role parameter is required" });
     }
     const users = await getUsersByRole(role as string);
-    res.status(200).send({ message: 'Users retrieved successfully', data: users });
+    res
+      .status(200)
+      .send({ message: "Users retrieved successfully", data: users });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }

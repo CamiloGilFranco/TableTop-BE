@@ -17,7 +17,7 @@ export const handleCheckout = async (req: Request, res: Response) => {
       amount,
       currency: "usd",
       confirm: true,
-      description: "Pago de prueba top27",
+      description: "",
     });
 
     return res.status(201).json({ message: "success", payment, address, city });
