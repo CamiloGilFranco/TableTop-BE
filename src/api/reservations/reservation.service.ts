@@ -3,7 +3,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getAllReservations = () => {
-  return prisma.reservations.findMany();
+  return prisma.reservations.findMany({
+    where: {
+      active: true
+    }
+  });
 };
 
 export const getByIdReservation = (id: string) => {
@@ -31,6 +35,7 @@ export const updateByIdReservation = (id: string, input: any) => {
     restaurantsId_restaurant,
     restaurant_venuesId_restaurant_venue,
     usersUser_id,
+    active
   } = input;
   return prisma.reservations.update({
     where: {
@@ -41,14 +46,29 @@ export const updateByIdReservation = (id: string, input: any) => {
       restaurantsId_restaurant,
       restaurant_venuesId_restaurant_venue,
       usersUser_id,
+      active
     },
   });
 };
 
 export const deleteReservation = (id: string) => {
-  return prisma.reservations.delete({
+  return prisma.reservations.update({
     where: {
       id_reservation: id,
+    },
+    data: {
+      active: false,
+    },
+  });
+};
+
+export const getReservationsByVenue = (venueId: string) => {
+  return prisma.reservations.findMany({
+    where: {
+      restaurant_venuesId_restaurant_venue: venueId
+    },
+    include: {
+      users: true
     },
   });
 };

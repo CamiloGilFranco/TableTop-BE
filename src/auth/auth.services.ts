@@ -8,7 +8,7 @@ export type DecodedToken = {
 
 const prisma = new PrismaClient();
 const secret = SECRET as string;
-const tokenExpirationTime = 60 * 60 * 2;
+const tokenExpirationTime = '365d';
 
 export const login = (email: string) => {
   return prisma.users.findUnique({
@@ -19,7 +19,7 @@ export const login = (email: string) => {
 };
 
 export const signToken = (payload: any): string => {
-  const token = jwt.sign(payload, SECRET, { expiresIn: tokenExpirationTime });
+  const token = jwt.sign(payload, secret, { expiresIn: tokenExpirationTime });
   return token;
 };
 

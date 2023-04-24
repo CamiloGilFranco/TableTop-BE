@@ -3,7 +3,8 @@ import { AuthUser } from "../../auth/auth.types";
 
 import {
   deactivateUser,
-  getAllUsers,
+  getAllUsers, 
+
   getUserById,
   getUsersByRole,
   updateUser,
@@ -120,3 +121,17 @@ export const getUsersByRoleController = async (req: Request, res: Response) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// delete user
+export const deactivateUserController = async (
+  req: Request,
+  res: Response,
+ ) => {
+  try {
+    const { id } = req.params;
+    const user = await deactivateUser(id);
+    res.json(user);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+ }

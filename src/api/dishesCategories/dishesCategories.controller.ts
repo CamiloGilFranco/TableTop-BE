@@ -49,12 +49,20 @@ export const createDishesCategoryController = async (
   res: Response,
   next: NextFunction
 ) => {
+  if (!req.body.dishes_category) {
+    return res.status(400).json({ message: "Dish category is required." });
+  }
+  
+  if (!req.body.restaurantsId_restaurant) {
+    return res.status(400).json({ message: "Restaurant ID is required." });
+  }
   try {
     const dishesCategory = await createDishesCategory(req.body);
     res
       .status(201)
-      .json({ message: "Disches Category created!", data: dishesCategory });
+      .json({ message: "Dishes Category created!", data: dishesCategory });
   } catch (error) {
+    console.error(error); 
     next(error);
   }
 };

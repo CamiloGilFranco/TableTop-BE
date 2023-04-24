@@ -4,6 +4,7 @@ import {
   deleteReservation,
   getAllReservations,
   getByIdReservation,
+  getReservationsByVenue,
   updateByIdReservation,
 } from "./reservation.service";
 import { AuthUser } from "../../auth/auth.types";
@@ -88,5 +89,21 @@ export const deleteReservationController = async (
     res.status(200).json({ message: "Reservation Deleted", data: reservation });
   } catch (error) {
     next(error);
+  }
+};
+
+export const getReservationsByVenueController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { venueId } = req.params;
+    const reservations = await getReservationsByVenue(venueId);
+    res.status(200).json({
+      message: `Reservations for venue ${venueId} retrieved successfully`,
+      data: reservations,
+    });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 };

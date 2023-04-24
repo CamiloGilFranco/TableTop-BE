@@ -11,6 +11,7 @@ export const auth = (
     const { authorization } = req.headers;
 
     if (!authorization) {
+
       throw new Error('Your session has expired, please log in again');
     }
 
@@ -26,9 +27,11 @@ export const auth = (
 
     const { id } = verifyToken(token) as  DecodedToken;
     req.user = id;
+
     next();
 
   } catch (error: any) {
+
     res.status(401).json({ message: error.message });
   }
 }

@@ -11,12 +11,28 @@ export const getAllRestaurants = () => {
     include: {
       cuisines: true,
       photos: true,
-      dishes: true,
-      dishes_categories: true,
+      dishes:{
+        where:{
+          active: true
+        }
+      },
+      dishes_categories: {
+        where:{
+          active: true
+        }
+      },
       venues: true,
-      reservations: true,
+      reservations: {
+        where:{
+          active: true
+        }
+      },
       reviews: true,
-      admins: true,
+      admins: {
+        where: {
+          active: true
+        }
+      },
       order_details: true,
     },
   });
@@ -33,12 +49,28 @@ export const getAllRestaurantById = (id: string) => {
     include: {
       cuisines: true,
       photos: true,
-      dishes: true,
-      dishes_categories: true,
+      dishes: {
+        where:{
+          active: true
+        }
+      },
+      dishes_categories: {
+        where:{
+          active: true
+        }
+      },
       venues: true,
-      reservations: true,
+      reservations: {
+        where:{
+          active: true
+        }
+      },
       reviews: true,
-      admins: true,
+      admins: {
+        where: {
+          active:true
+        }
+      },
       order_details: true,
     },
   });
@@ -68,7 +100,11 @@ export const getRestaurantByPath = (path: string) => {
       photos: true,
       dishes_categories: {
         include: {
-          dishes: true,
+          dishes: {
+            where:{
+              active: true
+            }
+          },
         },
       },
       venues: {
@@ -174,6 +210,95 @@ export const deactivateRestaurant = (id_restaurant: string) => {
     },
   });
 };
+
+// gets one restaurant by it's admin
+export const getRestaurantByUser = (user_id: string) => {
+  return prisma.restaurants.findFirst({
+    where: {
+      admins: {
+        some: {
+          user_id,
+        },
+      },
+    },  
+    include: {
+      cuisines: true,
+      photos: true,
+      dishes: {
+        where:{
+          active: true
+        }
+      },
+      dishes_categories: {
+        where:{
+          active: true
+        }
+      },
+      venues: true,
+      reservations: {
+        where:{
+          active: true
+        }
+      },
+      reviews: true,
+      admins: {
+        where: {
+          active: true
+        }
+      },
+      order_details: true,
+    },
+  });
+};
+
+// get a restaurant by venue id
+export const getRestaurantByVenueId = async (venueId: string) => {
+  try {
+    const restaurant = await prisma.restaurants.findFirst({
+      where: {
+        venues: {
+          some: {
+            id_restaurant_venue: venueId,
+          },
+        },
+      },
+    });
+    return restaurant;
+  } catch (error) {
+    console.error('Error in getRestaurantByVenueId:', error);
+    throw error;
+  }
+};
+
+export const addAdminToRestaurant = async (email: string, id_restaurant: string) => {
+  try {
+    const restaurantExists = await prisma.restaurants.findUnique({
+      where: {
+        id_restaurant,
+      },
+    });
+
+    if (!restaurantExists) {
+      throw new Error('Restaurant not found');
+    }
+
+    return prisma.restaurants.update({
+      where: {
+        id_restaurant,
+      },
+      data: {
+        admins: {
+          connect: {
+            email,
+          },
+        },
+      },
+    });
+  } catch (error: any) {
+    throw new Error(`${error.message}`);
+  }
+};
+
 
 //update restaurant rating
 
