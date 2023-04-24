@@ -7,6 +7,7 @@ import {
   updateUserController,
   updateUserRoleController,
   getUserAddressesController,
+  deleteUserController,
 } from "./users.controllers";
 import { auth } from "../../middleware/auth";
 import { isAppAdmin } from '../../middleware/isAppAdmin';
