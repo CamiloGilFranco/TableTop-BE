@@ -19,18 +19,12 @@ export const getByIdReservation = (id: string) => {
 };
 
 export const createReservation = (input: any) => {
-  const {
-    date_hour,
-    restaurantsId_restaurant,
-    restaurant_venuesId_restaurant_venue,
-    usersUser_id,
-  } = input;
   return prisma.reservations.create({
     data: {
-      date_hour,
-      restaurantsId_restaurant,
-      restaurant_venuesId_restaurant_venue,
-      usersUser_id,
+      date_hour: input.date,
+      restaurantsId_restaurant: input.id_restaurant,
+      restaurant_venuesId_restaurant_venue: input.id_venue,
+      usersUser_id: input.user,
     },
   });
 };

@@ -18,12 +18,13 @@ export const getOrderById = (id: string) => {
   });
 };
 
-export const createOrder = (input: Input) => {
-  const { price, usersUser_id } = input;
+export const createOrder = (input: any) => {
+  const { price, user, address_id } = input;
   return prisma.orders.create({
     data: {
       price,
-      usersUser_id,
+      usersUser_id: user,
+      user_addressesId_address: address_id,
     },
   });
 };

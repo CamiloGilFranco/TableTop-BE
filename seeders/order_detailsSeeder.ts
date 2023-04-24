@@ -14,6 +14,7 @@ const seedOrder_details = async (prisma: PrismaClient): Promise<void> => {
       const randomDish = dishes[random(0, dishes.length - 1)];
       await prisma.order_details.create({
         data: {
+          quantity: random(1, 5),
           orders: {
             connect: {
               id_order: order.id_order,

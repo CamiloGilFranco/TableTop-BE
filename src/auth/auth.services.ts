@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 export type DecodedToken = {
   id: string;
-}
+};
 
 const prisma = new PrismaClient();
 const secret = SECRET as string;
@@ -13,19 +13,15 @@ const tokenExpirationTime = '365d';
 export const login = (email: string) => {
   return prisma.users.findUnique({
     where: {
-      email
-    }
+      email,
+    },
   });
-}
+};
 
 export const signToken = (payload: any): string => {
-  const token = jwt.sign(
-    payload,
-    secret,
-    { expiresIn: tokenExpirationTime }
-  );
+  const token = jwt.sign(payload, SECRET, { expiresIn: tokenExpirationTime });
   return token;
-}
+};
 
 export const verifyToken = (token: string): DecodedToken | false => {
   try {
@@ -34,4 +30,4 @@ export const verifyToken = (token: string): DecodedToken | false => {
   } catch (error: any) {
     return false;
   }
-}
+};

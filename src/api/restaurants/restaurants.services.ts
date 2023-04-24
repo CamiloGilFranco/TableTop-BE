@@ -298,3 +298,17 @@ export const addAdminToRestaurant = async (email: string, id_restaurant: string)
     throw new Error(`${error.message}`);
   }
 };
+
+
+//update restaurant rating
+
+export const updateRestaurantRating = (id_restaurant: any, rating: any) => {
+  return prisma.restaurants.update({
+    where: {
+      id_restaurant,
+    },
+    data: {
+      rating,
+    },
+  });
+};

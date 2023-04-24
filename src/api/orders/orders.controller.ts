@@ -6,6 +6,7 @@ import {
   getOrderById,
   updateOrderById,
 } from "./orders.service";
+import { AuthUser } from "../../auth/auth.types";
 
 export const getAllOrdersController = async (
   req: Request,
@@ -39,15 +40,16 @@ export const getOrderByIdController = async (
 };
 
 export const createOrderController = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: Request & AuthUser,
+  res: Response
 ) => {
   try {
-    const order = await createOrder(req.body);
+    const { user } = req;
+    const { price, address_id } = req.body;
+    const order = await createOrder({ user, price, address_id });
     res.status(201).json({ message: "Order created", data: order });
   } catch (error) {
-    next(error);
+    res.status(500).json({ message: "Order can't be created" });
   }
 };
 

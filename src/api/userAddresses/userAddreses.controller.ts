@@ -6,6 +6,7 @@ import {
   getUserAddressById,
   updateUserAddress,
 } from "./userAddresses.service";
+import { AuthUser } from "../../auth/auth.types";
 
 export const getAllUserAddressesController = async (
   req: Request,
@@ -40,15 +41,24 @@ export const getUserAddressByIdController = async (
 };
 
 export const createUserAddresController = async (
-  req: Request,
+  req: Request & AuthUser,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const userAddress = await createUserAddress(req.body);
-    res
-      .status(201)
-      .json({ message: "user address created succesfully", data: userAddress });
+    const { name, address, city } = req.body;
+    const { user } = req;
+
+    const userAddress = await createUserAddress({
+      address_name: name,
+      address,
+      city,
+      usersUser_id: user,
+    });
+    res.status(201).json({
+      message: "user address created succesfully",
+      data: userAddress,
+    });
   } catch (error) {
     next(error);
   }

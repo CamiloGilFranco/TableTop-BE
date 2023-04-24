@@ -5,6 +5,7 @@ import {
   getAllOrderDetails,
   getOrderDetailById,
   updateOrderDetail,
+  createSeveralOrderDetail,
 } from "./orderDetails.service";
 
 export const getAllOrderDetailsController = async (
@@ -85,5 +86,21 @@ export const deleteOrderDetailController = async (
       .json({ message: "Order detail deleted", data: orderDetail });
   } catch (error) {
     next(error);
+  }
+};
+
+export const createSeveralOrderDetailController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { dishList } = req.body;
+
+    await createSeveralOrderDetail(dishList);
+    res
+      .status(201)
+      .json({ message: "Order details created successfully", data: dishList });
+  } catch (error) {
+    res.status(500).json({ message: "records not created" });
   }
 };

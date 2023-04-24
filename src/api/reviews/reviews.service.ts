@@ -14,6 +14,25 @@ export const getAllReviews = () => {
   return prisma.reviews.findMany();
 };
 
+//search for a review on a specific restaurant
+export const getAllReviewsRestaurant = (restaurant: any, user: any) => {
+  return prisma.reviews.findFirst({
+    where: {
+      restaurantsId_restaurant: restaurant,
+      usersUser_id: user,
+    },
+  });
+};
+
+//count the number of reviews of a restaurant
+export const getNumberOfReviews = (restaurant: any) => {
+  return prisma.reviews.count({
+    where: {
+      restaurantsId_restaurant: restaurant,
+    },
+  });
+};
+
 export const getReviewById = (id: string) => {
   return prisma.reviews.findUnique({
     where: {
@@ -22,16 +41,15 @@ export const getReviewById = (id: string) => {
   });
 };
 
-export const createReview = (input: Input) => {
-  const { title, rating, comment, restaurantsId_restaurant, usersUser_id } =
-    input;
+export const createReview = (input: any) => {
+  const { user, rating, title, comment, id_restaurant } = input;
   return prisma.reviews.create({
     data: {
       title,
       rating,
       comment,
-      restaurantsId_restaurant,
-      usersUser_id,
+      restaurantsId_restaurant: id_restaurant,
+      usersUser_id: user,
     },
   });
 };
