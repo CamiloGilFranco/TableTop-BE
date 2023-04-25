@@ -23,7 +23,7 @@ export const createRestaurantVenues = (input: any) => {
     phone_number,
     open_hour,
     close_hour,
-    restaurantsId_restaurant,
+    id_restaurant,
   } = input;
   return prisma.restaurant_venues.create({
     data: {
@@ -34,7 +34,11 @@ export const createRestaurantVenues = (input: any) => {
       phone_number,
       open_hour,
       close_hour,
-      restaurantsId_restaurant,
+      restaurants: {
+        connect: {
+          id_restaurant
+        }
+      },
     },
   });
 };
