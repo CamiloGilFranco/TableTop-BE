@@ -124,16 +124,14 @@ export const createRestaurant = (input: any) => {
     logo,
     main_photo,
     rating,
-    number_of_sales,
     cuisines,
     photos,
     dishes,
     dishes_categories,
-    facilities_per_venue,
     venues,
     reservations,
     reviews,
-    admins,
+    adminEmail,
     order_details,
   } = input;
   const restaurant_path = restaurant_name.replaceAll(" ", "").toLowerCase();
@@ -144,7 +142,7 @@ export const createRestaurant = (input: any) => {
       logo,
       main_photo,
       rating,
-      number_of_sales,
+      number_of_sales: 0,
       cuisines,
       photos,
       dishes,
@@ -152,7 +150,11 @@ export const createRestaurant = (input: any) => {
       venues,
       reservations,
       reviews,
-      admins,
+      admins: {
+        connect: {
+          email: adminEmail
+        }
+      },
       order_details,
     },
   });
@@ -167,8 +169,10 @@ export const updateRestaurant = async (id: string, input: any) => {
     main_photo,
     admin_email,
   } = input;
-  const restaurant_path = restaurant_name.replaceAll(" ", "").toLowerCase();
-
+  const restaurant_path = restaurant_name
+  ? restaurant_name.replaceAll(" ", "").toLowerCase()
+  : "";
+  
   let adminUpdateData = {};
   if (admin_email) {
     const existingUser = await getUserByEmail(admin_email);
@@ -184,19 +188,24 @@ export const updateRestaurant = async (id: string, input: any) => {
       },
     };
   }
-
+try {
   return prisma.restaurants.update({
     where: {
       id_restaurant: id,
     },
     data: {
       restaurant_name: restaurant_name && { set: restaurant_name },
-      restaurant_path,
+      restaurant_path: restaurant_path && { set: restaurant_path },
       logo: logo && { set: logo },
       main_photo: main_photo && { set: main_photo },
       ...adminUpdateData,
     },
   });
+  
+} catch (error: any) {
+  console.log("🚀 ~ file: restaurants.services.ts:192 ~ updateRestaurant ~ error:", error)
+  
+}
 };
 
 // delete restaurant
