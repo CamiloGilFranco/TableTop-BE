@@ -7,7 +7,7 @@ import {
   updateUserController,
   updateUserRoleController,
   getUserAddressesController,
-  deleteUserController,
+  deactivateSelfController,
 } from "./users.controllers";
 import { auth } from "../../middleware/auth";
 import { isAppAdmin } from "../../middleware/isAppAdmin";
@@ -16,7 +16,7 @@ import { checkUserActive } from "../../middleware/checkUserActive";
 const router = Router();
 
 router.get("/", getAllUsersController);
-router.get("/profile", auth, checkUserActive, getUserByTokenController);
+router.get("/profile", auth, getUserByTokenController);
 router.put("/", auth, checkUserActive, updateUserController);
 router.put(
   "/change-role",
@@ -33,9 +33,7 @@ router.get(
   isAppAdmin,
   getUsersByRoleController
 );
-router.get("/profile", auth, getUserByTokenController);
-router.put("/", auth, updateUserController);
 router.get("/payment", auth, getUserAddressesController);
-router.delete("/:id", auth, deactivateUserController);
+router.patch("/deactivateSelf", auth, checkUserActive, deactivateSelfController);
 
 export default router;
