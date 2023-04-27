@@ -127,12 +127,12 @@ export const deactivateSelfController = async (
   res: Response
 ) => {
   try {
-    const user_id = req.user;
-    if (!user_id) {
+    const { user: id } = req;
+    if (!id) {
       return res.status(404).json({ message: "User not found" });
     }
-    const user = await deactivateUser(user_id);
-    res.json(user);
+    const user = await deactivateUser(id);
+    res.status(202).json(user);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
