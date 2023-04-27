@@ -87,7 +87,6 @@ export const createRestaurantController = async (
 ) => {
   try {
     const { adminEmail } = req.body;
-    console.log("🚀 ~ file: restaurants.controller.ts:90 ~ req.body:", req.body)
     
     const existingUser = await getUserByEmail(adminEmail);
     if (!existingUser) {
@@ -115,7 +114,6 @@ export const createRestaurantController = async (
 export const updateRestaurantController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    console.log("Before updating restaurant");
     const restaurant = await updateRestaurant(id, req.body);
     console.log("After updating restaurant", restaurant);
     res.status(200).json({ message: "Restaurant updated", data: restaurant });

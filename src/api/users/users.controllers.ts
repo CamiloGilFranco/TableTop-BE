@@ -3,8 +3,7 @@ import { AuthUser } from "../../auth/auth.types";
 
 import {
   deactivateUser,
-  getAllUsers, 
-
+  getAllUsers,
   getUserById,
   getUsersByRole,
   updateUser,
@@ -80,7 +79,6 @@ export const updateUserController = async (req: AuthUser, res: Response) => {
   }
 };
 
-
 // updates a user role
 export const updateUserRoleController = async (req: Request, res: Response) => {
   try {
@@ -114,10 +112,7 @@ export const getUsersByRoleController = async (req: Request, res: Response) => {
 };
 
 // delete user
-export const deactivateUserController = async (
-  req: Request,
-  res: Response,
- ) => {
+export const deactivateUserController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user = await deactivateUser(id);
@@ -125,4 +120,20 @@ export const deactivateUserController = async (
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
- }
+};
+
+export const deactivateSelfController = async (
+  req: AuthUser,
+  res: Response
+) => {
+  try {
+    const { user: id } = req;
+    if (!id) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const user = await deactivateUser(id);
+    res.status(202).json(user);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
