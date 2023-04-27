@@ -145,6 +145,7 @@ model restaurant_venues {
   reservations             reservations[]
   createdAt                DateTime               @default(now())
   updatedAt                DateTime               @updatedAt
+  active                   Boolean                @default(true)
 }
 
 model reservations {

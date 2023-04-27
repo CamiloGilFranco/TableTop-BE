@@ -11,33 +11,36 @@ export const getAllRestaurants = () => {
     include: {
       cuisines: true,
       photos: true,
-      dishes:{
-        where:{
-          active: true
-        }
+      dishes: {
+        where: {
+          active: true,
+        },
       },
       dishes_categories: {
-        where:{
-          active: true
-        }
+        where: {
+          active: true,
+        },
       },
-      venues: true,
+      venues: {
+        where: {
+          active: true,
+        },
+      },
       reservations: {
-        where:{
-          active: true
-        }
+        where: {
+          active: true,
+        },
       },
       reviews: true,
       admins: {
         where: {
-          active: true
-        }
+          active: true,
+        },
       },
       order_details: true,
     },
   });
 };
-
 
 // get restaurant by id
 export const getAllRestaurantById = (id: string) => {
@@ -50,26 +53,30 @@ export const getAllRestaurantById = (id: string) => {
       cuisines: true,
       photos: true,
       dishes: {
-        where:{
-          active: true
-        }
+        where: {
+          active: true,
+        },
       },
       dishes_categories: {
-        where:{
-          active: true
-        }
+        where: {
+          active: true,
+        },
       },
-      venues: true,
+      venues: {
+        where: {
+          active: true,
+        },
+      },
       reservations: {
-        where:{
-          active: true
-        }
+        where: {
+          active: true,
+        },
       },
       reviews: true,
       admins: {
         where: {
-          active:true
-        }
+          active: true,
+        },
       },
       order_details: true,
     },
@@ -101,13 +108,16 @@ export const getRestaurantByPath = (path: string) => {
       dishes_categories: {
         include: {
           dishes: {
-            where:{
-              active: true
-            }
+            where: {
+              active: true,
+            },
           },
         },
       },
       venues: {
+        where: {
+          active: true,
+        },
         include: {
           facilities: true,
         },
@@ -152,8 +162,8 @@ export const createRestaurant = (input: any) => {
       reviews,
       admins: {
         connect: {
-          email: adminEmail
-        }
+          email: adminEmail,
+        },
       },
       order_details,
     },
@@ -162,17 +172,11 @@ export const createRestaurant = (input: any) => {
 
 // update restaurant
 export const updateRestaurant = async (id: string, input: any) => {
-
-  const {
-    restaurant_name,
-    logo,
-    main_photo,
-    admin_email,
-  } = input;
+  const { restaurant_name, logo, main_photo, admin_email } = input;
   const restaurant_path = restaurant_name
-  ? restaurant_name.replaceAll(" ", "").toLowerCase()
-  : "";
-  
+    ? restaurant_name.replaceAll(" ", "").toLowerCase()
+    : "";
+
   let adminUpdateData = {};
   if (admin_email) {
     const existingUser = await getUserByEmail(admin_email);
@@ -188,24 +192,22 @@ export const updateRestaurant = async (id: string, input: any) => {
       },
     };
   }
-try {
-  return prisma.restaurants.update({
-    where: {
-      id_restaurant: id,
-    },
-    data: {
-      restaurant_name: restaurant_name && { set: restaurant_name },
-      restaurant_path: restaurant_path && { set: restaurant_path },
-      logo: logo && { set: logo },
-      main_photo: main_photo && { set: main_photo },
-      ...adminUpdateData,
-    },
-  });
-  
-} catch (error: any) {
-  console.log("🚀 ~ file: restaurants.services.ts:192 ~ updateRestaurant ~ error:", error)
-  
-}
+  try {
+    return prisma.restaurants.update({
+      where: {
+        id_restaurant: id,
+      },
+      data: {
+        restaurant_name: restaurant_name && { set: restaurant_name },
+        restaurant_path: restaurant_path && { set: restaurant_path },
+        logo: logo && { set: logo },
+        main_photo: main_photo && { set: main_photo },
+        ...adminUpdateData,
+      },
+    });
+  } catch (error: any) {
+    console.log(error);
+  }
 };
 
 // delete restaurant
@@ -229,31 +231,35 @@ export const getRestaurantByUser = (user_id: string) => {
           user_id,
         },
       },
-    },  
+    },
     include: {
       cuisines: true,
       photos: true,
       dishes: {
-        where:{
-          active: true
-        }
+        where: {
+          active: true,
+        },
       },
       dishes_categories: {
-        where:{
-          active: true
-        }
+        where: {
+          active: true,
+        },
       },
-      venues: true,
+      venues: {
+        where: {
+          active: true,
+        },
+      },
       reservations: {
-        where:{
-          active: true
-        }
+        where: {
+          active: true,
+        },
       },
       reviews: true,
       admins: {
         where: {
-          active: true
-        }
+          active: true,
+        },
       },
       order_details: true,
     },
@@ -274,12 +280,15 @@ export const getRestaurantByVenueId = async (venueId: string) => {
     });
     return restaurant;
   } catch (error) {
-    console.error('Error in getRestaurantByVenueId:', error);
+    console.error("Error in getRestaurantByVenueId:", error);
     throw error;
   }
 };
 
-export const addAdminToRestaurant = async (email: string, id_restaurant: string) => {
+export const addAdminToRestaurant = async (
+  email: string,
+  id_restaurant: string
+) => {
   try {
     const restaurantExists = await prisma.restaurants.findUnique({
       where: {
@@ -288,7 +297,7 @@ export const addAdminToRestaurant = async (email: string, id_restaurant: string)
     });
 
     if (!restaurantExists) {
-      throw new Error('Restaurant not found');
+      throw new Error("Restaurant not found");
     }
 
     return prisma.restaurants.update({
@@ -307,7 +316,6 @@ export const addAdminToRestaurant = async (email: string, id_restaurant: string)
     throw new Error(`${error.message}`);
   }
 };
-
 
 //update restaurant rating
 
