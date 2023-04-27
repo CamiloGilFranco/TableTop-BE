@@ -11,27 +11,24 @@ export const auth = (
     const { authorization } = req.headers;
 
     if (!authorization) {
-
-      throw new Error('Your session has expired, please log in again');
+      throw new Error("Your session has expired, please log in again");
     }
 
-    const [_, token] = authorization.split(' ');
+    const [_, token] = authorization.split(" ");
 
     if (!token) {
-      throw new Error('Your session has expired, please log in again');
+      throw new Error("Your session has expired, please log in again");
     }
     const decodedToken = verifyToken(token);
     if (!decodedToken) {
-      throw new Error('Invalid token, please log in again');
+      throw new Error("Invalid token, please log in again");
     }
 
-    const { id } = verifyToken(token) as  DecodedToken;
+    const { id } = verifyToken(token) as DecodedToken;
     req.user = id;
 
     next();
-
   } catch (error: any) {
-
     res.status(401).json({ message: error.message });
   }
-}
+};

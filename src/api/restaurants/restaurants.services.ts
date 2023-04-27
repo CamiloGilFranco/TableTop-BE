@@ -203,7 +203,6 @@ try {
   });
   
 } catch (error: any) {
-  console.log("🚀 ~ file: restaurants.services.ts:192 ~ updateRestaurant ~ error:", error)
   
 }
 };
