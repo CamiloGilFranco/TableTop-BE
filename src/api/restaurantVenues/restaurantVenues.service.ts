@@ -3,13 +3,18 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getAllRestaurantVenues = () => {
-  return prisma.restaurant_venues.findMany();
+  return prisma.restaurant_venues.findMany({
+    where: {
+      active: true
+    }
+  });
 };
 
 export const getByIdRestaurantVenues = (id: string) => {
-  return prisma.restaurant_venues.findUnique({
+  return prisma.restaurant_venues.findMany({
     where: {
       id_restaurant_venue: id,
+      active: true
     },
   });
 };
@@ -72,9 +77,12 @@ export const updateByIdRestaurantVenues = (id: string, input: any) => {
 };
 
 export const deleteRestaurantVenues = (id: string) => {
-  return prisma.restaurant_venues.delete({
+  return prisma.restaurant_venues.update({
     where: {
       id_restaurant_venue: id,
     },
+    data: {
+      active: false
+    }
   });
 };
