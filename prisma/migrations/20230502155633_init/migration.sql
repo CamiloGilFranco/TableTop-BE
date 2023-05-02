@@ -131,6 +131,7 @@ CREATE TABLE "restaurant_venues" (
     "restaurantsId_restaurant" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "active" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "restaurant_venues_pkey" PRIMARY KEY ("id_restaurant_venue")
 );
@@ -169,6 +170,7 @@ CREATE TABLE "user_addresses" (
     "usersUser_id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "active" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "user_addresses_pkey" PRIMARY KEY ("id_address")
 );
