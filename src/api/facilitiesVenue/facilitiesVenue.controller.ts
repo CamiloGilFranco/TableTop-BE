@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import {
+  checkFacilityExists,
   createFacilityVenue,
   deleteFacilityVenue,
   getAllFacilitiesVenue,
@@ -49,6 +50,18 @@ export const createFacilityVenueController = async (
   next: NextFunction
 ) => {
   try {
+    const existingFacility = await checkFacilityExists(
+      req.body.facilitiesId_facility,
+      req.body.restaurant_venuesId_restaurant_venue
+    );
+
+    if (existingFacility) {
+      return res.status(400).json({
+        message: "Facility already exists in the venue",
+        data: existingFacility,
+      });
+    }
+
     const facilityVanue = await createFacilityVenue(req.body);
     res
       .status(201)
@@ -57,6 +70,7 @@ export const createFacilityVenueController = async (
     next(error);
   }
 };
+
 
 export const updateFacilityVenueController = async (
   req: Request,

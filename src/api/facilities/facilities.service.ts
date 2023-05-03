@@ -33,10 +33,14 @@ export const updateByIdFacility = (id: string, input: any) => {
   });
 };
 
-export const deleteFacility = (id: string) => {
-  return prisma.facilities.delete({
+export const deleteFacility = (id_facility_per_venue: string) => {
+  console.log("🚀 ~ file: facilities.service.ts:37 ~ deleteFacility ~ id_facility_per_venue:", id_facility_per_venue)
+  return prisma.facilities_per_venue.update({
     where: {
-      id_facility: id,
+      id_facility_per_venue,
+    },
+    data: {
+      active: false,
     },
   });
 };

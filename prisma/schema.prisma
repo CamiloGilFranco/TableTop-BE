@@ -130,7 +130,6 @@ model facilities {
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
   active               Boolean                @default(true)
-
 }
 
 model restaurant_venues {
