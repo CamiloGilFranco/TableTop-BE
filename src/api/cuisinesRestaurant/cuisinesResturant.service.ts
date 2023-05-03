@@ -50,10 +50,13 @@ export const updateCuisineRestaurant = (id: string, input: any) => {
   });
 };
 
-export const deleteCuisineRestaurant = (id: string) => {
-  return prisma.cuisines_per_restaurant.delete({
+export const deleteCuisineRestaurant = (id_cuisine_per_restaurant: string) => {
+  return prisma.cuisines_per_restaurant.update({
     where: {
-      id_cuisine_per_restaurant: id,
+      id_cuisine_per_restaurant
     },
+    data: {
+      active: false
+    }
   });
 };

@@ -228,7 +228,11 @@ export const getRestaurantByUser = (user_id: string) => {
       },
     },
     include: {
-      cuisines: true,
+      cuisines: {
+        where: {
+          active: true
+        }
+      },
       photos: true,
       dishes: {
         where: {

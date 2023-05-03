@@ -16,6 +16,6 @@ router.get("/", getAllCuisineRestaurantController);
 router.get("/:id", getCuisineRestaurantByIdController);
 router.post("/", auth, checkUserActive, createCuisineRestaurantController);
 router.put("/:id", updateCuisineRestaurantController);
-router.delete("/:id", deleteCuisineRestaurantController);
+router.patch("/:id", auth, checkUserActive, deleteCuisineRestaurantController);
 
 export default router;
