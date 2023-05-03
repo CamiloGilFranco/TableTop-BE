@@ -3,7 +3,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getAllCuisineRestaurant = () => {
-  return prisma.cuisines_per_restaurant.findMany();
+  return prisma.cuisines_per_restaurant.findMany({
+    where: {
+      active: true
+    }
+  });
 };
 
 export const getCuisineRestaurantById = (id: string) => {
@@ -23,7 +27,7 @@ export const createCuisineRestaurant = async (input: any) => {
       cuisine_category: cuisine_categoriesId_cuisine_category,
     },
   });
-  if (existingCuisine) {
+  if (existingCuisine.length) {
     throw new Error("Cuisine already exists for this restaurant.");
   }
 
