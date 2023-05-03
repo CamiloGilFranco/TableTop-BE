@@ -13,16 +13,28 @@ export const getCuisineRestaurantById = (id: string) => {
     },
   });
 };
-export const createCuisineRestaurant = (input: any) => {
+export const createCuisineRestaurant = async (input: any) => {
   const { restaurantsId_restaurant, cuisine_categoriesId_cuisine_category } =
     input;
+
+  const existingCuisine = await prisma.cuisines_per_restaurant.findMany({
+    where: {
+      restaurantsId_restaurant,
+      cuisine_category: cuisine_categoriesId_cuisine_category,
+    },
+  });
+  if (existingCuisine) {
+    throw new Error("Cuisine already exists for this restaurant.");
+  }
+
   return prisma.cuisines_per_restaurant.create({
     data: {
       restaurantsId_restaurant,
-      cuisine_categoriesId_cuisine_category,
+      cuisine_category: cuisine_categoriesId_cuisine_category,
     },
   });
 };
+
 export const updateCuisineRestaurant = (id: string, input: any) => {
   const { restaurantsId_restaurant, cuisine_categoriesId_cuisine_category } =
     input;
