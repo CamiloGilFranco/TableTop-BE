@@ -22,6 +22,16 @@ interface OrderEmailData {
   cart: CartItem[];
 }
 
+interface ReserveEmailData {
+  name: string;
+  email: string;
+  reserve: string;
+  restaurant: string;
+  venue: string;
+  address: string;
+  date: string;
+}
+
 export const welcomeEmail = ({ name, email }: UserEmailData) => {
   const welcomeEmail = {
     from: "<admin@restaurant.com>",
@@ -105,4 +115,46 @@ export const orderEmail = ({
   </div>`,
   };
   return orderEmail;
+};
+
+export const reserveEmail = ({
+  name,
+  email,
+  reserve,
+  restaurant,
+  venue,
+  address,
+  date,
+}: ReserveEmailData) => {
+  const reserveEmail = {
+    from: "<admin@restaurant.com>",
+    to: email,
+    subject: "Tu reserva esta lista!!!",
+    html: `<div style="font-family: sans-serif; text-align: center;">
+    <img src="https://raw.githubusercontent.com/CamiloGilFranco/TableTop-FE/main/public/logo.png" alt="log"
+      style="width: 150px; margin: 0 auto;">
+    <h1 style="margin-top: 30px;">Hola ${name}</h1>
+
+    <h2>Tu reserva esta lista</h2>
+
+    <div style="border: solid 2px black; font-size:18px;">
+      <p><b>Numero de reserva:</b> ${reserve}</p>
+      <p><b>Restaurante:</b> ${restaurant}</p>
+      <p><b>Sede:</b> ${venue}</p>
+      <p><b>Dirección:</b> ${address}</p>
+      <p><b>Fecha y hora:</b> ${date}</p>
+      <p style="font-size: 12px;">* Recuerda que debes llegar al lugar al menos 10 minutos antes de la hora de tu
+        reserva o esta sera cancelada
+      </p>
+      <p style="font-size: 12px;">* Para cancelar tu reserva contacta directamente a la sede en que fue hecha tu reserva
+      </p>
+
+    </div>
+    <p style="font-size: 18px; margin-top: 30px;">Si tienes alguna pregunta o comentario sobre la aplicación, no dudes
+      en
+      ponerte en contacto con nuestro equipo de atención al cliente en cualquier momento.</p>
+    <p style="font-size: 18px; margin-top: 30px;">¡Que disfrutes de tu comida!</p>
+  </div>`,
+  };
+  return reserveEmail;
 };
