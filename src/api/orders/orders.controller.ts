@@ -7,6 +7,9 @@ import {
   updateOrderById,
 } from "./orders.service";
 import { AuthUser } from "../../auth/auth.types";
+import { sendNodemailer } from "../../config/nodemailer";
+import { orderEmail, welcomeEmail } from "../../utils/emails";
+import { getUserById } from "../users/users.services";
 
 export const getAllOrdersController = async (
   req: Request,
@@ -44,9 +47,28 @@ export const createOrderController = async (
   res: Response
 ) => {
   try {
-    const { user } = req;
-    const { price, address_id } = req.body;
+    let user: string;
+    user = req.user as string;
+    const { price, address_id, address, city, cart } = req.body;
+
     const order = await createOrder({ user, price, address_id });
+
+    const userData = await getUserById(user);
+
+    console.log(userData!.email);
+
+    await sendNodemailer(
+      orderEmail({
+        price,
+        name: userData!.name,
+        email: userData!.email,
+        order: order.id_order,
+        address,
+        city,
+        cart,
+      })
+    );
+
     res.status(201).json({ message: "Order created", data: order });
   } catch (error) {
     res.status(500).json({ message: "Order can't be created" });
