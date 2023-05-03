@@ -56,9 +56,9 @@ export const orderEmail = ({
             <td style="border: 1px solid black; padding: 5px">${
               cart[i].title
             }</td>
-            <td style="border: 1px solid black; padding: 5px">${
-              cart[i].price
-            }</td>
+            <td style="border: 1px solid black; padding: 5px">$${cart[
+              i
+            ].price.toLocaleString()}</td>
             <td style="border: 1px solid black; padding: 5px">${
               cart[i].quantity
             }</td>
