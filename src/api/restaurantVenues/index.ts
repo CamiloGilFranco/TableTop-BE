@@ -15,8 +15,20 @@ const router = Router();
 
 router.get("/", getAllRestaurantVenuesController);
 router.get("/:id", getByIdRestaurantVenuesController);
-router.post("/", auth, checkUserActive, isRestaurantAdmin, formData, createRestaurantVenuesController);
-router.put("/:id", auth, isRestaurantAdmin, updateByIdRestaurantVenuesController);
+router.post(
+  "/",
+  auth,
+  checkUserActive,
+  isRestaurantAdmin,
+  formData,
+  createRestaurantVenuesController
+);
+router.put(
+  "/:id",
+  auth,
+  isRestaurantAdmin,
+  updateByIdRestaurantVenuesController
+);
 router.patch("/:id", auth, isRestaurantAdmin, deleteRestaurantVenuesController);
 
 export default router;
