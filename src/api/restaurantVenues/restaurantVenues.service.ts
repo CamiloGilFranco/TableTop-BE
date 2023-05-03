@@ -85,3 +85,14 @@ export const deleteRestaurantVenues = (id: string) => {
     },
   });
 };
+
+export const updateVenueImage = (id_restaurant_venue: string, venue_photo: string) => {
+  return prisma.restaurant_venues.update({
+    where: {
+      id_restaurant_venue,
+    },
+    data: {
+      venue_photo: venue_photo && { set: venue_photo },
+    },
+  });
+};

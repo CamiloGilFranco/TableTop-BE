@@ -5,6 +5,7 @@ import {
   getAllRestaurantVenuesController,
   getByIdRestaurantVenuesController,
   updateByIdRestaurantVenuesController,
+  updateVenueImageController,
 } from "./restaurantVenues.controller";
 import { isRestaurantAdmin } from "../../middleware/isRestaurantAdmin";
 import { auth } from "../../middleware/auth";
@@ -30,5 +31,12 @@ router.put(
   updateByIdRestaurantVenuesController
 );
 router.patch("/:id", auth, isRestaurantAdmin, deleteRestaurantVenuesController);
+router.patch(
+  "/:id/image",
+  auth,
+  isRestaurantAdmin,
+  formData,
+  updateVenueImageController
+);
 
 export default router;

@@ -172,10 +172,7 @@ export const createRestaurant = (input: any) => {
 
 // update restaurant
 export const updateRestaurant = async (id: string, input: any) => {
-  const { restaurant_name, logo, main_photo, admin_email } = input;
-  const restaurant_path = restaurant_name
-    ? restaurant_name.replaceAll(" ", "").toLowerCase()
-    : "";
+  const { logo, main_photo, admin_email } = input;
 
   let adminUpdateData = {};
   if (admin_email) {
@@ -198,8 +195,6 @@ export const updateRestaurant = async (id: string, input: any) => {
         id_restaurant: id,
       },
       data: {
-        restaurant_name: restaurant_name && { set: restaurant_name },
-        restaurant_path: restaurant_path && { set: restaurant_path },
         logo: logo && { set: logo },
         main_photo: main_photo && { set: main_photo },
         ...adminUpdateData,
@@ -249,6 +244,13 @@ export const getRestaurantByUser = (user_id: string) => {
         where: {
           active: true,
         },
+        include: {
+          facilities: {
+            where: {
+              active: true
+            }
+          }
+        },
       },
       reservations: {
         where: {
@@ -262,6 +264,7 @@ export const getRestaurantByUser = (user_id: string) => {
         },
       },
       order_details: true,
+  
     },
   });
 };
