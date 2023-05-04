@@ -13,7 +13,10 @@ const seedRestaurant_photos = async (prisma: PrismaClient): Promise<void> => {
     for (let i = 0; i < numberOfPhotos; i++) {
       await prisma.restaurant_photos.create({
         data: {
-          photo_link: faker.image.business(),
+          photo_link: `https://raw.githubusercontent.com/CamiloGilFranco/TableTop-FE/main/src/assets/gallery/${random(
+            1,
+            40
+          )}.jpg`,
           restaurants: {
             connect: {
               id_restaurant: restaurant.id_restaurant,

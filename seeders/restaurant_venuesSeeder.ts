@@ -31,7 +31,10 @@ const seedRestaurant_venues = async (prisma: PrismaClient): Promise<void> => {
             150
           )} - ${random(1, 5)}`,
           city: cities[random(0, cities.length - 1)],
-          venue_photo: faker.image.business(),
+          venue_photo: `https://raw.githubusercontent.com/CamiloGilFranco/TableTop-FE/main/src/assets/gallery/${random(
+            1,
+            40
+          )}.jpg`,
           phone_number: faker.phone.number("###-###-####"),
           open_hour: `${random(8, 11)} AM`,
           close_hour: `${random(8, 11)} PM`,
