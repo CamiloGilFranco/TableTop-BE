@@ -100,9 +100,6 @@ export const updateUserRoleController = async (req: Request, res: Response) => {
 export const removeResAdminController = async (req: Request, res: Response) => {
   try {
     const { email, user_role } = req.body;
-    console.log("🚀 ~ file: users.controllers.ts:102 ~ removeResAdminController ~ req.body:", req.body)
-    console.log("🚀 ~ file: users.controllers.ts:102 ~ removeResAdminController ~ user_role:", user_role)
-    console.log("🚀 ~ file: users.controllers.ts:102 ~ removeResAdminController ~ email:", email)
     if (!email || !user_role) {
       return res
         .status(400)

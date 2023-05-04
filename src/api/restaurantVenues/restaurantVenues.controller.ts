@@ -94,7 +94,7 @@ export const updateVenueImageController = async (
 ) => {
   try {
     const { id } = req.params;
-    const venue_photo = req.body.venue_photo;
+    const { venue_photo } = req.body;
     const restaurantVenues = await updateVenueImage(id, venue_photo);
     res
       .status(200)
