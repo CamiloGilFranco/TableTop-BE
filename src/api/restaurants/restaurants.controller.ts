@@ -91,29 +91,27 @@ export const createRestaurantController = async (
 
     const existingUser = await getUserByEmail(adminEmail);
     if (!existingUser) {
-      res
+      return res
         .status(400)
         .json({ message: "Admin email does not match any existing user" });
-      return;
     }
-    req.body.admins = [
-      {
-        id: existingUser.user_id,
-      },
-    ];
 
-    //updates the existing user to have the restaurant admin role
+    const { user_id: id } = existingUser;
+    req.body.admins = [{ id }];
+
+    // Updates the existing user to have the restaurant admin role.
     await updateUserRole(adminEmail, "restaurantAdmin");
 
     const restaurant = await createRestaurant(req.body);
-    res
+    return res
       .status(200)
       .json({ message: "Restaurant created successfully", data: restaurant });
   } catch (error: any) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
+
 
 //update restaurant
 export const updateRestaurantController = async (
@@ -183,23 +181,22 @@ export const addAdminToRestaurantController = async (
 ) => {
   try {
     const { email, restaurantId } = req.body;
-    const existingUser = await getUserByEmail(email);
-    if (!existingUser) {
-      res
-        .status(400)
-        .json({ message: "Admin email does not match any existing user" });
-      return;
-    }
-
     if (!email || !restaurantId) {
       return res
         .status(400)
         .json({ message: "Email and restaurantId are required" });
     }
+    const existingUser = await getUserByEmail(email);
+    if (!existingUser) {
+      return res
+        .status(400)
+        .json({ message: "Admin email does not match any existing user" });
+    }
+
     await updateUserRole(email, RESTAURANT_ADMIN_ROLE);
 
     const updatedRestaurant = await addAdminToRestaurant(email, restaurantId);
-    res
+    return res
       .status(200)
       .json({
         message: "Admin added to the restaurant",
@@ -207,7 +204,8 @@ export const addAdminToRestaurantController = async (
       });
   } catch (error: any) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
+
 
