@@ -40,16 +40,19 @@ const seedReviews = async (prisma: PrismaClient): Promise<void> => {
       ratingSum += rating;
     }
 
-    const rating = (await ratingSum) / dataQuantity;
+    setTimeout(async () => {
+      const rating = ratingSum / dataQuantity;
+      await prisma.restaurants.update({
+        where: {
+          id_restaurant: id_restaurant,
+        },
+        data: {
+          rating,
+        },
+      });
 
-    await prisma.restaurants.update({
-      where: {
-        id_restaurant: id_restaurant,
-      },
-      data: {
-        rating,
-      },
-    });
+      console.log("Finished");
+    }, 5000);
   }
 
   console.log("reviews created!");
