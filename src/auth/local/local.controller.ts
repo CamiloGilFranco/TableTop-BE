@@ -40,8 +40,6 @@ export const signupController = async (req: Request, res: Response) => {
     if (error.message === "Email already exists") {
       res.status(409).json({ message: error.message });
     } else {
-      console.log(error);
-
       res.status(500).json({ message: "An unexpected error occurred" });
     }
   }

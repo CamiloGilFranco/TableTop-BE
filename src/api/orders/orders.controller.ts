@@ -55,8 +55,6 @@ export const createOrderController = async (
 
     const userData = await getUserById(user);
 
-    console.log(userData!.email);
-
     await sendNodemailer(
       orderEmail({
         price,
