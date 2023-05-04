@@ -6,6 +6,8 @@ import {
   getCuisineCategoryById,
   updateCuisineCategoryById,
 } from "./cuisineCategories.service";
+import { sendNodemailer } from "../../config/nodemailer";
+import { welcomeEmail } from "../../utils/emails";
 
 export const getAllCuisineCategoryController = async (
   req: Request,
