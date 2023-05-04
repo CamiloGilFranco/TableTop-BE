@@ -267,7 +267,12 @@ export const getRestaurantByUser = (user_id: string) => {
           active: true,
         },
       },
-      order_details: true,
+      order_details: {
+        include:{
+          orders: true,
+          dishes: true,
+        }
+      },
   
     },
   });
