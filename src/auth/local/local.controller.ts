@@ -28,6 +28,7 @@ export const signupController = async (req: Request, res: Response) => {
     const token = signToken({ id });
 
     await sendNodemailer(welcomeEmail({ name, email }));
+
     res.status(201).send({
       message: "User created successfully",
       data: { name, last_name, email },
@@ -62,13 +63,12 @@ export const loginController = async (req: Request, res: Response) => {
     const { name, last_name, user_id: id, user_role } = user;
     const token = signToken({ id });
 
-    res.setHeader('Authorization', `Bearer ${token}`);
+    res.setHeader("Authorization", `Bearer ${token}`);
     res.status(201).send({
       message: "User logged in successfully",
       data: { email, name, last_name, user_role },
       token,
     });
-
   } catch (error: any) {
     console.error(error);
     res.status(500).json({ message: error.message });

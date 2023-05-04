@@ -8,6 +8,11 @@ import {
   updateByIdReservation,
 } from "./reservation.service";
 import { AuthUser } from "../../auth/auth.types";
+import { sendNodemailer } from "../../config/nodemailer";
+import { reserveEmail } from "../../utils/emails";
+import { getUserById } from "../users/users.services";
+import { getAllRestaurantById } from "../restaurants/restaurants.services";
+import { getByIdRestaurantVenues } from "../restaurantVenues/restaurantVenues.service";
 
 export const getAllReservationsController = async (
   req: Request,
@@ -45,16 +50,38 @@ export const createReservationController = async (
   next: NextFunction
 ) => {
   try {
-    const {
-      user,
-      body: { id_restaurant, id_venue, date },
-    } = req;
+    let user: string;
+    user = req.user as string;
+
+    const { id_restaurant, id_venue, date } = req.body;
+
     const reservation = await createReservation({
       date,
       id_restaurant,
       id_venue,
       user,
     });
+
+    const userData = await getUserById(user);
+
+    const restaurantData = await getAllRestaurantById(id_restaurant);
+
+    const venueData = await getByIdRestaurantVenues(id_venue);
+
+    const dateString = date.replace("T", " / ").replace(":00.000Z", "");
+
+    await sendNodemailer(
+      reserveEmail({
+        name: userData!.name,
+        email: userData!.email,
+        reserve: reservation.id_reservation,
+        restaurant: restaurantData!.restaurant_name,
+        venue: venueData[0].name_venue,
+        address: venueData[0].address,
+        date: dateString,
+      })
+    );
+
     res.status(201).json({ message: "Reservation Created", data: reservation });
   } catch (error) {
     next(error);
