@@ -8,6 +8,7 @@ import {
   updateUserRoleController,
   getUserAddressesController,
   deactivateSelfController,
+  removeResAdminController,
 } from "./users.controllers";
 import { auth } from "../../middleware/auth";
 import { isAppAdmin } from "../../middleware/isAppAdmin";
@@ -24,6 +25,12 @@ router.put(
   checkUserActive,
   isAppAdmin,
   updateUserRoleController
+);
+router.patch(
+  "/remove-res-admin",
+  auth,
+  checkUserActive,
+  removeResAdminController
 );
 router.put("/:id", auth, checkUserActive, isAppAdmin, deactivateUserController);
 router.get(

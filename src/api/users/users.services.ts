@@ -203,6 +203,22 @@ export const updateUserRole = async (email: string, user_role: string) => {
   }
 };
 
+export const removeResAdmin = async (email: string, user_role: string) => {
+  try {
+    return prisma.users.update({
+      where: {
+        email,
+      },
+      data: {
+        user_role: { set: user_role },
+        restaurantsId_restaurant: { set: null },
+      },
+    });
+  } catch (error: any) {
+    throw new Error(`${error.message}`);
+  }
+};
+
 export const getUsersByRole = (user_role: string) => {
   return prisma.users.findMany({
     where: {

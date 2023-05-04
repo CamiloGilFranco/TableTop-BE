@@ -23,18 +23,17 @@ export const getFacilityVenueById = (id: string) => {
 //create -> post
 export const createFacilityVenue = (input: Input) => {
   const {
-    restaurantsId_restaurant,
     facilitiesId_facility,
     restaurant_venuesId_restaurant_venue,
   } = input;
   return prisma.facilities_per_venue.create({
     data: {
-      restaurantsId_restaurant,
-      facilitiesId_facility,
+      facility: facilitiesId_facility,
       restaurant_venuesId_restaurant_venue,
     },
   });
 };
+
 
 export const updateFacilityVenue = (id: string, input: any) => {
   const {
@@ -58,6 +57,18 @@ export const deleteFacilityVenue = (id: string) => {
   return prisma.facilities_per_venue.delete({
     where: {
       id_facility_per_venue: id,
+    },
+  });
+};
+
+export const checkFacilityExists = async (
+  facilitiesId_facility: string,
+  restaurant_venuesId_restaurant_venue: string
+) => {
+  return prisma.facilities_per_venue.findFirst({
+    where: {
+      facility: facilitiesId_facility,
+      restaurant_venuesId_restaurant_venue,
     },
   });
 };

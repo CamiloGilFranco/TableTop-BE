@@ -9,6 +9,7 @@ import {
   updateUser,
   updateUserRole,
   getUserAddresses,
+  removeResAdmin,
 } from "./users.services";
 
 // gets all the users from the bd
@@ -89,6 +90,22 @@ export const updateUserRoleController = async (req: Request, res: Response) => {
         .json({ message: "Email and user_role are required" });
     }
     const user = await updateUserRole(email, user_role);
+    res.status(200).json({ message: "User role updated", data: user });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const removeResAdminController = async (req: Request, res: Response) => {
+  try {
+    const { email, user_role } = req.body;
+    if (!email || !user_role) {
+      return res
+        .status(400)
+        .json({ message: "Email and user_role are required" });
+    }
+    const user = await removeResAdmin(email, user_role);
     res.status(200).json({ message: "User role updated", data: user });
   } catch (error: any) {
     console.error(error);

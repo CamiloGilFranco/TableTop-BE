@@ -75,6 +75,7 @@ model cuisines_per_restaurant {
   cuisine_category          String
   createdAt                 DateTime           @default(now())
   updatedAt                 DateTime           @updatedAt
+  active                    Boolean            @default(true)
 }
 
 model restaurant_photos {
@@ -120,6 +121,7 @@ model facilities_per_venue {
   restaurant_venuesId_restaurant_venue String
   createdAt                            DateTime          @default(now())
   updatedAt                            DateTime          @updatedAt
+  active                               Boolean            @default(true)
 }
 
 model facilities {
@@ -128,6 +130,7 @@ model facilities {
   facilities_per_venue facilities_per_venue[]
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
+  active               Boolean                @default(true)
 }
 
 model restaurant_venues {

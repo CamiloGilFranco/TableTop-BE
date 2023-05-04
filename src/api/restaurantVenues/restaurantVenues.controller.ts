@@ -5,6 +5,7 @@ import {
   getAllRestaurantVenues,
   getByIdRestaurantVenues,
   updateByIdRestaurantVenues,
+  updateVenueImage,
 } from "./restaurantVenues.service";
 
 export const getAllRestaurantVenuesController = async (
@@ -81,6 +82,23 @@ export const deleteRestaurantVenuesController = async (
     res
       .status(200)
       .json({ message: "Restaurant venues deleted", data: restaurantVenues });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateVenueImageController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+    const { venue_photo } = req.body;
+    const restaurantVenues = await updateVenueImage(id, venue_photo);
+    res
+      .status(200)
+      .json({ message: "Venue image updated", data: restaurantVenues });
   } catch (error) {
     next(error);
   }
