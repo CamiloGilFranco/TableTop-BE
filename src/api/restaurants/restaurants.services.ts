@@ -106,6 +106,9 @@ export const getRestaurantByPath = (path: string) => {
       cuisines: true,
       photos: true,
       dishes_categories: {
+        where:{
+          active: true
+        },
         include: {
           dishes: {
             where: {
