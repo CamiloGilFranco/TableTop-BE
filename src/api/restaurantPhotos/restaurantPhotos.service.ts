@@ -37,10 +37,10 @@ export const updatePhotosRestaurant = (id: string, input: any) => {
     },
   });
 };
-export const deleteCuisineRestaurant = (id: string) => {
+export const deleteCuisineRestaurant = (id_restaurant_photo: string) => {
   return prisma.restaurant_photos.delete({
     where: {
-      id_restaurant_photo: id,
+      id_restaurant_photo,
     },
   });
 };
