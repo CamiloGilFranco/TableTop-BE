@@ -230,8 +230,8 @@ export const getRestaurantByUser = (user_id: string) => {
     include: {
       cuisines: {
         where: {
-          active: true
-        }
+          active: true,
+        },
       },
       photos: true,
       dishes: {
@@ -251,9 +251,9 @@ export const getRestaurantByUser = (user_id: string) => {
         include: {
           facilities: {
             where: {
-              active: true
-            }
-          }
+              active: true,
+            },
+          },
         },
       },
       reservations: {
@@ -267,8 +267,22 @@ export const getRestaurantByUser = (user_id: string) => {
           active: true,
         },
       },
-      order_details: true,
-  
+      order_details: {
+        include: {
+          dishes: true,
+          orders: {
+            include: {
+              users: {
+                select: {
+                  name: true,
+                  last_name: true,
+                  addresses: true,
+                },
+              },
+            },
+          },
+        },
+      },
     },
   });
 };
