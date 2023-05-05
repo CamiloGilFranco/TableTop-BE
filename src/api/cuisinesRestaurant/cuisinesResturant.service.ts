@@ -17,9 +17,19 @@ export const getCuisineRestaurantById = (id: string) => {
     },
   });
 };
+
 export const createCuisineRestaurant = async (input: any) => {
-  const { restaurantsId_restaurant, cuisine_categoriesId_cuisine_category } =
-    input;
+  const { restaurantsId_restaurant, cuisine_categoriesId_cuisine_category } = input;
+
+  const existingCuisines = await prisma.cuisines_per_restaurant.findMany({
+    where: {
+      restaurantsId_restaurant,
+    },
+  });
+
+  if (existingCuisines.length >= 3) {
+    throw new Error("A restaurant can have a maximum of 3 cuisines.");
+  }
 
   const existingCuisine = await prisma.cuisines_per_restaurant.findMany({
     where: {
@@ -27,6 +37,7 @@ export const createCuisineRestaurant = async (input: any) => {
       cuisine_category: cuisine_categoriesId_cuisine_category,
     },
   });
+  
   if (existingCuisine.length) {
     throw new Error("Cuisine already exists for this restaurant.");
   }
@@ -38,6 +49,7 @@ export const createCuisineRestaurant = async (input: any) => {
     },
   });
 };
+
 
 export const updateCuisineRestaurant = (id: string, input: any) => {
   const { restaurantsId_restaurant, cuisine_categoriesId_cuisine_category } =

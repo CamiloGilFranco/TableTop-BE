@@ -8,7 +8,6 @@ import {
 } from "./cuisinesRestaurant.controller";
 import { auth } from "../../middleware/auth";
 import { checkUserActive } from "../../middleware/checkUserActive";
-import { isRestaurantAdmin } from "../../middleware/isRestaurantAdmin";
 
 const router = Router();
 
