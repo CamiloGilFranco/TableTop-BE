@@ -198,8 +198,8 @@ export const updateRestaurant = async (id: string, input: any) => {
         id_restaurant: id,
       },
       data: {
-        logo: logo && { set: logo },
-        main_photo: main_photo && { set: main_photo },
+        logo: logo ? { set: logo } : undefined,
+        main_photo: main_photo ? { set: main_photo } : undefined,
         ...adminUpdateData,
       },
     });
