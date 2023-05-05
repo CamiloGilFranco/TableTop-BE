@@ -37,7 +37,7 @@ const seedReviews = async (prisma: PrismaClient): Promise<void> => {
       });
 
       dataQuantity++;
-      ratingSum += rating;
+      ratingSum += rating as number;
     }
 
     setTimeout(async () => {
@@ -50,12 +50,11 @@ const seedReviews = async (prisma: PrismaClient): Promise<void> => {
           rating,
         },
       });
-
-      console.log("Finished");
     }, 5000);
   }
 
   console.log("reviews created!");
+  console.log("Finished");
 };
 
 export default seedReviews;
