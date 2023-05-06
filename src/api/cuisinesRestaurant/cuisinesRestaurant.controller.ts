@@ -55,10 +55,11 @@ export const createCuisineRestaurantController = async (
     res
       .status(201)
       .json({ message: "Cuisine Category created", data: cuisineRestaurant });
-  } catch (error) {
-    next(error);
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
   }
 };
+
 
 export const updateCuisineRestaurantController = async (
   req: Request,

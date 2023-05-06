@@ -25,9 +25,21 @@ router.get("/path/:path", getRestaurantByPathController);
 router.get("/withcuisines/all", getAllRestaurantsWithCuisinesController);
 router.get("/id/:id", getAllRestaurantByIdController);
 router.post("/", auth, isAppAdmin, formData, createRestaurantController);
-router.put("/update/:id", auth, isRestaurantAdmin, formData, updateRestaurantController);
-router.get('/byuser/:user_id', getRestaurantByUserController);
+router.put(
+  "/update/:id",
+  auth,
+  isRestaurantAdmin,
+  formData,
+  updateRestaurantController
+);
+router.get("/byuser/:user_id", getRestaurantByUserController);
 router.put("/deactivate/:id", auth, isAppAdmin, deactivateRestaurantController);
-router.put("/add-admin", auth, checkUserActive, isRestaurantAdmin, addAdminToRestaurantController);
+router.put(
+  "/add-admin",
+  auth,
+  checkUserActive,
+  isRestaurantAdmin,
+  addAdminToRestaurantController
+);
 
 export default router;

@@ -121,7 +121,6 @@ export const updateRestaurantController = async (
   try {
     const { id } = req.params;
     const restaurant = await updateRestaurant(id, req.body);
-    console.log("After updating restaurant", restaurant);
     res.status(200).json({ message: "Restaurant updated", data: restaurant });
   } catch (error: any) {
     console.error("Error in updateRestaurantController:", error);

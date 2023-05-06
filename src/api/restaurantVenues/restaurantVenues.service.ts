@@ -63,16 +63,17 @@ export const updateByIdRestaurantVenues = (id: string, input: any) => {
       id_restaurant_venue: id,
     },
     data: {
-      name_venue: name_venue && { set: name_venue },
-      address: address && { set: address },
-      city: city && { set: city },
-      venue_photo: venue_photo && { set: venue_photo },
-      phone_number: phone_number && { set: phone_number },
-      open_hour: open_hour && { set: open_hour },
-      close_hour: close_hour && { set: close_hour },
+      name_venue: name_venue ? { set: name_venue } : undefined,
+      address: address ? { set: address } : undefined,
+      city: city ? { set: city } : undefined,
+      venue_photo: venue_photo ? { set: venue_photo } : undefined,
+      phone_number: phone_number ? { set: phone_number } : undefined,
+      open_hour: open_hour ? { set: open_hour } : undefined,
+      close_hour: close_hour ? { set: close_hour } : undefined,
     },
   });
 };
+
 
 
 export const deleteRestaurantVenues = (id: string) => {
