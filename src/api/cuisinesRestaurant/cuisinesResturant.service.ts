@@ -52,7 +52,7 @@ export const createCuisineRestaurant = async (input: any) => {
 
 
 export const updateCuisineRestaurant = (id: string, input: any) => {
-  const { restaurantsId_restaurant, cuisine_categoriesId_cuisine_category } =
+  const { restaurantsId_restaurant, cuisine_category } =
     input;
 
   return prisma.cuisines_per_restaurant.update({
@@ -61,7 +61,7 @@ export const updateCuisineRestaurant = (id: string, input: any) => {
     },
     data: {
       restaurantsId_restaurant,
-      cuisine_categoriesId_cuisine_category,
+      cuisine_category,
     },
   });
 };

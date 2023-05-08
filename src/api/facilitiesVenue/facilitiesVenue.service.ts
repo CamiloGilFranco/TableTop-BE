@@ -36,22 +36,19 @@ export const createFacilityVenue = (input: Input) => {
 
 
 export const updateFacilityVenue = (id: string, input: any) => {
-  const {
-    restaurantsId_restaurant,
-    facilitiesId_facility,
-    restaurant_venuesId_restaurant_venue,
-  } = input;
+  const { facilitiesId_facility, restaurant_venuesId_restaurant_venue } = input;
+
   return prisma.facilities_per_venue.update({
     where: {
       id_facility_per_venue: id,
     },
     data: {
-      restaurantsId_restaurant,
-      facilitiesId_facility,
+      facility: facilitiesId_facility,
       restaurant_venuesId_restaurant_venue,
     },
   });
 };
+
 
 export const deleteFacilityVenue = (id: string) => {
   return prisma.facilities_per_venue.delete({
