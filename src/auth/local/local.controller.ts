@@ -60,6 +60,10 @@ export const loginController = async (req: Request, res: Response) => {
       throw new Error("Email or password are incorrect");
     }
 
+    if (!user.active) {
+      return res.status(403).json({ message: 'User is not active' });
+    }
+    
     const { name, last_name, user_id: id, user_role } = user;
     const token = signToken({ id });
 

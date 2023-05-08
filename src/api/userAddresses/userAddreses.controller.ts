@@ -49,6 +49,10 @@ export const createUserAddresController = async (
     const { name, address, city } = req.body;
     const { user } = req;
 
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
     const userAddress = await createUserAddress({
       address_name: name,
       address,
@@ -63,6 +67,7 @@ export const createUserAddresController = async (
     next(error);
   }
 };
+
 
 export const updateUserAddressController = async (
   req: Request,
