@@ -4,6 +4,7 @@ import{
   signupController
 } from './local.controller';
 
+
 const router = Router();
 
 router.post('/signup', signupController);
